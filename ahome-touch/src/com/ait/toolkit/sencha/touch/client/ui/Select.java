@@ -17,11 +17,11 @@ package com.ait.toolkit.sencha.touch.client.ui;
 
 import java.util.List;
 
+import com.ait.toolkit.sencha.shared.client.core.XType;
 import com.ait.toolkit.sencha.shared.client.core.handlers.CallbackRegistration;
 import com.ait.toolkit.sencha.shared.client.data.Store;
 import com.ait.toolkit.sencha.touch.client.core.config.Event;
 import com.ait.toolkit.sencha.touch.client.core.config.SelectConfig;
-import com.ait.toolkit.sencha.shared.client.core.XType;
 import com.ait.toolkit.sencha.touch.client.core.handlers.field.select.SelectChangeHandler;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
@@ -199,8 +199,7 @@ public class Select<T> extends Text<T> implements HasStore {
 	 * @param handler
 	 */
 	public CallbackRegistration addChangeHandler(SelectChangeHandler handler) {
-		return this.addWidgetListener(Event.CHANGE.getValue(),
-				handler.getJsoPeer());
+		return this.addWidgetListener(Event.CHANGE.getValue(), handler.getJsoPeer());
 	}
 
 	public void setStore(Store store) {
@@ -226,7 +225,7 @@ public class Select<T> extends Text<T> implements HasStore {
 		for (SelectOption option : options) {
 			array.push(option.getJsObj());
 		}
-		setOptions(options);
+		setOptions(array);
 	}
 
 	private void setOptions(JavaScriptObject options) {
