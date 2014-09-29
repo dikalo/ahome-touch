@@ -18,21 +18,19 @@ package com.ait.toolkit.sencha.touch.client.core;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * This class is used to bootstrap the Sencha Touch library or get the current version of the Touch4j library. The bootstrap mechanisism should nt be called directly instead one
- * should extends the {@link com.ait.toolkit.sencha.touch.client.core.TouchEntryPoint} or the {@link com.ait.toolkit.sencha.touch.client.core.ConfigurableTouchEntryPoint} class.
+ * This class is used to bootstrap the Sencha Touch library or get the current version of the Touch4j library. The class might not be called directly instead one should extends the
+ * {@link com.ait.toolkit.sencha.touch.client.core.TouchEntryPoint} or the {@link com.ait.toolkit.sencha.touch.client.core.ConfigurableTouchEntryPoint} class.
  * 
  */
 public class Touch {
 
-	private static final String VERSION = "1.0.0";
+	private static final String VERSION = "4.0.0";
 
 	public static void init(InitHandler handler) {
-		// setPlugingBasePath(GWT.getModuleBaseURL() + "plugins");
 		init(handler.getJsoPeer());
 	}
 
 	public static void init(TouchConfig config) {
-		// setPlugingBasePath(GWT.getModuleBaseURL() + "plugins");
 		init(config.getJsObj());
 	}
 
@@ -59,14 +57,5 @@ public class Touch {
 	public static String getVersion() {
 		return VERSION;
 	}
-
-	private static native void setPlugingBasePath(String path)/*-{
-		if (typeof ($wnd) != 'undefined' && typeof ($wnd.Ext) != 'undefined') {
-			$wnd.Ext.Loader.setPath({
-				'Ext.plugin' : path, // add class path   
-			});
-		}
-
-	}-*/;
 
 }
