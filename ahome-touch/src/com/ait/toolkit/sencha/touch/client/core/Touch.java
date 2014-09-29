@@ -58,4 +58,46 @@ public class Touch {
 		return VERSION;
 	}
 
+	/**
+	 * Gets the build version of Sencha Touch
+	 */
+	public static final native int getSenchaTouchBuild()/*-{
+		return $wnd.Ext.version.build;
+	}-*/;
+
+	/**
+	 * Gets the major version of Sencha Touch
+	 */
+	public static final native int getSenchaTouchMajorVersion()/*-{
+		return $wnd.Ext.version.major;
+	}-*/;
+
+	/**
+	 * Gets the minor version of Sencha Touch
+	 */
+	public static final native int getSenchaTouchMinorVersion()/*-{
+		return $wnd.Ext.version.minor;
+	}-*/;
+
+	/**
+	 * Gets the patch version of Sencha Touch
+	 */
+	public static final native int getSenchaTouchPathVersion()/*-{
+		return $wnd.Ext.version.patch;
+	}-*/;
+
+	/**
+	 * Gets the short version of Sencha Touch
+	 */
+	public static final native String getSenchaTouchShortVersion()/*-{
+		return $wnd.Ext.version.shortVersion;
+	}-*/;
+
+	/**
+	 * Gets the version of Sencha Touch
+	 */
+	public static final native String getSenchaTouchVersion()/*-{
+		return $wnd.Ext.version.version;
+	}-*/;
+
 }
