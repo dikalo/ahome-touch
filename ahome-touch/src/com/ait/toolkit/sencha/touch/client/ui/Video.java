@@ -15,8 +15,8 @@
  */
 package com.ait.toolkit.sencha.touch.client.ui;
 
-import com.ait.toolkit.sencha.touch.client.core.Media;
 import com.ait.toolkit.sencha.shared.client.core.XType;
+import com.ait.toolkit.sencha.touch.client.core.Media;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
@@ -26,87 +26,75 @@ import com.google.gwt.core.client.JavaScriptObject;
  */
 public class Video extends Media {
 
-    private Video(JavaScriptObject config) {
-        super(config);
-    }
+	private Video(JavaScriptObject config) {
+		super(config);
+	}
 
-    @Override
-    protected native void init()/*-{
+	@Override
+	protected native void init()/*-{
 		var c = new $wnd.Ext.Video();
 		this.@com.ait.toolkit.sencha.touch.client.core.Component::configPrototype = c.initialConfig;
-    }-*/;
+	}-*/;
 
-    @Override
-    public String getXType() {
-        return XType.VIDEO.getValue();
-    }
+	@Override
+	public String getXType() {
+		return XType.VIDEO.getValue();
+	}
 
-    /**
-     * Create a new Sheet.
-     */
-    public Video() {
-    }
+	/**
+	 * Create a new Sheet.
+	 */
+	public Video() {
+	}
 
-    @Override
-    protected native JavaScriptObject create(JavaScriptObject config) /*-{
+	@Override
+	protected native JavaScriptObject create(JavaScriptObject config) /*-{
 		return new $wnd.Ext.Video(config);
-    }-*/;
+	}-*/;
 
-    /**
-     * Set the value of posterurl
-     * 
-     * @param value
-     */
-    public native void setPosterUrl(String value) /*-{
+	/**
+	 * Set the value of posterurl
+	 * 
+	 * @param value
+	 */
+	public native void setPosterUrl(String value) /*-{
 		var video = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		video.setPosterUrl(value);
-    }-*/;
+	}-*/;
 
-    /**
-     * Gets the value of posterurl
-     * 
-     */
-    public native String getPosterUrl() /*-{
+	/**
+	 * Gets the value of posterurl
+	 * 
+	 */
+	public native String getPosterUrl() /*-{
 		var video = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		return video.getPosterUrl();
-    }-*/;
+	}-*/;
 
-    /**
-     * Set the value of url
-     * 
-     * @param value
-     */
-    @Override
-    public native void setUrl(String value) /*-{
+	/**
+	 * Set the value of url
+	 * 
+	 * @param value
+	 */
+	@Override
+	public native void setUrl(String value) /*-{
 		var video = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		video.setUrl(value);
-    }-*/;
+	}-*/;
 
-    /**
-     * Gets the value of url
-     * 
-     */
-    @Override
-    public native String getUrl() /*-{
+	/**
+	 * Gets the value of url
+	 * 
+	 */
+	@Override
+	public native String getUrl() /*-{
 		var video = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		return video.getUrl();
-    }-*/;
+	}-*/;
 
-    public native void updatePosterUrl(Object value) /*-{
+	public native void updatePosterUrl(Object value) /*-{
 		var video = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		video.updatePosterUrl(value);
-    }-*/;
-
-    @Override
-    public String getText() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public void setText(String text) {
-        // TODO Auto-generated method stub
-
-    }
+	}-*/;
 
 }

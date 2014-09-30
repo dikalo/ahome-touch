@@ -15,61 +15,48 @@
  */
 package com.ait.toolkit.sencha.touch.client.ui;
 
+import com.ait.toolkit.sencha.shared.client.core.XType;
 import com.ait.toolkit.sencha.touch.client.core.Component;
 import com.ait.toolkit.sencha.touch.client.core.HasHtml;
-import com.ait.toolkit.sencha.shared.client.core.XType;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * A simple label component which allows you to insert content using html
- * configuration.
+ * A simple label component which allows you to insert content using html configuration.
  * 
  * @see <a href=http://docs.sencha.com/touch/2-0/#!/api/Ext.Label>Ext.Label</a>
  */
 public class Label extends Component implements HasHtml {
 
-    private Label(JavaScriptObject config) {
-        super(config);
-    }
+	private Label(JavaScriptObject config) {
+		super(config);
+	}
 
-    protected native void init()/*-{
+	protected native void init()/*-{
 		var c = new $wnd.Ext.Label();
 		this.@com.ait.toolkit.sencha.touch.client.core.Component::configPrototype = c.initialConfig;
-    }-*/;
+	}-*/;
 
-    public String getXType() {
-        return XType.LABEL.getValue();
-    }
+	public String getXType() {
+		return XType.LABEL.getValue();
+	}
 
-    /**
-     * Create a new Label.
-     */
-    public Label() {
-    }
+	/**
+	 * Create a new Label.
+	 */
+	public Label() {
+	}
 
-    @Override
-    protected native JavaScriptObject create(JavaScriptObject config) /*-{
+	@Override
+	protected native JavaScriptObject create(JavaScriptObject config) /*-{
 		return new $wnd.Ext.Label(config);
-    }-*/;
+	}-*/;
 
-    /**
-     * The label of this component
-     */
-    public native void setHtml(String value) /*-{
+	/**
+	 * The label of this component
+	 */
+	public native void setHtml(String value) /*-{
 		var label = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		label.setHtml(value);
-    }-*/;
-
-    @Override
-    public String getText() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public void setText(String text) {
-        // TODO Auto-generated method stub
-
-    }
+	}-*/;
 
 }

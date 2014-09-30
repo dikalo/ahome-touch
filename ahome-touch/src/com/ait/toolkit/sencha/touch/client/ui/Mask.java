@@ -15,75 +15,62 @@
  */
 package com.ait.toolkit.sencha.touch.client.ui;
 
-import com.ait.toolkit.sencha.touch.client.core.Component;
-import com.ait.toolkit.sencha.touch.client.core.config.TouchAttribute;
-import com.ait.toolkit.sencha.touch.client.core.config.Event;
 import com.ait.toolkit.sencha.shared.client.core.XType;
 import com.ait.toolkit.sencha.shared.client.core.handlers.CallbackRegistration;
+import com.ait.toolkit.sencha.touch.client.core.Component;
+import com.ait.toolkit.sencha.touch.client.core.config.Event;
+import com.ait.toolkit.sencha.touch.client.core.config.TouchAttribute;
 import com.ait.toolkit.sencha.touch.client.core.handlers.mask.MaskTapHandler;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * A simple class used to mask any Container. This should rarely be used
- * directly, instead look at the Container.mask configuration.
+ * A simple class used to mask any Container. This should rarely be used directly, instead look at the Container.mask configuration.
  * 
  * @see <a href=http://docs.sencha.com/touch/2-0/#!/api/Ext.Mask>Ext.Mask</a>
  */
 public class Mask extends Component {
 
-    @Override
-    protected native void init()/*-{
+	@Override
+	protected native void init()/*-{
 		var c = new $wnd.Ext.Mask();
 		this.@com.ait.toolkit.sencha.touch.client.core.Component::configPrototype = c.initialConfig;
-    }-*/;
+	}-*/;
 
-    @Override
-    public String getXType() {
-        return XType.MASK.getValue();
-    }
+	@Override
+	public String getXType() {
+		return XType.MASK.getValue();
+	}
 
-    @Override
-    protected native JavaScriptObject create(JavaScriptObject config) /*-{
+	@Override
+	protected native JavaScriptObject create(JavaScriptObject config) /*-{
 		return new $wnd.Ext.Mask(config);
-    }-*/;
+	}-*/;
 
-    public Mask() {
-    }
+	public Mask() {
+	}
 
-    protected Mask(JavaScriptObject jso) {
-        super(jso);
-    }
+	protected Mask(JavaScriptObject jso) {
+		super(jso);
+	}
 
-    /**
-     * True to make this mask transparent.
-     * 
-     * Defaults to: false
-     * 
-     * @param value
-     */
-    public void setTransparent(String value) {
-        setAttribute(TouchAttribute.TRANSPARENT.getValue(), value, true);
-    }
+	/**
+	 * True to make this mask transparent.
+	 * 
+	 * Defaults to: false
+	 * 
+	 * @param value
+	 */
+	public void setTransparent(String value) {
+		setAttribute(TouchAttribute.TRANSPARENT.getValue(), value, true);
+	}
 
-    /**
-     * A tap event fired when a user taps on this mask
-     * 
-     * @param handler
-     */
-    public CallbackRegistration addTapHandler(MaskTapHandler handler) {
-        return this.addWidgetListener(Event.TAP.getValue(), handler.getJsoPeer());
-    }
-
-    @Override
-    public String getText() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public void setText(String text) {
-        // TODO Auto-generated method stub
-
-    }
+	/**
+	 * A tap event fired when a user taps on this mask
+	 * 
+	 * @param handler
+	 */
+	public CallbackRegistration addTapHandler(MaskTapHandler handler) {
+		return this.addWidgetListener(Event.TAP.getValue(), handler.getJsoPeer());
+	}
 
 }

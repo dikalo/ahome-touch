@@ -23,8 +23,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 
 /**
  * 
- This classed is used for the {@link ToolBar} title configuration in the
- * {@link TitleBar} component.
+ This classed is used for the {@link ToolBar} title configuration in the {@link TitleBar} component.
  * 
  */
 public class Title extends Component {
@@ -68,12 +67,10 @@ public class Title extends Component {
 		return getAttribute(TouchAttribute.TITLE.getValue());
 	}
 
-	@Override
 	public String getText() {
 		return this.getTitle();
 	}
 
-	@Override
 	public void setText(String text) {
 		this.setTitle(text);
 	}

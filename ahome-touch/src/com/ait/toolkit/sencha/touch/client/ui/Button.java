@@ -17,23 +17,16 @@ package com.ait.toolkit.sencha.touch.client.ui;
 
 import com.ait.toolkit.core.client.Function;
 import com.ait.toolkit.core.client.JsoHelper;
-import com.ait.toolkit.sencha.shared.client.core.handlers.CallbackRegistration;
-import com.ait.toolkit.sencha.touch.client.core.Component;
-import com.ait.toolkit.sencha.touch.client.core.HasBadge;
-import com.ait.toolkit.sencha.touch.client.core.HasIcon;
-import com.ait.toolkit.sencha.touch.client.core.HasTapHandlers;
-import com.ait.toolkit.sencha.touch.client.core.HasUi;
-import com.ait.toolkit.sencha.touch.client.core.Icons;
-import com.ait.toolkit.sencha.touch.client.core.config.Event;
-import com.ait.toolkit.sencha.touch.client.core.config.TouchAttribute;
 import com.ait.toolkit.sencha.shared.client.core.XType;
-import com.ait.toolkit.sencha.touch.client.core.handlers.button.BeforeTapHandler;
-import com.ait.toolkit.sencha.touch.client.core.handlers.button.TapHandler;
+import com.ait.toolkit.sencha.touch.client.core.Component;
+import com.ait.toolkit.sencha.touch.client.core.Icons;
+import com.ait.toolkit.sencha.touch.client.core.config.TouchAttribute;
+import com.ait.toolkit.sencha.touch.client.events.HandlerRegistration;
+import com.ait.toolkit.sencha.touch.client.events.button.TapHandler;
 import com.ait.toolkit.sencha.touch.client.laf.UI;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.user.client.ui.HasText;
 
 /**
  * A simple class to display different styles of buttons.
@@ -41,15 +34,10 @@ import com.google.gwt.user.client.ui.HasText;
  * <h2>Usefull methods</h2>
  * <ul>
  * <li>setUi(UI ui). Defines the styles of the buttons</li>
- * <li>addTapHanlder(TapHandler handler). Defines the method to be called when
- * the button is tapped</li>
+ * <li>addTapHanlder(TapHandler handler). Defines the method to be called when the button is tapped</li>
  * </ul>
- * 
- * @see <a
- *      href=http://docs.sencha.com/touch/2-0/#!/api/Ext.Button>Ext.Button</a>
  */
-public class Button extends Component implements HasUi, HasIcon,
-		HasTapHandlers, HasBadge, HasText {
+public class Button extends Component {
 
 	private static int buttonId = 1000;
 
@@ -113,8 +101,7 @@ public class Button extends Component implements HasUi, HasIcon,
 	}
 
 	/**
-	 * Create a new button with a given text and ui. Also add the given
-	 * tapHandler to the button.
+	 * Create a new button with a given text and ui. Also add the given tapHandler to the button.
 	 * 
 	 * @param text
 	 *            , the button label
@@ -132,10 +119,8 @@ public class Button extends Component implements HasUi, HasIcon,
 	 */
 	public enum IconAlign {
 
-		BOTTOM(TouchAttribute.BOTTOM.getValue()), CENTER(TouchAttribute.CENTER
-				.getValue()), LEFT(TouchAttribute.LEFT.getValue()), RIGHT(
-				TouchAttribute.RIGHT.getValue()), TOP(TouchAttribute.TOP
-				.getValue());
+		BOTTOM(TouchAttribute.BOTTOM.getValue()), CENTER(TouchAttribute.CENTER.getValue()), LEFT(TouchAttribute.LEFT.getValue()), RIGHT(TouchAttribute.RIGHT.getValue()), TOP(
+				TouchAttribute.TOP.getValue());
 
 		private String value;
 
@@ -172,7 +157,6 @@ public class Button extends Component implements HasUi, HasIcon,
 	/**
 	 * Returns the value of badgeText.
 	 */
-	@Override
 	public native String getBadgeText() /*-{
 		var button = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		return button.getBadgeText();
@@ -181,7 +165,6 @@ public class Button extends Component implements HasUi, HasIcon,
 	/**
 	 * Returns the value of icon.
 	 */
-	@Override
 	public native String getIcon() /*-{
 		var button = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		return button.getIcon();
@@ -190,7 +173,6 @@ public class Button extends Component implements HasUi, HasIcon,
 	/**
 	 * Returns the value of iconAlign.
 	 */
-	@Override
 	public native String getIconAlign() /*-{
 		var button = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		return button.getIconAlign();
@@ -199,7 +181,6 @@ public class Button extends Component implements HasUi, HasIcon,
 	/**
 	 * Returns the value of iconCls.
 	 */
-	@Override
 	public native String getIconCls() /*-{
 		var button = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		return button.getIconCls();
@@ -218,7 +199,6 @@ public class Button extends Component implements HasUi, HasIcon,
 	/**
 	 * Returns the value of iconMask.
 	 */
-	@Override
 	public native String getIconMaskCls() /*-{
 		var button = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		return button.getIconMaskCls();
@@ -247,7 +227,6 @@ public class Button extends Component implements HasUi, HasIcon,
 	/**
 	 * Returns the value of text.
 	 */
-	@Override
 	public String getText() {
 		if (isRendered()) {
 			return getRenderedText();
@@ -287,7 +266,6 @@ public class Button extends Component implements HasUi, HasIcon,
 	/**
 	 * Sets the value of badgeCls.
 	 */
-	@Override
 	public native void setBadgeText(String value) /*-{
 		var button = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		button.setBadgeText(value);
@@ -303,64 +281,19 @@ public class Button extends Component implements HasUi, HasIcon,
 		return super.isDisabled();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.ait.toolkit.sencha.touch.client.widgets.HasTapHandlers#addTapHandler
-	 * (com .emitrom.gwt4.touch.client.core.handlers.button.TapHandler)
-	 */
-	@Override
-	public CallbackRegistration addTapHandler(final TapHandler handler) {
-		return this.addWidgetListener(Event.TAP.getValue(),
-				handler.getJsoPeer());
-	}
+	public native HandlerRegistration addTapHandler(TapHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(b, e) {
+			var button = @com.ait.toolkit.sencha.touch.client.ui.Button::new(Lcom/google/gwt/core/client/JavaScriptObject;)(b);
+			var TapEvent = @com.ait.toolkit.sencha.touch.client.events.button.TapEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/Button;Lcom/google/gwt/core/client/JavaScriptObject;)(button,e);
+			handler.@com.ait.toolkit.sencha.touch.client.events.button.TapHandler::onTap(Lcom/ait/toolkit/sencha/touch/client/events/button/TapEvent;)(TapEvent);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.button.TapEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
 
-	/*
-	 * public native ComponentHandlerRegistration addTapHandler(
-	 * com.ait.toolkit.sencha.touch.client.events.handlers.TapHandler
-	 * handler)/*-{ var component =
-	 * this.@com.ait.toolkit.sencha.touch.client.core
-	 * .Component::getOrCreateJsObj()(); var fn = function(source, event) { var
-	 * btn =
-	 * 
-	 * @com.ait.toolkit.sencha.touch.client.ui
-	 * .Button::new(Lcom/google/gwt/core/client/JavaScriptObject;)(source); var
-	 * eventObject =
-	 * 
-	 * @com.ait.toolkit.sencha.touch.client.events.TapEvent::new(Lcom/emitrom
-	 * /touch4j/client
-	 * /ui/Button;Lcom/google/gwt/core/client/JavaScriptObject;)(btn,event);
-	 * handler
-	 * .@com.ait.toolkit.sencha.touch.client.events.handlers.TapHandler::
-	 * onTap(Lcom /emitrom/touch4j/client/events/TapEvent;)(eventObject); }; var
-	 * eventName =
-	 * 
-	 * @com.ait.toolkit.sencha.touch.client.events.TapEvent::EVENT_NAME;
-	 * component.addListener(eventName, fn); var listener = fn; var toReturn =
-	 * 
-	 * @com
-	 * .emitrom.touch4j.client.core.handlers.ComponentHandlerRegistration::new
-	 * (Lcom
-	 * /emitrom/touch4j/client/core/Component;;Ljava/lang/String;Lcom/google/
-	 * gwt/core/client/JavaScriptObject;)(this,eventName,listener); return
-	 * toReturn; }-
-	 */
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ait.toolkit.sencha.touch.client.widgets.HasTapHandlers#
-	 * addBeforeTapHandler
-	 * (com.ait.toolkit.sencha.touch.client.core.handlers.button
-	 * .BeforeTapHandler)
-	 */
-	@Override
-	public CallbackRegistration addBeforeTapHandler(
-			final BeforeTapHandler handler) {
-		return this.addWidgetListener(Event.BEFORE_TAP.getValue(),
-				handler.getJsoPeer());
-	}
+	}-*/;
 
 	@Override
 	public String getXType() {
@@ -392,7 +325,6 @@ public class Button extends Component implements HasUi, HasIcon,
 	/**
 	 * Sets the value of iconCls
 	 */
-	@Override
 	public void setIconCls(Icons icon) {
 		setIconCls(icon.getValue());
 	}
@@ -411,8 +343,7 @@ public class Button extends Component implements HasUi, HasIcon,
 	}-*/;
 
 	/**
-	 * @deprecated Updates the badge text.This method has been DEPRECATED since
-	 *             2.0.0
+	 * @deprecated Updates the badge text.This method has been DEPRECATED since 2.0.0
 	 * 
 	 *             Please use setBadgeText instead.
 	 * @param value
@@ -437,7 +368,6 @@ public class Button extends Component implements HasUi, HasIcon,
 	/**
 	 * Sets the value of icon
 	 */
-	@Override
 	public native void setIcon(String value) /*-{
 		var button = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		button.setIcon(value);
@@ -446,7 +376,6 @@ public class Button extends Component implements HasUi, HasIcon,
 	/**
 	 * Sets the value of iconAlign.
 	 */
-	@Override
 	public native void setIconAlign(String value) /*-{
 		var button = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		button.setIconAlign(value);
@@ -455,7 +384,6 @@ public class Button extends Component implements HasUi, HasIcon,
 	/**
 	 * Sets the value of iconAlign.
 	 */
-	@Override
 	public void setIconAlign(IconAlign align) {
 		setIconAlign(align.getValue());
 	}
@@ -463,7 +391,6 @@ public class Button extends Component implements HasUi, HasIcon,
 	/**
 	 * Sets the value of iconMask.
 	 */
-	@Override
 	public native void setIconMask(boolean value) /*-{
 		var button = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		//button.setIconMask(value);
@@ -472,7 +399,6 @@ public class Button extends Component implements HasUi, HasIcon,
 	/**
 	 * Sets the value of iconMaskCls.
 	 */
-	@Override
 	public native void setIconMaskCls(String value) /*-{
 		var button = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		//button.setIconMaksCls(value);
@@ -501,7 +427,6 @@ public class Button extends Component implements HasUi, HasIcon,
 	/**
 	 * Sets the value of text.
 	 */
-	@Override
 	public void setText(String text) {
 		setRenderedText(text);
 	}
@@ -560,18 +485,13 @@ public class Button extends Component implements HasUi, HasIcon,
 	}-*/;
 
 	private void generateButtonId() {
-
-		id = new StringBuilder().append("ext-").append(this.getXType())
-				.append("-").append(++buttonId).toString();
-
+		id = new StringBuilder().append("ext-").append(this.getXType()).append("-").append(++buttonId).toString();
 		Element elementId = Document.get().getElementById(id);
-
 		if (elementId == null) {
 			JsoHelper.setAttribute(config, "id", id);
 		} else {
 			generateButtonId();
 		}
-
 	}
 
 }

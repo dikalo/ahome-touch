@@ -16,10 +16,10 @@
 package com.ait.toolkit.sencha.touch.client.core;
 
 import com.ait.toolkit.core.client.JsoHelper;
+import com.ait.toolkit.sencha.shared.client.core.XType;
 import com.ait.toolkit.sencha.shared.client.dom.DomConfig;
 import com.ait.toolkit.sencha.shared.client.dom.DomHelper;
 import com.ait.toolkit.sencha.shared.client.dom.ExtElement;
-import com.ait.toolkit.sencha.shared.client.core.XType;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -28,9 +28,8 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * Adapter between GWT {@link com.google.gwt.user.client.ui.Widget}'s and
- * {@link com.ait.toolkit.sencha.touch.client.core.Component}'s. This class
- * enables the use of pure GWT component inside Touch4j panels
+ * Adapter between GWT {@link com.google.gwt.user.client.ui.Widget}'s and {@link com.ait.toolkit.sencha.touch.client.core.Component}'s. This class enables the use of pure GWT
+ * component inside Touch4j panels
  */
 public class WidgetComponent extends Component {
 
@@ -46,8 +45,7 @@ public class WidgetComponent extends Component {
 	}
 
 	public WidgetComponent() {
-		id = new StringBuilder().append("ext-").append(this.getXType())
-				.append("-").append(++widgetComponentId).toString();
+		id = new StringBuilder().append("ext-").append(this.getXType()).append("-").append(++widgetComponentId).toString();
 		JsoHelper.setAttribute(config, "id", id);
 	}
 
@@ -128,29 +126,26 @@ public class WidgetComponent extends Component {
 
 	protected void addWidgetDetachHandler() {
 		if (this.widget != null) {
-			detachHandler = this.widget
-					.addAttachHandler(new AttachEvent.Handler() {
-						boolean detaching = false;
+			detachHandler = this.widget.addAttachHandler(new AttachEvent.Handler() {
+				boolean detaching = false;
 
-						@Override
-						public void onAttachOrDetach(AttachEvent event) {
-							if (!detaching) {
-								detaching = true;
-								if (!event.isAttached()
-										&& getParent() instanceof HasWidgets) {
-									((HasWidgets) getParent())
-											.remove((Widget) event.getSource());
-								}
-								widget = null;
-								if (detachHandler != null) {
-									detachHandler.removeHandler();
-									detachHandler = null;
-								}
-								setParentWidget(null);
-								removeFromParent();
-							}
+				@Override
+				public void onAttachOrDetach(AttachEvent event) {
+					if (!detaching) {
+						detaching = true;
+						if (!event.isAttached() && getParent() instanceof HasWidgets) {
+							((HasWidgets) getParent()).remove((Widget) event.getSource());
 						}
-					});
+						widget = null;
+						if (detachHandler != null) {
+							detachHandler.removeHandler();
+							detachHandler = null;
+						}
+						setParentWidget(null);
+						removeFromParent();
+					}
+				}
+			});
 		}
 	}
 
@@ -160,15 +155,6 @@ public class WidgetComponent extends Component {
 
 	@Override
 	protected void init() {
-	}
-
-	@Override
-	public String getText() {
-		return "";
-	}
-
-	@Override
-	public void setText(String text) {
 	}
 
 	/*

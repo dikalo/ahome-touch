@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import com.ait.toolkit.sencha.shared.client.core.XType;
 import com.ait.toolkit.sencha.shared.client.core.handlers.CallbackRegistration;
 import com.ait.toolkit.sencha.touch.client.core.ComplexContainer;
 import com.ait.toolkit.sencha.touch.client.core.Component;
@@ -28,7 +29,6 @@ import com.ait.toolkit.sencha.touch.client.core.Resizable;
 import com.ait.toolkit.sencha.touch.client.core.Scroller;
 import com.ait.toolkit.sencha.touch.client.core.config.ContainerConfig;
 import com.ait.toolkit.sencha.touch.client.core.config.TouchAttribute;
-import com.ait.toolkit.sencha.shared.client.core.XType;
 import com.ait.toolkit.sencha.touch.client.core.handlers.component.RenderChangeHandler;
 import com.ait.toolkit.sencha.touch.client.core.handlers.layout.card.ActiveItemChangeHandler;
 import com.ait.toolkit.sencha.touch.client.layout.AbstractLayout;
@@ -43,27 +43,17 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * A Container has all of the abilities of Component, but lets you nest other
- * Components inside it. Applications are made up of lots of components, usually
- * nested inside one another. Containers allow you to render and arrange child
- * Components inside them. Most apps have a single top-level Container called a
- * Viewport, which takes up the entire screen. Inside of this are child
- * components, for example in a mail app the Viewport Container's two children
- * might be a message ListDataView and an email preview pane.
+ * A Container has all of the abilities of Component, but lets you nest other Components inside it. Applications are made up of lots of components, usually nested inside one
+ * another. Containers allow you to render and arrange child Components inside them. Most apps have a single top-level Container called a Viewport, which takes up the entire
+ * screen. Inside of this are child components, for example in a mail app the Viewport Container's two children might be a message ListDataView and an email preview pane.
  * 
  * Containers give the following extra functionality:
  * 
- * Adding child Components at instantiation and run time Removing child
- * Components Specifying a Layout Layouts determine how the child Components
- * should be laid out on the screen. In our mail app example we'd use an HBox
- * layout so that we can pin the email list to the left hand edge of the screen
- * and allow the preview pane to occupy the rest. There are several layouts in
- * Sencha Touch 2, each of which help you achieve your desired application
- * structure, further explained in the Layout guide.
+ * Adding child Components at instantiation and run time Removing child Components Specifying a Layout Layouts determine how the child Components should be laid out on the screen.
+ * In our mail app example we'd use an HBox layout so that we can pin the email list to the left hand edge of the screen and allow the preview pane to occupy the rest. There are
+ * several layouts in Sencha Touch 2, each of which help you achieve your desired application structure, further explained in the Layout guide.
  * 
- * @see <a
- *      href=http://docs.sencha.com/touch/2-0/#!/api/Ext.Container>Ext.Container
- *      </a>
+ * @see <a href=http://docs.sencha.com/touch/2-0/#!/api/Ext.Container>Ext.Container </a>
  */
 public class Container extends ComplexContainer implements HasLayout, Resizable {
 
@@ -111,10 +101,8 @@ public class Container extends ComplexContainer implements HasLayout, Resizable 
 	}
 
 	/**
-	 * Animates to the supplied activeItem with a specified animation. Currently
-	 * this only works with a Card layout. This passed animation will override
-	 * any default animations on the container, for a single card switch. The
-	 * animation will be destroyed when complete.
+	 * Animates to the supplied activeItem with a specified animation. Currently this only works with a Card layout. This passed animation will override any default animations on
+	 * the container, for a single card switch. The animation will be destroyed when complete.
 	 * 
 	 * @param activeItem
 	 * @param animation
@@ -128,8 +116,7 @@ public class Container extends ComplexContainer implements HasLayout, Resizable 
 	}
 
 	/**
-	 * @return true if Component is configured to auto destroy contained
-	 *         components on destruction
+	 * @return true if Component is configured to auto destroy contained components on destruction
 	 */
 	public native boolean getAutoDestroy() /*-{
 		var container = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
@@ -163,9 +150,7 @@ public class Container extends ComplexContainer implements HasLayout, Resizable 
 	}-*/;
 
 	/**
-	 * Inserts a Component into this Container at a specified index. Fires the
-	 * beforeadd event before inserting, then fires the add event after the
-	 * Component has been inserted.
+	 * Inserts a Component into this Container at a specified index. Fires the beforeadd event before inserting, then fires the add event after the Component has been inserted.
 	 * 
 	 * @param index
 	 *            the index to insert the component at
@@ -173,15 +158,12 @@ public class Container extends ComplexContainer implements HasLayout, Resizable 
 	 *            the component to insert
 	 */
 	public void insert(int index, Component component) {
-		JavaScriptObject componentJS = component.isCreated() ? component
-				.getOrCreateJsObj() : component.getConfig();
+		JavaScriptObject componentJS = component.isCreated() ? component.getOrCreateJsObj() : component.getConfig();
 		doInsert(index, componentJS);
 	}
 
 	/**
-	 * If true the container will automatically destroy any contained component
-	 * that is removed from it, else destruction must be handled manually
-	 * (defaults to true).
+	 * If true the container will automatically destroy any contained component that is removed from it, else destruction must be handled manually (defaults to true).
 	 * 
 	 * @param autoDestroy
 	 *            true to autodestroy
@@ -281,8 +263,7 @@ public class Container extends ComplexContainer implements HasLayout, Resizable 
 	}
 
 	/**
-	 * Removes all items currently in the Container, optionally destroying them
-	 * all.
+	 * Removes all items currently in the Container, optionally destroying them all.
 	 * 
 	 * @param destroy
 	 *            ,If true, destroys each removed Component.
@@ -293,14 +274,12 @@ public class Container extends ComplexContainer implements HasLayout, Resizable 
 	}
 
 	/**
-	 * Removes all items currently in the Container, optionally destroying them
-	 * all.
+	 * Removes all items currently in the Container, optionally destroying them all.
 	 * 
 	 * @param destroy
 	 *            ,If true, destroys each removed Component.
 	 * @param evertything
-	 *            , If true, completely remove all items including docked /
-	 *            centered and floating items.
+	 *            , If true, completely remove all items including docked / centered and floating items.
 	 */
 	public void removeAll(boolean destroy, boolean evertything) {
 		super.removeAll();
@@ -334,8 +313,7 @@ public class Container extends ComplexContainer implements HasLayout, Resizable 
 	}-*/;
 
 	/**
-	 * Convience method which calls setMasked with a value of false (to hide the
-	 * mask)
+	 * Convience method which calls setMasked with a value of false (to hide the mask)
 	 */
 	public native void unmask() /*-{
 		var container = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
@@ -369,20 +347,15 @@ public class Container extends ComplexContainer implements HasLayout, Resizable 
 	}-*/;
 
 	/**
-	 * Fires whenever an item is rendered into a container or derendered from a
-	 * Container
+	 * Fires whenever an item is rendered into a container or derendered from a Container
 	 * 
 	 * @param handler
 	 */
-	public CallbackRegistration addRenderChangeHandler(
-			RenderChangeHandler handler) {
-		return this
-				.addWidgetListener(TouchAttribute.RENDERED_CHANGE.getValue(),
-						handler.getJsoPeer());
+	public CallbackRegistration addRenderChangeHandler(RenderChangeHandler handler) {
+		return this.addWidgetListener(TouchAttribute.RENDERED_CHANGE.getValue(), handler.getJsoPeer());
 	}
 
-	public CallbackRegistration addActiveItemChangeHandler(
-			ActiveItemChangeHandler handler) {
+	public CallbackRegistration addActiveItemChangeHandler(ActiveItemChangeHandler handler) {
 		return this.addWidgetListener("activeitemchange", handler.getJsoPeer());
 	}
 
@@ -391,16 +364,14 @@ public class Container extends ComplexContainer implements HasLayout, Resizable 
 		container.setScrollable(scrollable);
 	}-*/;
 
-	private native void animateActiveItem(int activeItem,
-			JavaScriptObject animation) /*-{
+	private native void animateActiveItem(int activeItem, JavaScriptObject animation) /*-{
 		var container = this.@com.ait.toolkit.sencha.touch.client.ui.Container::getOrCreateJsObj()();
 		if (container != null) {
 			container.animateActiveItem(activeItem, animation);
 		}
 	}-*/;
 
-	private native void animateActiveItem(JavaScriptObject activeItem,
-			JavaScriptObject animation) /*-{
+	private native void animateActiveItem(JavaScriptObject activeItem, JavaScriptObject animation) /*-{
 		var container = this.@com.ait.toolkit.sencha.touch.client.ui.Container::getOrCreateJsObj()();
 		if (container != null) {
 			container.animateActiveItem(activeItem, animation);
@@ -416,17 +387,5 @@ public class Container extends ComplexContainer implements HasLayout, Resizable 
 		var container = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		container.insert(index, component);
 	}-*/;
-
-	@Override
-	public String getText() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setText(String text) {
-		// TODO Auto-generated method stub
-
-	}
 
 }
