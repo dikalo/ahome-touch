@@ -14,13 +14,13 @@ public class TapEvent extends EventObject {
 	/**
 	 * UiBinder implementations
 	 */
-	private static Type<ReleaseHandler> TYPE = new Type<ReleaseHandler>(EVENT_NAME, null);
+	private static Type<TapHandler> TYPE = new Type<TapHandler>(EVENT_NAME, null);
 
-	public static Type<ReleaseHandler> getType() {
+	public static Type<TapHandler> getType() {
 		return TYPE;
 	}
 
-	public static Type<ReleaseHandler> getAssociatedType() {
+	public static Type<TapHandler> getAssociatedType() {
 		return TYPE;
 	}
 
