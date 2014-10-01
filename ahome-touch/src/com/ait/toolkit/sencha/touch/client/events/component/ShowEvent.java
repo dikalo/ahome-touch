@@ -1,7 +1,6 @@
 package com.ait.toolkit.sencha.touch.client.events.component;
 
 import com.ait.toolkit.sencha.touch.client.core.Component;
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.event.dom.client.DomEvent.Type;
 
 public class ShowEvent {
@@ -23,7 +22,7 @@ public class ShowEvent {
 		return TYPE;
 	}
 
-	protected ShowEvent(Component source, JavaScriptObject nativeEvent) {
+	protected ShowEvent(Component source) {
 		this.source = source;
 	}
 

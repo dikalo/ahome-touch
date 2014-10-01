@@ -1,13 +1,13 @@
 package com.ait.toolkit.sencha.touch.client.events.component;
 
-import com.ait.toolkit.sencha.touch.client.core.Component;
+import com.ait.toolkit.sencha.shared.client.dom.ExtElement;
 import com.google.gwt.event.dom.client.DomEvent.Type;
 
 public class PaintedEvent {
 
 	public static String EVENT_NAME = "painted";
 
-	private Component source;
+	private ExtElement source;
 
 	/**
 	 * UiBinder implementations
@@ -22,14 +22,14 @@ public class PaintedEvent {
 		return TYPE;
 	}
 
-	protected PaintedEvent(Component source) {
+	protected PaintedEvent(ExtElement source) {
 		this.source = source;
 	}
 
 	/**
 	 * @return the source
 	 */
-	public Component getSource() {
+	public ExtElement getSource() {
 		return source;
 	}
 
