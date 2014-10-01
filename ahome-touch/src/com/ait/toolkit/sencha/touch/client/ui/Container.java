@@ -20,7 +20,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.ait.toolkit.sencha.shared.client.core.XType;
-import com.ait.toolkit.sencha.shared.client.core.handlers.CallbackRegistration;
 import com.ait.toolkit.sencha.touch.client.core.ComplexContainer;
 import com.ait.toolkit.sencha.touch.client.core.Component;
 import com.ait.toolkit.sencha.touch.client.core.DefaultsHandler;
@@ -28,9 +27,6 @@ import com.ait.toolkit.sencha.touch.client.core.HasLayout;
 import com.ait.toolkit.sencha.touch.client.core.Resizable;
 import com.ait.toolkit.sencha.touch.client.core.Scroller;
 import com.ait.toolkit.sencha.touch.client.core.config.ContainerConfig;
-import com.ait.toolkit.sencha.touch.client.core.config.TouchAttribute;
-import com.ait.toolkit.sencha.touch.client.core.handlers.component.RenderChangeHandler;
-import com.ait.toolkit.sencha.touch.client.core.handlers.layout.card.ActiveItemChangeHandler;
 import com.ait.toolkit.sencha.touch.client.layout.AbstractLayout;
 import com.ait.toolkit.sencha.touch.client.layout.CardLayout;
 import com.ait.toolkit.sencha.touch.client.layout.FitLayout;
@@ -345,19 +341,6 @@ public class Container extends ComplexContainer implements HasLayout, Resizable 
 		var container = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		container.removeAll(destroy, everything);
 	}-*/;
-
-	/**
-	 * Fires whenever an item is rendered into a container or derendered from a Container
-	 * 
-	 * @param handler
-	 */
-	public CallbackRegistration addRenderChangeHandler(RenderChangeHandler handler) {
-		return this.addWidgetListener(TouchAttribute.RENDERED_CHANGE.getValue(), handler.getJsoPeer());
-	}
-
-	public CallbackRegistration addActiveItemChangeHandler(ActiveItemChangeHandler handler) {
-		return this.addWidgetListener("activeitemchange", handler.getJsoPeer());
-	}
 
 	private native void setScrollable(JavaScriptObject scrollable) /*-{
 		var container = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();

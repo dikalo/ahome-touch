@@ -18,12 +18,9 @@ package com.ait.toolkit.sencha.touch.client.ui;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ait.toolkit.sencha.shared.client.core.handlers.CallbackRegistration;
 import com.ait.toolkit.sencha.touch.client.core.Component;
-import com.ait.toolkit.sencha.touch.client.core.config.Event;
 import com.ait.toolkit.sencha.touch.client.core.config.MenuConfig;
 import com.ait.toolkit.sencha.touch.client.core.config.MenuSide;
-import com.ait.toolkit.sencha.touch.client.core.handlers.component.OrientationChangeHandler;
 import com.ait.toolkit.sencha.touch.client.layout.card.CardAnimation;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
@@ -31,15 +28,11 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * Viewport is class instance created when Touch4j is loaded. Because Viewport
- * extends from com.ait.toolkit.sencha.touch.client.core.Container, it has as
- * layout (which defaults to CardLayout). This means you can add items to it at
- * any time, from anywhere in your code. The Viewport fullscreen atrribute is
- * true by default, so it will take up your whole screen.
+ * Viewport is class instance created when Touch4j is loaded. Because Viewport extends from com.ait.toolkit.sencha.touch.client.core.Container, it has as layout (which defaults to
+ * CardLayout). This means you can add items to it at any time, from anywhere in your code. The Viewport fullscreen atrribute is true by default, so it will take up your whole
+ * screen.
  * 
- * Adding a AcceptsOneWidget interface with an empty setWidget overriden method
- * to fake the operation and allow for a pure GWT Activty And Place
- * implementation.
+ * Adding a AcceptsOneWidget interface with an empty setWidget overriden method to fake the operation and allow for a pure GWT Activty And Place implementation.
  * 
  */
 public class ViewPort extends Container implements AcceptsOneWidget {
@@ -117,18 +110,14 @@ public class ViewPort extends Container implements AcceptsOneWidget {
 	}
 
 	/**
-	 * Whether or not to always automatically maximize the viewPort on first
-	 * load and all subsequent orientation changes.
+	 * Whether or not to always automatically maximize the viewPort on first load and all subsequent orientation changes.
 	 * 
 	 * This is set to false by default for a number of reasons:
 	 * 
 	 * <ul>
-	 * <li>Orientation change performance is drastically reduced when this is
-	 * enabled, on all devices.</li>
-	 * <li>On some devices (mostly Android) this can sometimes cause issues when
-	 * the default browser zoom setting is changed.</li>
-	 * <li>When wrapping your phone in a native shell, you may get a blank
-	 * screen.</li>
+	 * <li>Orientation change performance is drastically reduced when this is enabled, on all devices.</li>
+	 * <li>On some devices (mostly Android) this can sometimes cause issues when the default browser zoom setting is changed.</li>
+	 * <li>When wrapping your phone in a native shell, you may get a blank screen.</li>
 	 * </ul>
 	 * 
 	 * @param value
@@ -211,8 +200,7 @@ public class ViewPort extends Container implements AcceptsOneWidget {
 	/**
 	 * Sets a menu for a given side of the Viewport.
 	 * <p>
-	 * Adds functionality to show the menu by swiping from the side of the
-	 * screen from the given side.
+	 * Adds functionality to show the menu by swiping from the side of the screen from the given side.
 	 * <p>
 	 * If a menu is already set for a given side, it will be removed.
 	 * <p>
@@ -231,8 +219,7 @@ public class ViewPort extends Container implements AcceptsOneWidget {
 	/**
 	 * Sets a menu for a given side of the Viewport.
 	 * <p>
-	 * Adds functionality to show the menu by swiping from the side of the
-	 * screen from the given side.
+	 * Adds functionality to show the menu by swiping from the side of the screen from the given side.
 	 * 
 	 * @param menu
 	 * @param config
@@ -248,8 +235,7 @@ public class ViewPort extends Container implements AcceptsOneWidget {
 	/**
 	 * Sets a menu for a given side of the Viewport.
 	 * <p>
-	 * Adds functionality to show the menu by swiping from the side of the
-	 * screen from the given side.
+	 * Adds functionality to show the menu by swiping from the side of the screen from the given side.
 	 * <p>
 	 * If a menu is already set for a given side, it will be removed.
 	 * <p>
@@ -349,8 +335,7 @@ public class ViewPort extends Container implements AcceptsOneWidget {
 		viewPort.toggleMenu(side);
 	}-*/;
 
-	private native void _setMenu(Menu menu, String menuSide, boolean menuCover,
-			boolean menuReveal)/*-{
+	private native void _setMenu(Menu menu, String menuSide, boolean menuCover, boolean menuReveal)/*-{
 		var viewPort = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		viewPort
 				.setMenu(
@@ -362,16 +347,5 @@ public class ViewPort extends Container implements AcceptsOneWidget {
 
 						});
 	}-*/;
-
-	/**
-	 * Fires when the Viewport orientation has changed
-	 * 
-	 * @param handler
-	 */
-	public CallbackRegistration addOrientationChangeHandler(
-			OrientationChangeHandler handler) {
-		return viewPort.addWidgetListener(Event.ORIENTATION_CHANGE.getValue(),
-				handler.getJsoPeer());
-	}
 
 }
