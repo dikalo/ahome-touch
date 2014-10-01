@@ -22,6 +22,7 @@ import com.ait.toolkit.sencha.touch.client.core.Component;
 import com.ait.toolkit.sencha.touch.client.core.Icons;
 import com.ait.toolkit.sencha.touch.client.core.config.TouchAttribute;
 import com.ait.toolkit.sencha.touch.client.events.HandlerRegistration;
+import com.ait.toolkit.sencha.touch.client.events.button.ReleaseHandler;
 import com.ait.toolkit.sencha.touch.client.events.button.TapHandler;
 import com.ait.toolkit.sencha.touch.client.laf.UI;
 import com.google.gwt.core.client.JavaScriptObject;
@@ -446,7 +447,19 @@ public class Button extends Component {
 		component.addListener(eventName, fn);
 		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
 		return toReturn;
+	}-*/;
 
+	public native HandlerRegistration addReleaseHandler(ReleaseHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(b, e) {
+			var button = @com.ait.toolkit.sencha.touch.client.ui.Button::new(Lcom/google/gwt/core/client/JavaScriptObject;)(b);
+			var releaseEvent = @com.ait.toolkit.sencha.touch.client.events.button.ReleaseEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/Button;Lcom/google/gwt/core/client/JavaScriptObject;)(button,e);
+			handler.@com.ait.toolkit.sencha.touch.client.events.button.ReleaseHandler::onRelease(Lcom/ait/toolkit/sencha/touch/client/events/button/ReleaseEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.button.ReleaseEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
 	}-*/;
 
 	/**

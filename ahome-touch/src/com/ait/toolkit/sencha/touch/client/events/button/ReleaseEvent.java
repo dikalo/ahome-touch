@@ -5,30 +5,30 @@ import com.ait.toolkit.sencha.touch.client.ui.Button;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.event.dom.client.DomEvent.Type;
 
-public class TapEvent extends EventObject {
+public class ReleaseEvent extends EventObject {
 
-	public static String EVENT_NAME = "release";
+	public static String EVENT_NAME = "tap";
 
 	private Button source;
 
 	/**
 	 * UiBinder implementations
 	 */
-	private static Type<ReleaseHandler> TYPE = new Type<ReleaseHandler>(EVENT_NAME, null);
+	private static Type<TapHandler> TYPE = new Type<TapHandler>(EVENT_NAME, null);
 
-	public static Type<ReleaseHandler> getType() {
+	public static Type<TapHandler> getType() {
 		return TYPE;
 	}
 
-	public static Type<ReleaseHandler> getAssociatedType() {
+	public static Type<TapHandler> getAssociatedType() {
 		return TYPE;
 	}
 
-	public TapEvent(JavaScriptObject jsObj) {
+	public ReleaseEvent(JavaScriptObject jsObj) {
 		super(jsObj);
 	}
 
-	public TapEvent(Button source, JavaScriptObject nativeEvent) {
+	public ReleaseEvent(Button source, JavaScriptObject nativeEvent) {
 		super(nativeEvent);
 		this.source = source;
 
