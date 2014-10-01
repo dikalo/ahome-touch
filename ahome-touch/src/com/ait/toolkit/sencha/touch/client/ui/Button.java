@@ -281,20 +281,6 @@ public class Button extends Component {
 		return super.isDisabled();
 	}
 
-	public native HandlerRegistration addTapHandler(TapHandler handler)/*-{
-		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
-		var fn = function(b, e) {
-			var button = @com.ait.toolkit.sencha.touch.client.ui.Button::new(Lcom/google/gwt/core/client/JavaScriptObject;)(b);
-			var TapEvent = @com.ait.toolkit.sencha.touch.client.events.button.TapEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/Button;Lcom/google/gwt/core/client/JavaScriptObject;)(button,e);
-			handler.@com.ait.toolkit.sencha.touch.client.events.button.TapHandler::onTap(Lcom/ait/toolkit/sencha/touch/client/events/button/TapEvent;)(TapEvent);
-		};
-		var eventName = @com.ait.toolkit.sencha.touch.client.events.button.TapEvent::EVENT_NAME;
-		component.addListener(eventName, fn);
-		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
-		return toReturn;
-
-	}-*/;
-
 	@Override
 	public String getXType() {
 		return XType.BUTTON.getValue();
@@ -446,6 +432,22 @@ public class Button extends Component {
 	public static Button cast(Component component) {
 		return new Button(component.getOrCreateJsObj());
 	}
+
+	// Events
+
+	public native HandlerRegistration addTapHandler(TapHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(b, e) {
+			var button = @com.ait.toolkit.sencha.touch.client.ui.Button::new(Lcom/google/gwt/core/client/JavaScriptObject;)(b);
+			var TapEvent = @com.ait.toolkit.sencha.touch.client.events.button.TapEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/Button;Lcom/google/gwt/core/client/JavaScriptObject;)(button,e);
+			handler.@com.ait.toolkit.sencha.touch.client.events.button.TapHandler::onTap(Lcom/ait/toolkit/sencha/touch/client/events/button/TapEvent;)(TapEvent);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.button.TapEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+
+	}-*/;
 
 	/**
 	 * Gets the text of this button.

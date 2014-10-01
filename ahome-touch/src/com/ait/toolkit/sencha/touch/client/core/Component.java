@@ -19,28 +19,25 @@ import com.ait.toolkit.core.client.Function;
 import com.ait.toolkit.core.client.JsoHelper;
 import com.ait.toolkit.sencha.shared.client.core.Size;
 import com.ait.toolkit.sencha.shared.client.core.XType;
-import com.ait.toolkit.sencha.shared.client.core.handlers.CallbackRegistration;
 import com.ait.toolkit.sencha.shared.client.dom.DomUtil;
 import com.ait.toolkit.sencha.shared.client.dom.ExtElement;
 import com.ait.toolkit.sencha.touch.client.core.config.ComponentConfig;
 import com.ait.toolkit.sencha.touch.client.core.config.Dock;
-import com.ait.toolkit.sencha.touch.client.core.config.Event;
 import com.ait.toolkit.sencha.touch.client.core.config.TouchAttribute;
-import com.ait.toolkit.sencha.touch.client.core.handlers.component.BottomChangeHandler;
-import com.ait.toolkit.sencha.touch.client.core.handlers.component.CenteredChangeHandler;
-import com.ait.toolkit.sencha.touch.client.core.handlers.component.DisabledChangeHandler;
-import com.ait.toolkit.sencha.touch.client.core.handlers.component.DockedChangeHandler;
 import com.ait.toolkit.sencha.touch.client.core.handlers.component.HeightChangeHandler;
-import com.ait.toolkit.sencha.touch.client.core.handlers.component.HideHandler;
-import com.ait.toolkit.sencha.touch.client.core.handlers.component.LeftChangeHandler;
-import com.ait.toolkit.sencha.touch.client.core.handlers.component.ResizeHandler;
-import com.ait.toolkit.sencha.touch.client.core.handlers.component.RightChangeHandler;
-import com.ait.toolkit.sencha.touch.client.core.handlers.component.ShowHandler;
-import com.ait.toolkit.sencha.touch.client.core.handlers.component.TopChangeHandler;
-import com.ait.toolkit.sencha.touch.client.core.handlers.component.WidthChangeHandler;
+import com.ait.toolkit.sencha.touch.client.events.HandlerRegistration;
+import com.ait.toolkit.sencha.touch.client.events.component.BottomChangeHandler;
+import com.ait.toolkit.sencha.touch.client.events.component.CenteredChangeHandler;
+import com.ait.toolkit.sencha.touch.client.events.component.DestroyHandler;
+import com.ait.toolkit.sencha.touch.client.events.component.DisabledChangeHandler;
+import com.ait.toolkit.sencha.touch.client.events.component.DockedChangeHandler;
+import com.ait.toolkit.sencha.touch.client.events.component.ErasedHandler;
+import com.ait.toolkit.sencha.touch.client.events.component.FlexChangeHandler;
+import com.ait.toolkit.sencha.touch.client.events.component.FloatingChangeHandler;
 import com.ait.toolkit.sencha.touch.client.laf.UI;
 import com.ait.toolkit.sencha.touch.client.layout.card.AnimationType;
 import com.ait.toolkit.sencha.touch.client.layout.card.CardAnimation;
+import com.ait.toolkit.sencha.touch.client.ui.Container;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.Scheduler;
@@ -1298,11 +1295,16 @@ public abstract class Component extends TouchWidget {
 	 * 
 	 * @param value
 	 */
-	public native void up(String value) /*-{
+	public native Container up(String value) /*-{
 		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		if (component != null) {
-			component.up(value);
+			var o = component.up(value);
+			if (o) {
+				return @com.ait.toolkit.sencha.touch.client.ui.Container::new(Lcom/google/gwt/core/client/JavaScriptObject;)(o);
+			}
+			return null;
 		}
+		return null;
 	}-*/;
 
 	/*
@@ -1469,126 +1471,6 @@ public abstract class Component extends TouchWidget {
 
 	public int hashCode() {
 		return getId().hashCode();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ait.toolkit.sencha.touch.client.core.HasBoxHandlers# addBottomChangeHandler (com .emitrom.gwt4.touch.client.core.handlers.component.BottomChangeHandler)
-	 */
-
-	public CallbackRegistration addBottomChangeHandler(BottomChangeHandler handler) {
-		return this.addListener(Event.BOTTOM_CHANGE.getValue(), handler);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ait.toolkit.sencha.touch.client.core.HasBoxHandlers# addCenteredChangeHandler ( com.ait.toolkit.sencha.touch.client.core.handlers .component.CenteredChangeHandler )
-	 */
-
-	public CallbackRegistration addCenteredChangeHandler(CenteredChangeHandler handler) {
-		return this.addListener(Event.CENTERED_CHANGED.getValue(), handler);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ait.toolkit.sencha.touch.client.core.HasFocusHandlers# addDisabledChangeHandler ( com.ait.toolkit.sencha.touch.client.core.handlers .component.DisabledChangeHandler
-	 * )
-	 */
-
-	public CallbackRegistration addDisabledChangeHandler(DisabledChangeHandler handler) {
-		return this.addListener(Event.DISABLED_CHANGE.getValue(), handler);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ait.toolkit.sencha.touch.client.core.HasBoxHandlers#addDockChangeHandler (com .emitrom.gwt4.touch.client.core.handlers.component.DockedChangeHandler)
-	 */
-
-	public CallbackRegistration addDockChangeHandler(DockedChangeHandler handler) {
-		return this.addListener(Event.DOCKED_CHANGE.getValue(), handler);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ait.toolkit.sencha.touch.client.core.HasBoxHandlers# addHeightChangeHandler (com .emitrom.gwt4.touch.client.core.handlers.component.HeightChangeHandler)
-	 */
-
-	public CallbackRegistration addHeightChangeHandler(HeightChangeHandler handler) {
-		return this.addListener(Event.HEIGHT_CHANGE.getValue(), handler);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ait.toolkit.sencha.touch.client.core.HasFocusHandlers#addHideHandler (com .emitrom.gwt4.touch.client.core.handlers.component.HideHandler)
-	 */
-
-	public CallbackRegistration addHideHandler(HideHandler handler) {
-		return this.addListener(Event.HIDE.getValue(), handler);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ait.toolkit.sencha.touch.client.core.HasBoxHandlers#addLeftChangeHandler ( com.ait.toolkit.sencha.touch.client.core.handlers.component.LeftChangeHandler )
-	 */
-
-	public CallbackRegistration addLeftChangeHandler(LeftChangeHandler handler) {
-		return this.addListener(Event.LEFT_CHANGE.getValue(), handler);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ait.toolkit.sencha.touch.client.core.HasBoxHandlers#addRightChangeHandler (com .emitrom.gwt4.touch.client.core.handlers.component.RightChangeHandler)
-	 */
-
-	public CallbackRegistration addRightChangeHandler(RightChangeHandler handler) {
-		return this.addListener(Event.RIGHT_CHANGE.getValue(), handler);
-	}
-
-	/**
-	 * Important note: For the best performance on mobile devices, use this only when you absolutely need to monitor a Component's size.
-	 * 
-	 * Note: This event is not available to be used with event delegation. Instead 'resize' only fires if you explicily add at least one listener to it, due to performance reason.
-	 */
-	public CallbackRegistration addResizeHandler(ResizeHandler handler) {
-		return this.addListener(Event.RESIZE.getValue(), handler);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ait.toolkit.sencha.touch.client.core.HasFocusHandlers#addShowHandler (com .emitrom.gwt4.touch.client.core.handlers.component.ShowHandler)
-	 */
-
-	public CallbackRegistration addShowHandler(ShowHandler handler) {
-		return this.addListener(Event.SHOW.getValue(), handler);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ait.toolkit.sencha.touch.client.core.HasBoxHandlers#addTopChangeHandler ( com.ait.toolkit.sencha.touch.client.core.handlers.component.TopChangeHandler )
-	 */
-
-	public CallbackRegistration addTopChangeHandler(TopChangeHandler handler) {
-		return this.addListener(Event.TOP_CHANGE.getValue(), handler);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ait.toolkit.sencha.touch.client.core.HasBoxHandlers#addWidthHandler (com .emitrom.gwt4.touch.client.core.handlers.component.WidthChangeHandler)
-	 */
-
-	public CallbackRegistration addWidthHandler(WidthChangeHandler handler) {
-		return this.addListener(Event.WIDTH_CHANGE.getValue(), handler);
 	}
 
 	/**
@@ -1768,30 +1650,136 @@ public abstract class Component extends TouchWidget {
 		}
 	}-*/;
 
-	public static Component cast(Component peer) {
-		return new Component(peer.getOrCreateJsObj()) {
-
-			public void setText(String text) {
-				// TODO Auto-generated method stub
-
-			}
-
-			public String getText() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			protected JavaScriptObject create(JavaScriptObject config) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			protected void init() {
-				// TODO Auto-generated method stub
-
-			}
+	// Events
+	public native HandlerRegistration addBottomChangeHandler(BottomChangeHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, v, oldV) {
+			var comp = @com.ait.toolkit.sencha.touch.client.core.Component::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
+			var event = @com.ait.toolkit.sencha.touch.client.events.component.BottomChangeEvent::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/Object;Ljava/lang/Object;)(comp,v,oldV);
+			handler.@com.ait.toolkit.sencha.touch.client.events.component.BottomChangeHandler::onBottomChange(Lcom/ait/toolkit/sencha/touch/client/events/component/BottomChangeEvent;)(event);
 		};
-	}
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.component.BottomChangeEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
+
+	public native HandlerRegistration addCenteredChangeHandler(CenteredChangeHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, v, oldV) {
+			var comp = @com.ait.toolkit.sencha.touch.client.core.Component::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
+			var event = @com.ait.toolkit.sencha.touch.client.events.component.CenteredChangeEvent::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;ZZ)(comp,v,oldV);
+			handler.@com.ait.toolkit.sencha.touch.client.events.component.CenteredChangeHandler::onCenterdChange(Lcom/ait/toolkit/sencha/touch/client/events/component/CenteredChangeEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.component.CenteredChangeEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
+
+	public native HandlerRegistration addDestroyHandler(DestroyHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c) {
+			var comp = @com.ait.toolkit.sencha.touch.client.core.Component::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
+			var event = @com.ait.toolkit.sencha.touch.client.events.component.DesktroyEvent::new()();
+			handler.@com.ait.toolkit.sencha.touch.client.events.component.DestroyHandler::onDestroy(Lcom/ait/toolkit/sencha/touch/client/events/component/DesktroyEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.component.DesktroyEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
+
+	public native HandlerRegistration addDisabledChangeHandler(DisabledChangeHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, v, oldV) {
+			var comp = @com.ait.toolkit.sencha.touch.client.core.Component::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
+			var event = @com.ait.toolkit.sencha.touch.client.events.component.DisabledChangeEvent::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;ZZ)(comp,v,oldV);
+			handler.@com.ait.toolkit.sencha.touch.client.events.component.DisabledChangeHandler::onDisabledChange(Lcom/ait/toolkit/sencha/touch/client/events/component/DisabledChangeEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.component.DisabledChangeEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
+
+	public native HandlerRegistration addDockedChangeHandler(DockedChangeHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, v, oldV) {
+			var comp = @com.ait.toolkit.sencha.touch.client.core.Component::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
+			var event = @com.ait.toolkit.sencha.touch.client.events.component.DockedChangeEvent::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Ljava/lang/String;)(comp,v,oldV);
+			handler.@com.ait.toolkit.sencha.touch.client.events.component.DockedChangeHandler::onDockedChange(Lcom/ait/toolkit/sencha/touch/client/events/component/DockedChangeEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.component.DockedChangeEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
+
+	public native HandlerRegistration addErasedHandler(ErasedHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c) {
+			var comp = @com.ait.toolkit.sencha.touch.client.core.Component::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
+			var event = @com.ait.toolkit.sencha.touch.client.events.component.ErasedEvent::new()();
+			handler.@com.ait.toolkit.sencha.touch.client.events.component.ErasedHandler::onErased(Lcom/ait/toolkit/sencha/touch/client/events/component/ErasedEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.component.ErasedEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
+
+	public native HandlerRegistration addFlexChangeHandler(FlexChangeHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, v, oldV) {
+			var comp = @com.ait.toolkit.sencha.touch.client.core.Component::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
+			var event = @com.ait.toolkit.sencha.touch.client.events.component.FlexChangeEvent::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;II)(comp,v,oldV);
+			handler.@com.ait.toolkit.sencha.touch.client.events.component.FlexChangeHandler::onFlexChange(Lcom/ait/toolkit/sencha/touch/client/events/component/FlexChangeEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.component.FlexChangeEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
+
+	public native HandlerRegistration addFloatingChangeHandler(FloatingChangeHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, v) {
+			var comp = @com.ait.toolkit.sencha.touch.client.core.Component::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
+			var event = @com.ait.toolkit.sencha.touch.client.events.component.FloatingChangeEvent::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Z)(comp,v);
+			handler.@com.ait.toolkit.sencha.touch.client.events.component.FloatingChangeHandler::onFloatingChange(Lcom/ait/toolkit/sencha/touch/client/events/component/FloatingChangeEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.component.FloatingChangeEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
+
+	public native HandlerRegistration addFullScreenHandler(DestroyHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c) {
+			var comp = @com.ait.toolkit.sencha.touch.client.core.Component::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
+			var event = @com.ait.toolkit.sencha.touch.client.events.component.DesktroyEvent::new()();
+			handler.@com.ait.toolkit.sencha.touch.client.events.component.DestroyHandler::onDestroy(Lcom/ait/toolkit/sencha/touch/client/events/component/DesktroyEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.component.FullScreenEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
+
+	public native HandlerRegistration addHeightChangeHandler(HeightChangeHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, v, oldV) {
+			var comp = @com.ait.toolkit.sencha.touch.client.core.Component::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
+			var event = @com.ait.toolkit.sencha.touch.client.events.component.HeightChangeEvent::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/Object;Ljava/lang/Object;)(comp,v,oldV);
+			handler.@com.ait.toolkit.sencha.touch.client.events.component.HeightChangeHandler::onHeightChange(Lcom/ait/toolkit/sencha/touch/client/events/component/HeightChangeEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.component.HeightChangeEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
 	private native boolean isDisabledRendered() /*-{
 		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
