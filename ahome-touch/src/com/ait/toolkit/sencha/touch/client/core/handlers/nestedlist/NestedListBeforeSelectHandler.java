@@ -16,7 +16,7 @@
 package com.ait.toolkit.sencha.touch.client.core.handlers.nestedlist;
 
 import com.ait.toolkit.sencha.shared.client.core.handlers.AbstractHandler;
-import com.ait.toolkit.sencha.touch.client.ui.ListDataView;
+import com.ait.toolkit.sencha.touch.client.ui.ListView;
 import com.ait.toolkit.sencha.touch.client.ui.NestedListDataView;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
@@ -31,13 +31,13 @@ public abstract class NestedListBeforeSelectHandler extends AbstractHandler {
 			NestedListBeforeSelectHandler listener) /*-{
 		return function(source, list, node, selections, eOpts) {
 			var nestedList = @com.ait.toolkit.sencha.touch.client.ui.NestedListDataView::new(Lcom/google/gwt/core/client/JavaScriptObject;)(source);
-			listener.@com.ait.toolkit.sencha.touch.client.core.handlers.nestedlist.NestedListBeforeSelectHandler::fireOnEvent(Lcom/ait/toolkit/sencha/touch/client/ui/NestedListDataView;Lcom/ait/toolkit/sencha/touch/client/ui/ListDataView;Lcom/google/gwt/dom/client/Element;Lcom/google/gwt/core/client/JavaScriptObject;Ljava/lang/Object;)(nestedList,list, node, selections, eOpts);
+			listener.@com.ait.toolkit.sencha.touch.client.core.handlers.nestedlist.NestedListBeforeSelectHandler::fireOnEvent(Lcom/ait/toolkit/sencha/touch/client/ui/NestedListDataView;Lcom/ait/toolkit/sencha/touch/client/ui/ListView;Lcom/google/gwt/dom/client/Element;Lcom/google/gwt/core/client/JavaScriptObject;Ljava/lang/Object;)(nestedList,list, node, selections, eOpts);
 		};
 	}-*/;
 
 	// Called from JSNI
 	private final void fireOnEvent(NestedListDataView nestedList,
-			ListDataView list, Element node, JavaScriptObject selections,
+			ListView list, Element node, JavaScriptObject selections,
 			Object eOpts) {
 		UncaughtExceptionHandler handler = GWT.getUncaughtExceptionHandler();
 		if (handler != null) {
@@ -49,7 +49,7 @@ public abstract class NestedListBeforeSelectHandler extends AbstractHandler {
 	}
 
 	private void fireOnEventAndCatch(NestedListDataView nestedList,
-			ListDataView list, Element node, JavaScriptObject selections,
+			ListView list, Element node, JavaScriptObject selections,
 			Object eOpts, UncaughtExceptionHandler handler) {
 		try {
 			onBeforeSelect(nestedList, list, node, selections, eOpts);
@@ -64,7 +64,7 @@ public abstract class NestedListBeforeSelectHandler extends AbstractHandler {
 	}
 
 	public abstract void onBeforeSelect(NestedListDataView nestedList,
-			ListDataView list, Element node, JavaScriptObject selections,
+			ListView list, Element node, JavaScriptObject selections,
 			Object eOpts);
 
 }

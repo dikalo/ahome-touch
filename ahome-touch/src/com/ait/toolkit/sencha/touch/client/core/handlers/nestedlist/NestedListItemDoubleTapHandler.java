@@ -17,7 +17,7 @@ package com.ait.toolkit.sencha.touch.client.core.handlers.nestedlist;
 
 import com.ait.toolkit.sencha.shared.client.core.EventObject;
 import com.ait.toolkit.sencha.shared.client.core.handlers.AbstractHandler;
-import com.ait.toolkit.sencha.touch.client.ui.ListDataView;
+import com.ait.toolkit.sencha.touch.client.ui.ListView;
 import com.ait.toolkit.sencha.touch.client.ui.NestedListDataView;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
@@ -31,15 +31,15 @@ public abstract class NestedListItemDoubleTapHandler extends AbstractHandler {
 			NestedListItemDoubleTapHandler listener) /*-{
 		return function(source, listView, index, item, event, eOpts) {
 			var nestedList = @com.ait.toolkit.sencha.touch.client.ui.NestedListDataView::new(Lcom/google/gwt/core/client/JavaScriptObject;)(source);
-			var listViewObject = @com.ait.toolkit.sencha.touch.client.ui.ListDataView::new(Lcom/google/gwt/core/client/JavaScriptObject;)(listView);
+			var listViewObject = @com.ait.toolkit.sencha.touch.client.ui.ListView::new(Lcom/google/gwt/core/client/JavaScriptObject;)(listView);
 			var e = @com.ait.toolkit.sencha.shared.client.core.EventObject::new(Lcom/google/gwt/core/client/JavaScriptObject;)(event);
-			listener.@com.ait.toolkit.sencha.touch.client.core.handlers.nestedlist.NestedListItemDoubleTapHandler::fireOnEvent(Lcom/ait/toolkit/sencha/touch/client/ui/NestedListDataView;Lcom/ait/toolkit/sencha/touch/client/ui/ListDataView;ILjava/lang/Object;Lcom/ait/toolkit/sencha/shared/client/core/EventObject;Ljava/lang/Object;)(nestedList, listViewObject, index, item, e, eOpts);
+			listener.@com.ait.toolkit.sencha.touch.client.core.handlers.nestedlist.NestedListItemDoubleTapHandler::fireOnEvent(Lcom/ait/toolkit/sencha/touch/client/ui/NestedListDataView;Lcom/ait/toolkit/sencha/touch/client/ui/ListView;ILjava/lang/Object;Lcom/ait/toolkit/sencha/shared/client/core/EventObject;Ljava/lang/Object;)(nestedList, listViewObject, index, item, e, eOpts);
 		};
 	}-*/;
 
 	// Called from JSNI
 	private final void fireOnEvent(NestedListDataView nestedListView,
-			ListDataView listView, int index, Object item, EventObject event,
+			ListView listView, int index, Object item, EventObject event,
 			Object eOpts) {
 		UncaughtExceptionHandler handler = GWT.getUncaughtExceptionHandler();
 		if (handler != null) {
@@ -51,7 +51,7 @@ public abstract class NestedListItemDoubleTapHandler extends AbstractHandler {
 	}
 
 	private void fireOnEventAndCatch(NestedListDataView nestedListView,
-			ListDataView listView, int index, Object item, EventObject event,
+			ListView listView, int index, Object item, EventObject event,
 			Object eOpts, UncaughtExceptionHandler handler) {
 		try {
 			onItemDoubleTap(nestedListView, listView, index, item, event, eOpts);
@@ -66,7 +66,7 @@ public abstract class NestedListItemDoubleTapHandler extends AbstractHandler {
 	}
 
 	public abstract void onItemDoubleTap(NestedListDataView nestedListView,
-			ListDataView listView, int index, Object item, EventObject event,
+			ListView listView, int index, Object item, EventObject event,
 			Object eOpts);
 
 }

@@ -18,7 +18,7 @@ package com.ait.toolkit.sencha.touch.client.core.handlers.nestedlist;
 import com.ait.toolkit.data.client.BaseModel;
 import com.ait.toolkit.sencha.shared.client.core.EventObject;
 import com.ait.toolkit.sencha.shared.client.core.handlers.AbstractHandler;
-import com.ait.toolkit.sencha.touch.client.ui.ListDataView;
+import com.ait.toolkit.sencha.touch.client.ui.ListView;
 import com.ait.toolkit.sencha.touch.client.ui.NestedListDataView;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
@@ -34,15 +34,15 @@ public abstract class NestedListItemTapHandler extends AbstractHandler {
 		return function(source, list, index, target, record, event, eOpts) {
 			var nestedList = @com.ait.toolkit.sencha.touch.client.ui.NestedListDataView::new(Lcom/google/gwt/core/client/JavaScriptObject;)(source);
 			var model = @com.ait.toolkit.data.client.BaseModel::new(Lcom/google/gwt/core/client/JavaScriptObject;)(record);
-			var listJso = @com.ait.toolkit.sencha.touch.client.ui.ListDataView::new(Lcom/google/gwt/core/client/JavaScriptObject;)(list);
+			var listJso = @com.ait.toolkit.sencha.touch.client.ui.ListView::new(Lcom/google/gwt/core/client/JavaScriptObject;)(list);
 			var eventObject = @com.ait.toolkit.sencha.shared.client.core.EventObject::new(Lcom/google/gwt/core/client/JavaScriptObject;)(event);
-			listener.@com.ait.toolkit.sencha.touch.client.core.handlers.nestedlist.NestedListItemTapHandler::fireOnEvent(Lcom/ait/toolkit/sencha/touch/client/ui/NestedListDataView;Lcom/ait/toolkit/sencha/touch/client/ui/ListDataView;ILcom/google/gwt/dom/client/Element;Lcom/ait/toolkit/data/client/BaseModel;Lcom/ait/toolkit/sencha/shared/client/core/EventObject;Ljava/lang/Object;)(nestedList, listJso, index, target, model, eventObject, eOpts);
+			listener.@com.ait.toolkit.sencha.touch.client.core.handlers.nestedlist.NestedListItemTapHandler::fireOnEvent(Lcom/ait/toolkit/sencha/touch/client/ui/NestedListDataView;Lcom/ait/toolkit/sencha/touch/client/ui/ListView;ILcom/google/gwt/dom/client/Element;Lcom/ait/toolkit/data/client/BaseModel;Lcom/ait/toolkit/sencha/shared/client/core/EventObject;Ljava/lang/Object;)(nestedList, listJso, index, target, model, eventObject, eOpts);
 		};
 	}-*/;
 
 	// Called from JSNI
 	private final void fireOnEvent(NestedListDataView nestedList,
-			ListDataView list, int index, Element target, BaseModel record,
+			ListView list, int index, Element target, BaseModel record,
 			EventObject event, Object eOpts) {
 		UncaughtExceptionHandler handler = GWT.getUncaughtExceptionHandler();
 		if (handler != null) {
@@ -54,7 +54,7 @@ public abstract class NestedListItemTapHandler extends AbstractHandler {
 	}
 
 	private void fireOnEventAndCatch(NestedListDataView nestedList,
-			ListDataView list, int index, Element target, BaseModel record,
+			ListView list, int index, Element target, BaseModel record,
 			EventObject event, Object eOpts, UncaughtExceptionHandler handler) {
 		try {
 			onItemTap(nestedList, list, index, target, record, event, eOpts);
@@ -69,7 +69,7 @@ public abstract class NestedListItemTapHandler extends AbstractHandler {
 	}
 
 	public abstract void onItemTap(NestedListDataView nestedList,
-			ListDataView list, int index, Element target, BaseModel record,
+			ListView list, int index, Element target, BaseModel record,
 			EventObject event, Object eOpts);
 
 }

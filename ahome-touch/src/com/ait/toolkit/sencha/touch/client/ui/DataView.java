@@ -16,11 +16,11 @@
 package com.ait.toolkit.sencha.touch.client.ui;
 
 import com.ait.toolkit.sencha.shared.client.core.Template;
+import com.ait.toolkit.sencha.shared.client.core.XType;
 import com.ait.toolkit.sencha.shared.client.core.handlers.CallbackRegistration;
 import com.ait.toolkit.sencha.shared.client.data.Store;
 import com.ait.toolkit.sencha.touch.client.core.config.Event;
 import com.ait.toolkit.sencha.touch.client.core.config.TouchAttribute;
-import com.ait.toolkit.sencha.shared.client.core.XType;
 import com.ait.toolkit.sencha.touch.client.core.handlers.dataview.DataViewDoSelectHandler;
 import com.ait.toolkit.sencha.touch.client.core.handlers.dataview.DataViewItemDoubleTapHandler;
 import com.ait.toolkit.sencha.touch.client.core.handlers.dataview.DataViewItemSwipeHandler;
@@ -33,12 +33,10 @@ import com.ait.toolkit.sencha.touch.client.dataview.SimpleListItem;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * DataView makes it easy to create lots of components dynamically, usually
- * based off a Store. It's great for rendering lots of data from your server
- * backend or any other data source and is what powers components like
- * {@link ListDataView}.
+ * DataView makes it easy to create lots of components dynamically, usually based off a Store. It's great for rendering lots of data from your server backend or any other data
+ * source and is what powers components like {@link ListView}.
  */
-public class DataView extends Container implements HasStore, ListView {
+public class DataView extends Container implements HasStore {
 
 	protected Store store;
 	protected boolean useCompoments;
@@ -131,25 +129,11 @@ public class DataView extends Container implements HasStore, ListView {
 		return dataview.getMaxItemCache();
 	}-*/;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.ait.toolkit.sencha.touch.client.dataview.ListView#getPressedCls()
-	 */
-	@Override
 	public native String getPressedCls()/*-{
 		var dataview = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		return dataview.getPressedCls();
 	}-*/;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.ait.toolkit.sencha.touch.client.dataview.ListView#getPressedDelay()
-	 */
-	@Override
 	public native double getPressedDelay()/*-{
 		var dataview = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		return dataview.getPressedDelay();
@@ -168,8 +152,7 @@ public class DataView extends Container implements HasStore, ListView {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.ait.toolkit.sencha.touch.client.dataview.ListView#getSelectedCls()
+	 * @see com.ait.toolkit.sencha.touch.client.dataview.ListView#getSelectedCls()
 	 */
 	public native String getSelectedCls()/*-{
 		var dataview = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
@@ -220,20 +203,13 @@ public class DataView extends Container implements HasStore, ListView {
 		return dataview.getUseComponents();
 	}-*/;
 
-	/**
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ait.toolkit.sencha.touch.client.ui.ListView#refresh()
-	 */
-	@Override
 	public native void refresh()/*-{
 		var dataview = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		dataview.refresh();
 	}-*/;
 
 	/**
-	 * The xtype used for the component based DataView. Defaults to dataitem.
-	 * Note this is only used when useComponents is true.
+	 * The xtype used for the component based DataView. Defaults to dataitem. Note this is only used when useComponents is true.
 	 * 
 	 * Defaults to: "dataitem"
 	 * 
@@ -244,13 +220,6 @@ public class DataView extends Container implements HasStore, ListView {
 		dataview.setDefaultType(defaultType);
 	}-*/;
 
-	/**
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ait.toolkit.sencha.touch.client.ui.ListView#setDeselectOnContainerClick
-	 *      (boolean)
-	 */
-	@Override
 	public native void setDeselectOnContainerClick(boolean value)/*-{
 		var dataview = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		dataview.setDeselectOnContainerClick(value);
@@ -286,27 +255,11 @@ public class DataView extends Container implements HasStore, ListView {
 		dataview.setMaxItemCache(value);
 	}-*/;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.ait.toolkit.sencha.touch.client.dataview.ListView#setPressedCls(java
-	 * .lang .String)
-	 */
-	@Override
 	public native void setPressedCls(String value)/*-{
 		var dataview = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		dataview.setPressedCls(value);
 	}-*/;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.ait.toolkit.sencha.touch.client.dataview.ListView#setPressedDelay
-	 * (double)
-	 */
-	@Override
 	public native void setPressedDelay(double value)/*-{
 		var dataview = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		dataview.setPressedDelay(value);
@@ -322,14 +275,6 @@ public class DataView extends Container implements HasStore, ListView {
 		dataview.setScrollToTopOnRefresh(value);
 	}-*/;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.ait.toolkit.sencha.touch.client.dataview.ListView#setSelectedCls(
-	 * java.lang .String)
-	 */
-	@Override
 	public native void setSelectedCls(String value)/*-{
 		var dataview = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		dataview.setSelectedCls(value);
@@ -380,113 +325,44 @@ public class DataView extends Container implements HasStore, ListView {
 		dataview.setUseComponents(value);
 	}-*/;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.ait.toolkit.sencha.touch.client.dataview.ListView#setDeferEmptyText
-	 * (boolean )
-	 */
-	@Override
 	public void setDeferEmptyText(boolean value) {
 		setAttribute(TouchAttribute.DEFER_EMPTY_TEXT.getValue(), value, true);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.ait.toolkit.sencha.touch.client.dataview.ListView#deferEmptyText()
-	 */
-	@Override
 	public boolean deferEmptyText() {
 		return getAttributeAsBoolean(TouchAttribute.DEFER_EMPTY_TEXT.getValue());
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.ait.toolkit.sencha.touch.client.dataview.ListView#setEmptyText(java
-	 * .lang .String)
-	 */
-	@Override
 	public void setEmptyText(String value) {
 		setAttribute(TouchAttribute.EMPTY_TEXT.getValue(), value, true);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ait.toolkit.sencha.touch.client.dataview.ListView#getEmptyText()
-	 */
-	@Override
 	public String getEmptyText() {
 		return getAttribute(TouchAttribute.EMPTY_TEXT.getValue());
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.ait.toolkit.sencha.touch.client.dataview.ListView#setItemTpl(java
-	 * .lang. String)
-	 */
-	@Override
 	public void setItemTpl(String tpl) {
 		this._setItemTpl(tpl);
 		this.refresh();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 */
-	@Override
 	public void setItemTpl(Template tpl) {
 		this._setItemTpl(tpl.getJsObj());
 		this.refresh();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ait.toolkit.sencha.touch.client.dataview.ListView#getItemTpl()
-	 */
-	@Override
 	public String getItemTpl() {
 		return getAttribute(TouchAttribute.ITEM_TPL.getValue());
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.ait.toolkit.sencha.touch.client.dataview.ListView#setLoadingText(
-	 * java.lang .String)
-	 */
-	@Override
 	public void setLoadingText(String value) {
 		setAttribute(TouchAttribute.LOADING_TEXT.getValue(), value, true);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.ait.toolkit.sencha.touch.client.dataview.ListView#getLoaddingText()
-	 */
-	@Override
 	public String getLoaddingText() {
 		return getAttribute(TouchAttribute.LOADING_TEXT.getValue());
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ait.toolkit.sencha.touch.client.dataview.ListView#
-	 * deselectOnContainerClick ()
-	 */
-	@Override
 	public native boolean deselectOnContainerClick()/*-{
 		var dataview = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		dataview.getDeselectOnContainerClick();
@@ -502,10 +378,8 @@ public class DataView extends Container implements HasStore, ListView {
 	 * 
 	 * @param handler
 	 */
-	public CallbackRegistration addDoSelectHandler(
-			DataViewDoSelectHandler handler) {
-		return this.addWidgetListener(Event.DO_SELECT.getValue(),
-				handler.getJsoPeer());
+	public CallbackRegistration addDoSelectHandler(DataViewDoSelectHandler handler) {
+		return this.addWidgetListener(Event.DO_SELECT.getValue(), handler.getJsoPeer());
 	}
 
 	/**
@@ -513,10 +387,8 @@ public class DataView extends Container implements HasStore, ListView {
 	 * 
 	 * @param handler
 	 */
-	public CallbackRegistration addItemDoubleTapHandler(
-			DataViewItemDoubleTapHandler handler) {
-		return this.addWidgetListener(Event.ITEM_DOUBLE_TAP.getValue(),
-				handler.getJsoPeer());
+	public CallbackRegistration addItemDoubleTapHandler(DataViewItemDoubleTapHandler handler) {
+		return this.addWidgetListener(Event.ITEM_DOUBLE_TAP.getValue(), handler.getJsoPeer());
 	}
 
 	/**
@@ -524,10 +396,8 @@ public class DataView extends Container implements HasStore, ListView {
 	 * 
 	 * @param handler
 	 */
-	public CallbackRegistration addItemSwipeHandler(
-			DataViewItemSwipeHandler handler) {
-		return this.addWidgetListener(Event.ITEM_SWIPE.getValue(),
-				handler.getJsoPeer());
+	public CallbackRegistration addItemSwipeHandler(DataViewItemSwipeHandler handler) {
+		return this.addWidgetListener(Event.ITEM_SWIPE.getValue(), handler.getJsoPeer());
 	}
 
 	/**
@@ -536,8 +406,7 @@ public class DataView extends Container implements HasStore, ListView {
 	 * @param handler
 	 */
 	public CallbackRegistration addItemTapHandler(DataViewItemTapHandler handler) {
-		return this.addWidgetListener(Event.ITEM_TAP.getValue(),
-				handler.getJsoPeer());
+		return this.addWidgetListener(Event.ITEM_TAP.getValue(), handler.getJsoPeer());
 	}
 
 	/**
@@ -545,10 +414,8 @@ public class DataView extends Container implements HasStore, ListView {
 	 * 
 	 * @param handler
 	 */
-	public CallbackRegistration addItemTouchEndHandler(
-			DataViewItemTouchEndHandler handler) {
-		return this.addWidgetListener(Event.ITEM_TOUCH_END.getValue(),
-				handler.getJsoPeer());
+	public CallbackRegistration addItemTouchEndHandler(DataViewItemTouchEndHandler handler) {
+		return this.addWidgetListener(Event.ITEM_TOUCH_END.getValue(), handler.getJsoPeer());
 	}
 
 	/**
@@ -556,10 +423,8 @@ public class DataView extends Container implements HasStore, ListView {
 	 * 
 	 * @param handler
 	 */
-	public CallbackRegistration addItemTouchStartHandler(
-			DataViewItemTouchStartHandler handler) {
-		return this.addWidgetListener(Event.ITEM_TOUCH_START.getValue(),
-				handler.getJsoPeer());
+	public CallbackRegistration addItemTouchStartHandler(DataViewItemTouchStartHandler handler) {
+		return this.addWidgetListener(Event.ITEM_TOUCH_START.getValue(), handler.getJsoPeer());
 	}
 
 	/**
@@ -568,8 +433,7 @@ public class DataView extends Container implements HasStore, ListView {
 	 * @param handler
 	 */
 	public CallbackRegistration addRefreshHandler(DataViewRefreshHandler handler) {
-		return this.addWidgetListener(Event.REFRESH.getValue(),
-				handler.getJsoPeer());
+		return this.addWidgetListener(Event.REFRESH.getValue(), handler.getJsoPeer());
 	}
 
 	/**
@@ -578,8 +442,7 @@ public class DataView extends Container implements HasStore, ListView {
 	 * @param handler
 	 */
 	public CallbackRegistration addSelectHandler(DataViewSelectHandler handler) {
-		return this.addWidgetListener(Event.SELECT.getValue(),
-				handler.getJsoPeer());
+		return this.addWidgetListener(Event.SELECT.getValue(), handler.getJsoPeer());
 	}
 
 	private native void _setItemTpl(String value)/*-{
