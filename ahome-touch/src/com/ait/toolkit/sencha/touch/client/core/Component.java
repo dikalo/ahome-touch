@@ -33,6 +33,7 @@ import com.ait.toolkit.sencha.touch.client.events.component.DockedChangeHandler;
 import com.ait.toolkit.sencha.touch.client.events.component.ErasedHandler;
 import com.ait.toolkit.sencha.touch.client.events.component.FlexChangeHandler;
 import com.ait.toolkit.sencha.touch.client.events.component.FloatingChangeHandler;
+import com.ait.toolkit.sencha.touch.client.events.component.FullScreenHandler;
 import com.ait.toolkit.sencha.touch.client.events.component.HeightChangeHandler;
 import com.ait.toolkit.sencha.touch.client.events.component.HiddenChangeHandler;
 import com.ait.toolkit.sencha.touch.client.events.component.HideHandler;
@@ -1770,12 +1771,12 @@ public abstract class Component extends TouchWidget {
 		return toReturn;
 	}-*/;
 
-	public native HandlerRegistration addFullScreenHandler(DestroyHandler handler)/*-{
+	public native HandlerRegistration addFullScreenHandler(FullScreenHandler handler)/*-{
 		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		var fn = function(c) {
 			var comp = @com.ait.toolkit.sencha.touch.client.core.Component::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
-			var event = @com.ait.toolkit.sencha.touch.client.events.component.DesktroyEvent::new()();
-			handler.@com.ait.toolkit.sencha.touch.client.events.component.DestroyHandler::onDestroy(Lcom/ait/toolkit/sencha/touch/client/events/component/DesktroyEvent;)(event);
+			var event = @com.ait.toolkit.sencha.touch.client.events.component.FullScreenEvent::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;)(comp);
+			handler.@com.ait.toolkit.sencha.touch.client.events.component.FullScreenHandler::onFullScreen(Lcom/ait/toolkit/sencha/touch/client/events/component/FullScreenEvent;)(event);
 		};
 		var eventName = @com.ait.toolkit.sencha.touch.client.events.component.FullScreenEvent::EVENT_NAME;
 		component.addListener(eventName, fn);

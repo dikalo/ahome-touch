@@ -27,6 +27,14 @@ import com.ait.toolkit.sencha.touch.client.core.HasLayout;
 import com.ait.toolkit.sencha.touch.client.core.Resizable;
 import com.ait.toolkit.sencha.touch.client.core.Scroller;
 import com.ait.toolkit.sencha.touch.client.core.config.ContainerConfig;
+import com.ait.toolkit.sencha.touch.client.events.HandlerRegistration;
+import com.ait.toolkit.sencha.touch.client.events.container.ActivateHandler;
+import com.ait.toolkit.sencha.touch.client.events.container.ActiveItemChangeHandler;
+import com.ait.toolkit.sencha.touch.client.events.container.AddHandler;
+import com.ait.toolkit.sencha.touch.client.events.container.DeactivateHandler;
+import com.ait.toolkit.sencha.touch.client.events.container.MoveHandler;
+import com.ait.toolkit.sencha.touch.client.events.container.RemoveHandler;
+import com.ait.toolkit.sencha.touch.client.events.container.ScrollableChangeHandler;
 import com.ait.toolkit.sencha.touch.client.layout.AbstractLayout;
 import com.ait.toolkit.sencha.touch.client.layout.CardLayout;
 import com.ait.toolkit.sencha.touch.client.layout.FitLayout;
@@ -326,6 +334,106 @@ public class Container extends ComplexContainer implements HasLayout, Resizable 
 		}
 		return list.iterator();
 	}
+
+	public native HandlerRegistration addActivateHandler(ActivateHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(n, c, o) {
+			var container = @com.ait.toolkit.sencha.touch.client.ui.Container::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
+			var newC = @com.ait.toolkit.sencha.touch.client.core.Component::new(Lcom/google/gwt/core/client/JavaScriptObject;)(n);
+			var oldC = @com.ait.toolkit.sencha.touch.client.core.Component::new(Lcom/google/gwt/core/client/JavaScriptObject;)(o);
+			var event = @com.ait.toolkit.sencha.touch.client.events.container.ActivateEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/Container;Lcom/ait/toolkit/sencha/touch/client/core/Component;Lcom/ait/toolkit/sencha/touch/client/core/Component;)(container,newC,oldC);
+			handler.@com.ait.toolkit.sencha.touch.client.events.container.ActivateHandler::onActivate(Lcom/ait/toolkit/sencha/touch/client/events/container/ActivateEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.container.ActivateEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
+
+	public native HandlerRegistration addActiveItemChangeHandler(ActiveItemChangeHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, v, o) {
+			var container = @com.ait.toolkit.sencha.touch.client.ui.Container::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
+			var newC = @com.ait.toolkit.sencha.touch.client.core.Component::new(Lcom/google/gwt/core/client/JavaScriptObject;)(v);
+			var oldC = @com.ait.toolkit.sencha.touch.client.core.Component::new(Lcom/google/gwt/core/client/JavaScriptObject;)(o);
+			var event = @com.ait.toolkit.sencha.touch.client.events.container.ActiveItemChangeEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/Container;Lcom/ait/toolkit/sencha/touch/client/core/Component;Lcom/ait/toolkit/sencha/touch/client/core/Component;)(container,newC,oldC);
+			handler.@com.ait.toolkit.sencha.touch.client.events.container.ActiveItemChangeHandler::onActiveItemChange(Lcom/ait/toolkit/sencha/touch/client/events/container/ActiveItemChangeEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.container.ActiveItemChangeEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
+
+	public native HandlerRegistration addAddHandler(AddHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, i, index) {
+			var container = @com.ait.toolkit.sencha.touch.client.ui.Container::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
+			var newC = @com.ait.toolkit.sencha.touch.client.core.Component::new(Lcom/google/gwt/core/client/JavaScriptObject;)(i);
+			var event = @com.ait.toolkit.sencha.touch.client.events.container.AddEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/Container;Lcom/ait/toolkit/sencha/touch/client/core/Component;I)(container,newC,index);
+			handler.@com.ait.toolkit.sencha.touch.client.events.container.AddHandler::onAdd(Lcom/ait/toolkit/sencha/touch/client/events/container/AddEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.container.AddEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
+
+	public native HandlerRegistration addDeactivateHandler(DeactivateHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(n, c, o) {
+			var container = @com.ait.toolkit.sencha.touch.client.ui.Container::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
+			var newC = @com.ait.toolkit.sencha.touch.client.core.Component::new(Lcom/google/gwt/core/client/JavaScriptObject;)(n);
+			var oldC = @com.ait.toolkit.sencha.touch.client.core.Component::new(Lcom/google/gwt/core/client/JavaScriptObject;)(o);
+			var event = @com.ait.toolkit.sencha.touch.client.events.container.DeactivateEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/Container;Lcom/ait/toolkit/sencha/touch/client/core/Component;Lcom/ait/toolkit/sencha/touch/client/core/Component;)(container,newC,oldC);
+			handler.@com.ait.toolkit.sencha.touch.client.events.container.DeactivateHandler::onDeactivate(Lcom/ait/toolkit/sencha/touch/client/events/container/DeactivateEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.container.DeactivateEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
+
+	public native HandlerRegistration addMoveHandler(MoveHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(n, i, to, from) {
+			var container = @com.ait.toolkit.sencha.touch.client.ui.Container::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
+			var item = @com.ait.toolkit.sencha.touch.client.core.Component::new(Lcom/google/gwt/core/client/JavaScriptObject;)(i);
+			var event = @com.ait.toolkit.sencha.touch.client.events.container.MoveEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/Container;Lcom/ait/toolkit/sencha/touch/client/core/Component;II)(container,item,to,from);
+			handler.@com.ait.toolkit.sencha.touch.client.events.container.MoveHandler::onMove(Lcom/ait/toolkit/sencha/touch/client/events/container/MoveEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.container.MoveEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
+
+	public native HandlerRegistration addRemoveHandler(RemoveHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(n, i, index) {
+			var container = @com.ait.toolkit.sencha.touch.client.ui.Container::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
+			var item = @com.ait.toolkit.sencha.touch.client.core.Component::new(Lcom/google/gwt/core/client/JavaScriptObject;)(i);
+			var event = @com.ait.toolkit.sencha.touch.client.events.container.RemoveEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/Container;Lcom/ait/toolkit/sencha/touch/client/core/Component;I)(container,item,index);
+			handler.@com.ait.toolkit.sencha.touch.client.events.container.RemoveHandler::onRemove(Lcom/ait/toolkit/sencha/touch/client/events/container/RemoveEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.container.RemoveEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
+
+	public native HandlerRegistration addScrollableChangeHandler(ScrollableChangeHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(n, v, n) {
+			var container = @com.ait.toolkit.sencha.touch.client.ui.Container::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
+			var event = @com.ait.toolkit.sencha.touch.client.events.container.ScrollableChangeEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/Container;Ljava/lang/Object;Ljava/lang/Object;)(container,v,n);
+			handler.@com.ait.toolkit.sencha.touch.client.events.container.ScrollableChangeHandler::onScrollableChange(Lcom/ait/toolkit/sencha/touch/client/events/container/ScrollableChangeEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.container.ScrollableChangeEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
 	protected native void removeAllNative() /*-{
 		var container = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();

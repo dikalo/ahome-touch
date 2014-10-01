@@ -7,20 +7,20 @@ import com.google.gwt.event.dom.client.DomEvent.Type;
 
 public class ReleaseEvent extends EventObject {
 
-	public static String EVENT_NAME = "tap";
+	public static String EVENT_NAME = "release";
 
 	private Button source;
 
 	/**
 	 * UiBinder implementations
 	 */
-	private static Type<TapHandler> TYPE = new Type<TapHandler>(EVENT_NAME, null);
+	private static Type<ReleaseHandler> TYPE = new Type<ReleaseHandler>(EVENT_NAME, null);
 
-	public static Type<TapHandler> getType() {
+	public static Type<ReleaseHandler> getType() {
 		return TYPE;
 	}
 
-	public static Type<TapHandler> getAssociatedType() {
+	public static Type<ReleaseHandler> getAssociatedType() {
 		return TYPE;
 	}
 
@@ -31,7 +31,6 @@ public class ReleaseEvent extends EventObject {
 	public ReleaseEvent(Button source, JavaScriptObject nativeEvent) {
 		super(nativeEvent);
 		this.source = source;
-
 	}
 
 	/**
