@@ -16,11 +16,12 @@
 package com.ait.toolkit.sencha.touch.client.ui;
 
 import com.ait.toolkit.sencha.shared.client.core.XType;
-import com.ait.toolkit.sencha.shared.client.core.handlers.CallbackRegistration;
 import com.ait.toolkit.sencha.touch.client.core.Component;
 import com.ait.toolkit.sencha.touch.client.core.ImageElement;
-import com.ait.toolkit.sencha.touch.client.core.config.Event;
-import com.ait.toolkit.sencha.touch.client.core.handlers.image.ImageTapHandler;
+import com.ait.toolkit.sencha.touch.client.events.HandlerRegistration;
+import com.ait.toolkit.sencha.touch.client.events.image.ErrorHandler;
+import com.ait.toolkit.sencha.touch.client.events.image.LoadHandler;
+import com.ait.toolkit.sencha.touch.client.events.image.TapHandler;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
@@ -74,13 +75,43 @@ public class Image extends Component implements ImageElement {
 		return image.getSrc();
 	}-*/;
 
-	/**
-	 * Fires whenever the component is tapped
-	 * 
-	 * @param handler
-	 */
-	public CallbackRegistration addTapHandler(ImageTapHandler handler) {
-		return this.addWidgetListener(Event.TAP.getValue(), handler.getJsoPeer());
-	}
+	public native HandlerRegistration AddTapHandler(TapHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(i, e) {
+			var img = @com.ait.toolkit.sencha.touch.client.ui.Image::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
+			var event = @com.ait.toolkit.sencha.touch.client.events.image.TapEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/Image;Lcom/google/gwt/core/client/JavaScriptObject;)(img,e);
+			handler.@com.ait.toolkit.sencha.touch.client.events.image.TapHandler::onTap(Lcom/ait/toolkit/sencha/touch/client/events/image/TapEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.image.TapEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
+
+	public native HandlerRegistration addLoadHander(LoadHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(i, e) {
+			var img = @com.ait.toolkit.sencha.touch.client.ui.Image::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
+			var event = @com.ait.toolkit.sencha.touch.client.events.image.LoadEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/Image;Lcom/google/gwt/core/client/JavaScriptObject;)(img,e);
+			handler.@com.ait.toolkit.sencha.touch.client.events.image.LoadHandler::onLoad(Lcom/ait/toolkit/sencha/touch/client/events/image/LoadEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.image.LoadEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
+
+	public native HandlerRegistration addErrorHndler(ErrorHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(i, e) {
+			var img = @com.ait.toolkit.sencha.touch.client.ui.Image::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
+			var event = @com.ait.toolkit.sencha.touch.client.events.image.ErrorEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/Image;Lcom/google/gwt/core/client/JavaScriptObject;)(img,e);
+			handler.@com.ait.toolkit.sencha.touch.client.events.image.ErrorHandler::onError(Lcom/ait/toolkit/sencha/touch/client/events/image/ErrorHandler;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.image.ErrorEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
 }

@@ -1,7 +1,7 @@
-package com.ait.toolkit.sencha.touch.client.events.button;
+package com.ait.toolkit.sencha.touch.client.events.image;
 
 import com.ait.toolkit.sencha.shared.client.core.EventObject;
-import com.ait.toolkit.sencha.touch.client.ui.Button;
+import com.ait.toolkit.sencha.touch.client.ui.Image;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.event.dom.client.DomEvent.Type;
 
@@ -9,7 +9,7 @@ public class TapEvent extends EventObject {
 
 	public static String EVENT_NAME = "tap";
 
-	private Button source;
+	private Image source;
 
 	/**
 	 * UiBinder implementations
@@ -28,7 +28,7 @@ public class TapEvent extends EventObject {
 		super(jsObj);
 	}
 
-	public TapEvent(Button source, JavaScriptObject nativeEvent) {
+	public TapEvent(Image source, JavaScriptObject nativeEvent) {
 		super(nativeEvent);
 		this.source = source;
 
@@ -37,7 +37,7 @@ public class TapEvent extends EventObject {
 	/**
 	 * @return the source
 	 */
-	public Button getSource() {
+	public Image getSource() {
 		return source;
 	}
 }
