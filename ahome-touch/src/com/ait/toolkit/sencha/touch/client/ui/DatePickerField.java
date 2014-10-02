@@ -15,170 +15,170 @@
  */
 package com.ait.toolkit.sencha.touch.client.ui;
 
-import com.ait.toolkit.sencha.touch.client.core.config.DatePickerConfig;
-import com.ait.toolkit.sencha.touch.client.core.config.Event;
 import com.ait.toolkit.sencha.shared.client.core.XType;
-import com.ait.toolkit.sencha.shared.client.core.handlers.CallbackRegistration;
-import com.ait.toolkit.sencha.touch.client.core.handlers.field.datepicker.DatePickerChangeHandler;
+import com.ait.toolkit.sencha.touch.client.core.config.DatePickerConfig;
+import com.ait.toolkit.sencha.touch.client.events.datepicker.DateChangeHandler;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsDate;
+import com.google.gwt.event.shared.HandlerRegistration;
 
 /**
- * This is a specialized field which shows a Ext.picker.Date when tapped. If it
- * has a predefined value, or a value is selected in the Ext.picker.Date, it
- * will be displayed like a normal Ext.field.Text (but not
- * selectable/changable).
+ * This is a specialized field which shows a Ext.picker.Date when tapped. If it has a predefined value, or a value is selected in the Ext.picker.Date, it will be displayed like a
+ * normal Ext.field.Text (but not selectable/changable).
  */
 public class DatePickerField extends Text<JsDate> {
 
-    protected native void init()/*-{
+	protected native void init()/*-{
 		var c = new $wnd.Ext.field.DatePicker();
 		this.@com.ait.toolkit.sencha.touch.client.core.Component::configPrototype = c.initialConfig;
-    }-*/;
+	}-*/;
 
-    @Override
-    public String getXType() {
-        return XType.DATEPICKER_FIELD.getValue();
-    }
+	@Override
+	public String getXType() {
+		return XType.DATEPICKER_FIELD.getValue();
+	}
 
-    @Override
-    protected native JavaScriptObject create(JavaScriptObject config) /*-{
+	@Override
+	protected native JavaScriptObject create(JavaScriptObject config) /*-{
 		config.value = new $wnd.Date();
 		if (!config.picker) {
 			config.picker = {};
 		}
 		return new $wnd.Ext.field.DatePicker(config);
-    }-*/;
+	}-*/;
 
-    public DatePickerField() {
-    }
+	public DatePickerField() {
+	}
 
-    public DatePickerField(DatePickerConfig datePickerConfig) {
-        super(datePickerConfig.getJsObj());
-    }
+	public DatePickerField(DatePickerConfig datePickerConfig) {
+		super(datePickerConfig.getJsObj());
+	}
 
-    protected DatePickerField(JavaScriptObject jso) {
-        super(jso);
-    }
+	protected DatePickerField(JavaScriptObject jso) {
+		super(jso);
+	}
 
-    /**
-     * Returns the value of the field, which will be a Date unless the format
-     * parameter is true.
-     * 
-     * @return
-     */
-    public native boolean getDestroyPickerOnHide() /*-{
+	/**
+	 * Returns the value of the field, which will be a Date unless the format parameter is true.
+	 * 
+	 * @return
+	 */
+	public native boolean getDestroyPickerOnHide() /*-{
 		var comp = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		if (comp != null) {
 			return comp.getDestroyPickerOnHide();
 		}
-    }-*/;
+	}-*/;
 
-    /**
-     * Returns the value of picker.
-     * 
-     * @param format
-     * @return
-     */
-    public native String getFormattedValue(String format) /*-{
+	/**
+	 * Returns the value of picker.
+	 * 
+	 * @param format
+	 * @return
+	 */
+	public native String getFormattedValue(String format) /*-{
 		var comp = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		if (comp != null) {
 			return comp.getFormattedValue(format);
 		}
-    }-*/;
+	}-*/;
 
-    /**
-     * Returns the value of value.
-     * 
-     * @param <T>
-     * @return
-     */
-    public native <T> T getPicker() /*-{
+	/**
+	 * Returns the value of value.
+	 * 
+	 * @param <T>
+	 * @return
+	 */
+	public native <T> T getPicker() /*-{
 		var comp = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		if (comp != null) {
 			return comp.getPicker();
 		}
-    }-*/;
+	}-*/;
 
-    public native JsDate getValue() /*-{
+	public native JsDate getValue() /*-{
 		var field = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		if (field != null) {
 			return field.getValue();
 		}
-    }-*/;
+	}-*/;
 
-    /**
-     * Sets the value of destroyPickerOnHide.
-     * 
-     * @param value
-     */
-    public native void setDestroyPickerOnHide(boolean value) /*-{
+	/**
+	 * Sets the value of destroyPickerOnHide.
+	 * 
+	 * @param value
+	 */
+	public native void setDestroyPickerOnHide(boolean value) /*-{
 		var comp = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		if (comp != null) {
 			comp.setDestroyPickerOnHide(value);
 		}
-    }-*/;
+	}-*/;
 
-    /**
-     * Sets the value of picker.
-     * 
-     * @param value
-     */
+	/**
+	 * Sets the value of picker.
+	 * 
+	 * @param value
+	 */
 
-    public void setPicker(DatePickerField value) {
-        setPicker(value.getJsObj());
-    }
+	public void setPicker(DatePickerField value) {
+		setPicker(value.getJsObj());
+	}
 
-    protected native void setPicker(JavaScriptObject value) /*-{
+	protected native void setPicker(JavaScriptObject value) /*-{
 		var comp = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		if (comp != null) {
 			comp.setPicker(value);
 		}
-    }-*/;
+	}-*/;
 
-    /**
-     * Sets the value of picker.
-     * 
-     * @param value
-     */
-    public native void setPicker(JsDate value) /*-{
+	/**
+	 * Sets the value of picker.
+	 * 
+	 * @param value
+	 */
+	public native void setPicker(JsDate value) /*-{
 		var comp = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		if (comp != null) {
 			comp.setPicker(value);
 		}
-    }-*/;
+	}-*/;
 
-    /**
-     * Sets the value of value.
-     * 
-     * @param value
-     */
-    public native void setValue(JsDate value) /*-{
+	/**
+	 * Sets the value of value.
+	 * 
+	 * @param value
+	 */
+	public native void setValue(JsDate value) /*-{
 		var comp = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		if (comp != null) {
 			comp.setValue(value);
 		}
-    }-*/;
+	}-*/;
 
-    /**
-     * Sets the value of value.
-     * 
-     * @param value
-     */
-    protected native void setValue(JavaScriptObject value) /*-{
+	/**
+	 * Sets the value of value.
+	 * 
+	 * @param value
+	 */
+	protected native void setValue(JavaScriptObject value) /*-{
 		var comp = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		if (comp != null) {
 			comp.setValue(value);
 		}
-    }-*/;
+	}-*/;
 
-    /**
-     * Fires when a date is selected.
-     * 
-     * @param handler
-     */
-    public CallbackRegistration addChangeHandler(DatePickerChangeHandler handler) {
-        return this.addWidgetListener(Event.CHANGE.getValue(), handler.getJsoPeer());
-    }
+	public native HandlerRegistration addDateChangeHandler(DateChangeHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, n, o) {
+			var comp = @com.ait.toolkit.sencha.touch.client.ui.DatePickerField::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
+			var event = @com.ait.toolkit.sencha.touch.client.events.datepicker.DateChangeEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/DatePicker;Lcom/google/gwt/core/client/JsDate;Lcom/google/gwt/core/client/JsDate;)(comp,o,n);
+			handler.@com.ait.toolkit.sencha.touch.client.events.datepicker.DateChangeHandler::onDateChange(Lcom/ait/toolkit/sencha/touch/client/events/datepicker/DateChangeEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.datepicker.DateChangeEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
 }
