@@ -15,11 +15,11 @@
  */
 package com.ait.toolkit.sencha.touch.client.ui;
 
-import com.ait.toolkit.sencha.touch.client.core.config.CheckBoxConfig;
-import com.ait.toolkit.sencha.touch.client.core.config.Event;
 import com.ait.toolkit.sencha.shared.client.core.XType;
-import com.ait.toolkit.sencha.touch.client.core.handlers.field.checkbox.CheckBoxCheckHandler;
-import com.ait.toolkit.sencha.touch.client.core.handlers.field.checkbox.CheckBoxUnCheckHandler;
+import com.ait.toolkit.sencha.touch.client.core.config.CheckBoxConfig;
+import com.ait.toolkit.sencha.touch.client.events.checkbox.CheckChangeHandler;
+import com.ait.toolkit.sencha.touch.client.events.checkbox.CheckHandler;
+import com.ait.toolkit.sencha.touch.client.events.checkbox.UnCheckHandler;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.editor.client.IsEditor;
@@ -30,10 +30,8 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasValue;
 
 /**
- * The checkbox field is an enhanced version of the native browser checkbox and
- * is great for enabling your user to choose one or more items from a set (for
- * example choosing toppings for a pizza order). It works like any other field
- * and is usually found in the context of a form.
+ * The checkbox field is an enhanced version of the native browser checkbox and is great for enabling your user to choose one or more items from a set (for example choosing
+ * toppings for a pizza order). It works like any other field and is usually found in the context of a form.
  * 
  */
 public class CheckBox extends Field implements HasValue<Boolean>, IsEditor<LeafValueEditor<Boolean>> {
@@ -112,8 +110,7 @@ public class CheckBox extends Field implements HasValue<Boolean>, IsEditor<LeafV
 	}-*/;
 
 	/**
-	 * Returns an array of values from the checkboxes in the group that are
-	 * checked.
+	 * Returns an array of values from the checkboxes in the group that are checked.
 	 * 
 	 * @return
 	 */
@@ -217,24 +214,6 @@ public class CheckBox extends Field implements HasValue<Boolean>, IsEditor<LeafV
 		}
 	}-*/;
 
-	/**
-	 * Fires when the checkbox is checked.
-	 * 
-	 * @param handler
-	 */
-	public void addOnCheckHandler(CheckBoxCheckHandler handler) {
-		this.addWidgetListener(Event.CHECK.getValue(), handler.getJsoPeer());
-	}
-
-	/**
-	 * Fires when the checkbox is unchecked.
-	 * 
-	 * @param handler
-	 */
-	public void addOnUnCheckHandler(CheckBoxUnCheckHandler handler) {
-		this.addWidgetListener(Event.UNCHECK.getValue(), handler.getJsoPeer());
-	}
-
 	@Override
 	public LeafValueEditor<Boolean> asEditor() {
 		if (editor == null) {
@@ -242,6 +221,45 @@ public class CheckBox extends Field implements HasValue<Boolean>, IsEditor<LeafV
 		}
 		return editor;
 	}
+
+	public native HandlerRegistration addCheckChangeHandler(CheckChangeHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, v, o) {
+			var comp = @com.ait.toolkit.sencha.touch.client.ui.CheckBox::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
+			var event = @com.ait.toolkit.sencha.touch.client.events.checkbox.CheckChangeEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/CheckBox;ZZ)(comp,v,o);
+			handler.@com.ait.toolkit.sencha.touch.client.events.checkbox.CheckChangeHandler::onCheckChange(Lcom/ait/toolkit/sencha/touch/client/events/checkbox/CheckChangeEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.checkbox.CheckChangeEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
+
+	public native HandlerRegistration addCheckHandler(CheckHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, e) {
+			var comp = @com.ait.toolkit.sencha.touch.client.ui.CheckBox::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
+			var event = @com.ait.toolkit.sencha.touch.client.events.checkbox.CheckEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/CheckBox;Lcom/google/gwt/core/client/JavaScriptObject;)(comp,e);
+			handler.@com.ait.toolkit.sencha.touch.client.events.checkbox.CheckHandler::onCheck(Lcom/ait/toolkit/sencha/touch/client/events/checkbox/CheckEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.checkbox.CheckEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
+
+	public native HandlerRegistration addUnCheckHandler(UnCheckHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, e) {
+			var comp = @com.ait.toolkit.sencha.touch.client.ui.CheckBox::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
+			var event = @com.ait.toolkit.sencha.touch.client.events.checkbox.UnCheckEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/CheckBox;Lcom/google/gwt/core/client/JavaScriptObject;)(comp,e);
+			handler.@com.ait.toolkit.sencha.touch.client.events.checkbox.UnCheckHandler::onUnCheck(Lcom/ait/toolkit/sencha/touch/client/events/checkbox/UnCheckEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.checkbox.UnCheckEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
 	@Override
 	public HandlerRegistration addValueChangeHandler(ValueChangeHandler<Boolean> handler) {
