@@ -17,7 +17,9 @@ package com.ait.toolkit.sencha.touch.client.core;
 
 import com.ait.toolkit.core.client.JsObject;
 import com.ait.toolkit.core.client.JsoHelper;
+import com.ait.toolkit.sencha.shared.client.fx.Animation;
 import com.ait.toolkit.sencha.touch.client.laf.Direction;
+import com.google.gwt.core.client.JavaScriptObject;
 
 public class Scroller extends JsObject {
 
@@ -65,6 +67,39 @@ public class Scroller extends JsObject {
 		peer.scrollBy(x, y);
 	}-*/;
 
+	public final native void scrollBy(int x, int y, boolean animate) /*-{
+		var peer = this.@com.ait.toolkit.core.client.JsObject::getJsObj()();
+		peer.scrollBy(x, y, animate);
+	}-*/;
+
+	public final native void scrollBy(int x, int y, Animation animation) /*-{
+		var peer = this.@com.ait.toolkit.core.client.JsObject::getJsObj()();
+		peer.scrollBy(x, y,
+				animation.@com.ait.toolkit.core.client.JsObject::getJsObj()());
+	}-*/;
+
+	public final native void scrollTo(int x, int y) /*-{
+		var peer = this.@com.ait.toolkit.core.client.JsObject::getJsObj()();
+		peer.scrollTo(x, y);
+	}-*/;
+
+	public final native void scrollTo(int x, int y, boolean animate) /*-{
+		var peer = this.@com.ait.toolkit.core.client.JsObject::getJsObj()();
+		peer.scrollTo(x, y, animate);
+	}-*/;
+
+	public final native void scrollTo(int x, int y, Animation animation) /*-{
+		var peer = this.@com.ait.toolkit.core.client.JsObject::getJsObj()();
+		peer.scrollTo(x, y,
+				animation.@com.ait.toolkit.core.client.JsObject::getJsObj()());
+	}-*/;
+
+	public final native void scrollToEnd(Animation animation) /*-{
+		var peer = this.@com.ait.toolkit.core.client.JsObject::getJsObj()();
+		peer
+				.scrollToEnd(animation.@com.ait.toolkit.core.client.JsObject::getJsObj()());
+	}-*/;
+
 	public final native void setDirection(String direction) /*-{
 		var peer = this.@com.ait.toolkit.core.client.JsObject::getJsObj()();
 		peer.direction = direction;
@@ -87,6 +122,36 @@ public class Scroller extends JsObject {
 	public final native void setOutOfBoundRestrictFactor(double value) /*-{
 		var peer = this.@com.ait.toolkit.core.client.JsObject::getJsObj()();
 		peer.outOfBoundRestrictFactor = value;
+	}-*/;
+
+	public final native void setInitialOffset(double value) /*-{
+		var peer = this.@com.ait.toolkit.core.client.JsObject::getJsObj()();
+		peer.setInitialOffset(value);
+	}-*/;
+
+	public final native void setInitialOffset(JavaScriptObject value) /*-{
+		var peer = this.@com.ait.toolkit.core.client.JsObject::getJsObj()();
+		peer.setInitialOffset(value);
+	}-*/;
+
+	public final native void setMomentumEasing(JavaScriptObject value) /*-{
+		var peer = this.@com.ait.toolkit.core.client.JsObject::getJsObj()();
+		peer.setMomentumEasing(value);
+	}-*/;
+
+	public final native void setSlotSnapEasing(JavaScriptObject value) /*-{
+		var peer = this.@com.ait.toolkit.core.client.JsObject::getJsObj()();
+		peer.setSlotSnapEasing(value);
+	}-*/;
+
+	public final native void setSlotSnapSize(JavaScriptObject value) /*-{
+		var peer = this.@com.ait.toolkit.core.client.JsObject::getJsObj()();
+		peer.setSlotSnapSize(value);
+	}-*/;
+
+	public final native void setSlotSnapSize(double value) /*-{
+		var peer = this.@com.ait.toolkit.core.client.JsObject::getJsObj()();
+		peer.setSlotSnapSize(value);
 	}-*/;
 
 }
