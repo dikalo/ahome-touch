@@ -16,11 +16,9 @@
 package com.ait.toolkit.sencha.touch.client.ui;
 
 import com.ait.toolkit.sencha.shared.client.core.XType;
-import com.ait.toolkit.sencha.shared.client.core.handlers.CallbackRegistration;
 import com.ait.toolkit.sencha.touch.client.core.Component;
-import com.ait.toolkit.sencha.touch.client.core.config.Event;
 import com.ait.toolkit.sencha.touch.client.core.config.TouchAttribute;
-import com.ait.toolkit.sencha.touch.client.core.handlers.mask.MaskTapHandler;
+import com.ait.toolkit.sencha.touch.client.events.HandlerRegistration;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
@@ -69,8 +67,17 @@ public class Mask extends Component {
 	 * 
 	 * @param handler
 	 */
-	public CallbackRegistration addTapHandler(MaskTapHandler handler) {
-		return this.addWidgetListener(Event.TAP.getValue(), handler.getJsoPeer());
-	}
+	public native HandlerRegistration addTapHandler(com.ait.toolkit.sencha.touch.client.events.mask.TapHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(m, e) {
+			var comp = @com.ait.toolkit.sencha.touch.client.ui.Mask::new(Lcom/google/gwt/core/client/JavaScriptObject;)(m);
+			var TapEvent = @com.ait.toolkit.sencha.touch.client.events.mask.TapEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/Mask;Lcom/google/gwt/core/client/JavaScriptObject;)(comp,e);
+			handler.@com.ait.toolkit.sencha.touch.client.events.mask.TapHandler::onTap(Lcom/ait/toolkit/sencha/touch/client/events/mask/TapEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.mask.TapEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
 }
