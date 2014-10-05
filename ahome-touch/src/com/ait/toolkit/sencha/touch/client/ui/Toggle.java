@@ -115,7 +115,7 @@ public class Toggle extends Slider {
 		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		var fn = function(c, v, o) {
 			var comp = @com.ait.toolkit.sencha.touch.client.ui.CheckBox::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
-			var event = @com.ait.toolkit.sencha.touch.client.events.toggle.ToggleChangeEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/CheckBox;ZZ)(comp,v,o);
+			var event = @com.ait.toolkit.sencha.touch.client.events.toggle.ToggleChangeEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/Toggle;ZZ)(comp,v,o);
 			handler.@com.ait.toolkit.sencha.touch.client.events.toggle.ToggleChangeHandler::onToggleChange(Lcom/ait/toolkit/sencha/touch/client/events/toggle/ToggleChangeEvent;)(event);
 		};
 		var eventName = @com.ait.toolkit.sencha.touch.client.events.toggle.ToggleChangeEvent::EVENT_NAME;
