@@ -13,7 +13,7 @@
  See the License for the specific language governing permissions and
  limitations under the License.
  */
-package com.ait.toolkit.sencha.touch.client.core.handlers.tabitem;
+package com.ait.toolkit.sencha.touch.client.events.tabitem;
 
 import com.ait.toolkit.sencha.touch.client.ui.TabItem;
 import com.google.gwt.event.shared.EventHandler;

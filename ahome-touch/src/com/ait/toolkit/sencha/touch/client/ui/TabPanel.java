@@ -17,8 +17,8 @@ package com.ait.toolkit.sencha.touch.client.ui;
 
 import com.ait.toolkit.sencha.shared.client.core.XType;
 import com.ait.toolkit.sencha.touch.client.core.HasUi;
-import com.ait.toolkit.sencha.touch.client.core.handlers.tabitem.TabItemAddEvent;
-import com.ait.toolkit.sencha.touch.client.core.handlers.tabitem.TabItemRemoveEvent;
+import com.ait.toolkit.sencha.touch.client.events.tabitem.TabItemAddEvent;
+import com.ait.toolkit.sencha.touch.client.events.tabitem.TabItemRemoveEvent;
 import com.ait.toolkit.sencha.touch.client.laf.Alignment;
 import com.ait.toolkit.sencha.touch.client.laf.UI;
 import com.ait.toolkit.sencha.touch.client.layout.CardLayout;

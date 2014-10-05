@@ -13,28 +13,28 @@
  See the License for the specific language governing permissions and
  limitations under the License.
  */
-package com.ait.toolkit.sencha.touch.client.core.handlers.tabitem;
+package com.ait.toolkit.sencha.touch.client.events.tabitem;
 
 import com.ait.toolkit.sencha.touch.client.ui.TabItem;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 
-public class TabItemChangeEvent extends GwtEvent<TabItemChangeEvent.Handler> {
+public class TabItemRemoveEvent extends GwtEvent<TabItemRemoveEvent.Handler> {
 
     public static final Type<Handler> TYPE = new Type<Handler>();
     private TabItem tabItem;
     
-    public TabItemChangeEvent(TabItem tabItem) {
+    public TabItemRemoveEvent(TabItem tabItem) {
         this.tabItem = tabItem;
     }
     
     public interface Handler extends EventHandler {
-        public void onTabItemChange(TabItemChangeEvent event);
+        public void onTabItemRemove(TabItemRemoveEvent event);
     }
 
     @Override
     protected void dispatch(Handler handler) {
-        handler.onTabItemChange(this);
+        handler.onTabItemRemove(this);
     }
 
     @Override
