@@ -29,6 +29,10 @@ public class PickerSlot extends JsObject {
 		jsObj = JavaScriptObject.createObject();
 	}
 
+	protected PickerSlot(JavaScriptObject peer) {
+		jsObj = peer;
+	}
+
 	public void setName(String name) {
 		JsoHelper.setAttribute(jsObj, Attribute.NAME.getValue(), name);
 	}
@@ -50,7 +54,6 @@ public class PickerSlot extends JsObject {
 		for (int i = 0; i < values.size(); i++) {
 			array[i] = values.get(i);
 		}
-		JsoHelper.setAttribute(jsObj, Attribute.DATA.getValue(),
-				JsoHelper.convertToJavaScriptArray(array));
+		JsoHelper.setAttribute(jsObj, Attribute.DATA.getValue(), JsoHelper.convertToJavaScriptArray(array));
 	}
 }

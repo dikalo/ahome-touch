@@ -1966,7 +1966,7 @@ public abstract class Component extends TouchWidget {
 		return toReturn;
 	}-*/;
 
-	public native HandlerRegistration addwidthChangeHandler(WidthChangeHandler handler)/*-{
+	public native HandlerRegistration addWidthChangeHandler(WidthChangeHandler handler)/*-{
 		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		var fn = function(c, v, oldV) {
 			var comp = @com.ait.toolkit.sencha.touch.client.core.Component::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);

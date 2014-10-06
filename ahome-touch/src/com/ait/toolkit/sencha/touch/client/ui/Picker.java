@@ -20,26 +20,22 @@ import java.util.List;
 
 import com.ait.toolkit.core.client.JsoHelper;
 import com.ait.toolkit.data.client.BaseModel;
-import com.ait.toolkit.sencha.shared.client.core.handlers.CallbackRegistration;
-import com.ait.toolkit.sencha.touch.client.core.config.Event;
-import com.ait.toolkit.sencha.touch.client.core.config.TouchAttribute;
 import com.ait.toolkit.sencha.shared.client.core.XType;
-import com.ait.toolkit.sencha.touch.client.core.handlers.picker.PickerCancelHandler;
-import com.ait.toolkit.sencha.touch.client.core.handlers.picker.PickerChangeHandler;
-import com.ait.toolkit.sencha.touch.client.core.handlers.picker.PickerPickHandler;
+import com.ait.toolkit.sencha.touch.client.core.config.TouchAttribute;
+import com.ait.toolkit.sencha.touch.client.events.HandlerRegistration;
+import com.ait.toolkit.sencha.touch.client.events.picker.CancelHandler;
+import com.ait.toolkit.sencha.touch.client.events.picker.ChangeHandler;
+import com.ait.toolkit.sencha.touch.client.events.picker.PickHandler;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 
 /**
- * A general picker class. Ext.picker.Slots are used to organize multiple
- * scrollable slots into a single picker. slots is the only necessary
- * configuration.
+ * A general picker class. Ext.picker.Slots are used to organize multiple scrollable slots into a single picker. slots is the only necessary configuration.
  * 
  * The slots configuration with a few key values:
  * 
- * name: The name of the slot (will be the key when using getValues in this
- * Ext.picker.Picker) title: The title of this slot (if useTitles is set to
- * true) data/store: The data or store to use for this slot.
+ * name: The name of the slot (will be the key when using getValues in this Ext.picker.Picker) title: The title of this slot (if useTitles is set to true) data/store: The data or
+ * store to use for this slot.
  * 
  */
 public class Picker extends Sheet {
@@ -71,8 +67,7 @@ public class Picker extends Sheet {
 	}
 
 	/**
-	 * Updates the cancelButton configuration. Will change it into a button when
-	 * appropriate, or just update the text if needed.
+	 * Updates the cancelButton configuration. Will change it into a button when appropriate, or just update the text if needed.
 	 * 
 	 * @param value
 	 */
@@ -84,8 +79,7 @@ public class Picker extends Sheet {
 	}-*/;
 
 	/**
-	 * Updates the doneButton configuration. Will change it into a button when
-	 * appropriate, or just update the text if needed.
+	 * Updates the doneButton configuration. Will change it into a button when appropriate, or just update the text if needed.
 	 * 
 	 * @param value
 	 */
@@ -196,18 +190,15 @@ public class Picker extends Sheet {
 		List<PickerSlotData> slotsData = new ArrayList<PickerSlotData>();
 		JsArray<JavaScriptObject> values = _getValues();
 		for (int i = 0; i < values.length(); i++) {
-			String text = JsoHelper.getAttribute(values.get(i),
-					TouchAttribute.TEXT.getValue());
-			String value = JsoHelper.getAttribute(values.get(i),
-					TouchAttribute.VALUE.getValue());
+			String text = JsoHelper.getAttribute(values.get(i), TouchAttribute.TEXT.getValue());
+			String value = JsoHelper.getAttribute(values.get(i), TouchAttribute.VALUE.getValue());
 			slotsData.add(new PickerSlotData(text, value));
 		}
 		return slotsData;
 	}
 
 	/**
-	 * Sets the value of cancelButton. This method is deprecated. Use
-	 * setCancelButtonText instead.
+	 * Sets the value of cancelButton. This method is deprecated. Use setCancelButtonText instead.
 	 * 
 	 * @param value
 	 * @deprecated
@@ -255,8 +246,7 @@ public class Picker extends Sheet {
 	}-*/;
 
 	/**
-	 * Disable Cancel button. Typically used when a ToolBar is used as the
-	 * configuration instead of the default buttons.
+	 * Disable Cancel button. Typically used when a ToolBar is used as the configuration instead of the default buttons.
 	 * 
 	 * @param value
 	 */
@@ -268,8 +258,7 @@ public class Picker extends Sheet {
 	}-*/;
 
 	/**
-	 * Disable Done button. Typically used when a ToolBar is used as the
-	 * configuration instead of the default buttons.
+	 * Disable Done button. Typically used when a ToolBar is used as the configuration instead of the default buttons.
 	 * 
 	 * @param value
 	 */
@@ -281,8 +270,7 @@ public class Picker extends Sheet {
 	}-*/;
 
 	/**
-	 * Sets the value of doneButton. This method is deprecated. use
-	 * setDoneButtonText instead
+	 * Sets the value of doneButton. This method is deprecated. use setDoneButtonText instead
 	 * 
 	 * @param value
 	 * @deprecated
@@ -360,12 +348,10 @@ public class Picker extends Sheet {
 	}-*/;
 
 	/**
-	 * Sets the values of the pickers slots. Be aware that this method is
-	 * depended upon the number of slots setup for the picker.
+	 * Sets the values of the pickers slots. Be aware that this method is depended upon the number of slots setup for the picker.
 	 * 
-	 * For example, if the picker has two slots, the first one with name of hour
-	 * and the second one using name minutes, the BaseModel would need to
-	 * provide a model describing the following data structure:
+	 * For example, if the picker has two slots, the first one with name of hour and the second one using name minutes, the BaseModel would need to provide a model describing the
+	 * following data structure:
 	 * 
 	 * {hour: "05", minutes: "20"}.
 	 * 
@@ -383,8 +369,7 @@ public class Picker extends Sheet {
 	 * @param newSlots
 	 */
 	public void updateSlots(List<PickerSlot> newSlots) {
-		updateSlots(JsoHelper.convertToJavaScriptArray(newSlots.toArray())
-				.cast());
+		updateSlots(JsoHelper.convertToJavaScriptArray(newSlots.toArray()).cast());
 	}
 
 	/**
@@ -399,35 +384,66 @@ public class Picker extends Sheet {
 	}-*/;
 
 	/**
-	 * Fired when the cancel button is tapped and the values are reverted back
-	 * to what they were.
+	 * Fired when the cancel button is tapped and the values are reverted back to what they were.
 	 * 
 	 * @param handler
 	 */
-	public CallbackRegistration addCancelHandler(PickerCancelHandler handler) {
-		return this.addWidgetListener(Event.CANCEL.getValue(),
-				handler.getJsoPeer());
-	}
+	public native HandlerRegistration addCancelHandler(CancelHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(p) {
+			var comp = @com.ait.toolkit.sencha.touch.client.ui.Picker::new(Lcom/google/gwt/core/client/JavaScriptObject;)(b);
+			var event = @com.ait.toolkit.sencha.touch.client.events.picker.CancelEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/Picker;)(comp);
+			handler.@com.ait.toolkit.sencha.touch.client.events.picker.CancelHandler::onCancel(Lcom/ait/toolkit/sencha/touch/client/events/picker/CancelEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.picker.CancelEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
 	/**
 	 * Fired when the picked value has changed
 	 * 
 	 * @param handler
 	 */
-	public CallbackRegistration addChangeHandler(PickerChangeHandler handler) {
-		return this.addWidgetListener(Event.CHANGE.getValue(),
-				handler.getJsoPeer());
-	}
+	public native HandlerRegistration addChangeHandler(ChangeHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(p, v) {
+			var comp = @com.ait.toolkit.sencha.touch.client.ui.Picker::new(Lcom/google/gwt/core/client/JavaScriptObject;)(b);
+			var event = @com.ait.toolkit.sencha.touch.client.events.picker.ChangeEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/Picker;Lcom/google/gwt/core/client/JavaScriptObject;)(comp,v);
+			handler.@com.ait.toolkit.sencha.touch.client.events.picker.ChangeHandler::onChange(Lcom/ait/toolkit/sencha/touch/client/events/picker/ChangeEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.picker.ChangeEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
 	/**
 	 * Fired when a slot has been picked
 	 * 
 	 * @param handler
 	 */
-	public CallbackRegistration addPickerHandler(PickerPickHandler handler) {
-		return this.addWidgetListener(Event.PICK.getValue(),
-				handler.getJsoPeer());
-	}
+	public native HandlerRegistration addPickHandler(PickHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(p, v, s) {
+			var comp = @com.ait.toolkit.sencha.touch.client.ui.Picker::new(Lcom/google/gwt/core/client/JavaScriptObject;)(b);
+			var slot = @com.ait.toolkit.sencha.touch.client.ui.PickerSlot::new(Lcom/google/gwt/core/client/JavaScriptObject;)(s);
+			var event = @com.ait.toolkit.sencha.touch.client.events.picker.PickEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/Picker;Lcom/google/gwt/core/client/JavaScriptObject;Lcom/ait/toolkit/sencha/touch/client/ui/PickerSlot;)(comp,v,slot);
+			handler.@com.ait.toolkit.sencha.touch.client.events.picker.PickHandler::onPick(Lcom/ait/toolkit/sencha/touch/client/events/picker/PickEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.picker.PickEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
+
+	public native void setValue(JavaScriptObject value, boolean animated) /*-{
+		var picker = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		if (picker != null) {
+			picker.setValue(value, true);
+		}
+	}-*/;
 
 	private native void setToolBar(JavaScriptObject value) /*-{
 		var picker = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
@@ -464,13 +480,6 @@ public class Picker extends Sheet {
 		var picker = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		if (picker != null) {
 			picker.updateSlots(newSlots);
-		}
-	}-*/;
-
-	public native void setValue(JavaScriptObject value, boolean animated) /*-{
-		var picker = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
-		if (picker != null) {
-			picker.setValue(value, true);
 		}
 	}-*/;
 
