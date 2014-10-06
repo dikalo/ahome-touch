@@ -1,4 +1,4 @@
-package com.ait.toolkit.sencha.touch.client.events.datepicker;
+package com.ait.toolkit.sencha.touch.client.events.datepickerfield;
 
 import com.google.gwt.event.shared.EventHandler;
 

@@ -17,7 +17,7 @@ package com.ait.toolkit.sencha.touch.client.ui;
 
 import com.ait.toolkit.sencha.shared.client.core.XType;
 import com.ait.toolkit.sencha.touch.client.core.config.DatePickerConfig;
-import com.ait.toolkit.sencha.touch.client.events.datepicker.DateChangeHandler;
+import com.ait.toolkit.sencha.touch.client.events.datepickerfield.DateChangeHandler;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsDate;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -172,10 +172,10 @@ public class DatePickerField extends Text<JsDate> {
 		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		var fn = function(c, n, o) {
 			var comp = @com.ait.toolkit.sencha.touch.client.ui.DatePickerField::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
-			var event = @com.ait.toolkit.sencha.touch.client.events.datepicker.DateChangeEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/DatePicker;Lcom/google/gwt/core/client/JsDate;Lcom/google/gwt/core/client/JsDate;)(comp,o,n);
-			handler.@com.ait.toolkit.sencha.touch.client.events.datepicker.DateChangeHandler::onDateChange(Lcom/ait/toolkit/sencha/touch/client/events/datepicker/DateChangeEvent;)(event);
+			var event = @com.ait.toolkit.sencha.touch.client.events.datepickerfield.DateChangeEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/DatePickerField;Lcom/google/gwt/core/client/JsDate;Lcom/google/gwt/core/client/JsDate;)(comp,o,n);
+			handler.@com.ait.toolkit.sencha.touch.client.events.datepickerfield.DateChangeHandler::onDateChange(Lcom/ait/toolkit/sencha/touch/client/events/datepickerfield/DateChangeEvent;)(event);
 		};
-		var eventName = @com.ait.toolkit.sencha.touch.client.events.datepicker.DateChangeEvent::EVENT_NAME;
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.datepickerfield.DateChangeEvent::EVENT_NAME;
 		component.addListener(eventName, fn);
 		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
 		return toReturn;

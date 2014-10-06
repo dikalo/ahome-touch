@@ -1,6 +1,6 @@
-package com.ait.toolkit.sencha.touch.client.events.datepicker;
+package com.ait.toolkit.sencha.touch.client.events.datepickerfield;
 
-import com.ait.toolkit.sencha.touch.client.ui.DatePicker;
+import com.ait.toolkit.sencha.touch.client.ui.DatePickerField;
 import com.google.gwt.core.client.JsDate;
 import com.google.gwt.event.dom.client.DomEvent.Type;
 
@@ -8,11 +8,11 @@ public class DateChangeEvent {
 
 	public static String EVENT_NAME = "change";
 
-	private DatePicker source;
+	private DatePickerField source;
 	private JsDate newDate;
 	private JsDate oldDate;
 
-	public DateChangeEvent(DatePicker source, JsDate newDate, JsDate oldDate) {
+	public DateChangeEvent(DatePickerField source, JsDate newDate, JsDate oldDate) {
 		super();
 		this.source = source;
 		this.newDate = newDate;
@@ -32,7 +32,7 @@ public class DateChangeEvent {
 		return TYPE;
 	}
 
-	public DatePicker getSource() {
+	public DatePickerField getSource() {
 		return source;
 	}
 
