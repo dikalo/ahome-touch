@@ -16,11 +16,12 @@
 package com.ait.toolkit.sencha.touch.client.ui;
 
 import com.ait.toolkit.sencha.shared.client.core.XType;
-import com.ait.toolkit.sencha.shared.client.core.handlers.CallbackRegistration;
 import com.ait.toolkit.sencha.touch.client.core.Component;
-import com.ait.toolkit.sencha.touch.client.core.handlers.map.MapCenterChangeHandler;
-import com.ait.toolkit.sencha.touch.client.core.handlers.map.MapTypeChangeHandler;
-import com.ait.toolkit.sencha.touch.client.core.handlers.map.MapZoomChangeHandler;
+import com.ait.toolkit.sencha.touch.client.events.HandlerRegistration;
+import com.ait.toolkit.sencha.touch.client.events.map.CenterChangeHandler;
+import com.ait.toolkit.sencha.touch.client.events.map.MapRenderHandler;
+import com.ait.toolkit.sencha.touch.client.events.map.TypeChangeHandler;
+import com.ait.toolkit.sencha.touch.client.events.map.ZoomChangeHandler;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
@@ -30,10 +31,8 @@ import com.google.gwt.core.client.JavaScriptObject;
  * {@code
  * <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
  * }
- * 
- * @see <a href=http://docs.sencha.com/touch/2-0/#!/api/Ext.Map>Ext.Map</a>
  */
-public class GoogleMap extends Component implements MapElement {
+public class GoogleMap extends Component {
 
 	private static final String CENTER_CHANGE = "centerchange";
 	private static final String MAP_RENDER = "maprender";
@@ -105,12 +104,6 @@ public class GoogleMap extends Component implements MapElement {
 		return map.getMapOptions();
 	}-*/;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ait.toolkit.sencha.touch.client.widgets.MapElement#isUseCurrentLocation()
-	 */
-	@Override
 	public native boolean isUseCurrentLocation() /*-{
 		var map = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		return map.getUseCurrentLocation();
@@ -140,40 +133,62 @@ public class GoogleMap extends Component implements MapElement {
 	/**
 	 * Sets the value of useCurrentLocation
 	 */
-	@Override
+
 	public native void setUseCurrentLocation(boolean value) /*-{
 		var map = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		map.setUseCurrentLocation(value);
 	}-*/;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ait.toolkit.sencha.touch.client.widgets.MapElement#addCenterChangeHandler (com.ait.toolkit.sencha.touch.client.core.handlers.map.MapCenterChangeHandler)
-	 */
-	@Override
-	public CallbackRegistration addCenterChangeHandler(MapCenterChangeHandler handler) {
-		return addWidgetListener(CENTER_CHANGE, handler.getJsoPeer());
-	}
+	public native HandlerRegistration addCenterChangeHandler(CenterChangeHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(m, g, l) {
+			var comp = @com.ait.toolkit.sencha.touch.client.ui.GoogleMap::new(Lcom/google/gwt/core/client/JavaScriptObject;)(f);
+			var event = @com.ait.toolkit.sencha.touch.client.events.map.CenterChangeEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/GoogleMap;Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(comp,g,l);
+			handler.@com.ait.toolkit.sencha.touch.client.events.map.CenterChangeHandler::onCenterChange(Lcom/ait/toolkit/sencha/touch/client/events/map/CenterChangeEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.map.CenterChangeEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ait.toolkit.sencha.touch.client.ui.MapElement#addTypeChangeHandler (com.ait.toolkit.sencha.touch.client.core.handlers.map.MapTypeChangeHandler)
-	 */
-	@Override
-	public CallbackRegistration addTypeChangeHandler(MapTypeChangeHandler handler) {
-		return addWidgetListener(TYPE_CHANGE, handler.getJsoPeer());
-	}
+	public native HandlerRegistration addMapRenderHandler(MapRenderHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(m, g) {
+			var comp = @com.ait.toolkit.sencha.touch.client.ui.GoogleMap::new(Lcom/google/gwt/core/client/JavaScriptObject;)(f);
+			var event = @com.ait.toolkit.sencha.touch.client.events.map.MapRenderEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/GoogleMap;Lcom/google/gwt/core/client/JavaScriptObject;)(comp,g);
+			handler.@com.ait.toolkit.sencha.touch.client.events.map.MapRenderHandler::onMapRender(Lcom/ait/toolkit/sencha/touch/client/events/map/MapRenderEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.map.MapRenderEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ait.toolkit.sencha.touch.client.widgets.MapElement#addZoomChangeHandler (com.ait.toolkit.sencha.touch.client.core.handlers.map.MapZoomChangeHandler)
-	 */
-	@Override
-	public CallbackRegistration addZoomChangeHandler(MapZoomChangeHandler handler) {
-		return addWidgetListener(ZOOM_CHANGE, handler.getJsoPeer());
-	}
+	public native HandlerRegistration addTypeChangeHandler(TypeChangeHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(m, g, t) {
+			var comp = @com.ait.toolkit.sencha.touch.client.ui.GoogleMap::new(Lcom/google/gwt/core/client/JavaScriptObject;)(f);
+			var event = @com.ait.toolkit.sencha.touch.client.events.map.TypeChangeEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/GoogleMap;Lcom/google/gwt/core/client/JavaScriptObject;I)(c,g,t);
+			handler.@com.ait.toolkit.sencha.touch.client.events.map.TypeChangeHandler::onTypeChange(Lcom/ait/toolkit/sencha/touch/client/events/map/TypeChangeEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.map.TypeChangeEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
+
+	public native HandlerRegistration addZoomChangeHandler(ZoomChangeHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(m, g, z) {
+			var comp = @com.ait.toolkit.sencha.touch.client.ui.GoogleMap::new(Lcom/google/gwt/core/client/JavaScriptObject;)(f);
+			var event = @com.ait.toolkit.sencha.touch.client.events.map.ZoomChangeEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/GoogleMap;Lcom/google/gwt/core/client/JavaScriptObject;I)(comp,g,z);
+			handler.@com.ait.toolkit.sencha.touch.client.events.map.ZoomChangeHandler::onZoomChange(Lcom/ait/toolkit/sencha/touch/client/events/map/ZoomChangeEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.map.ZoomChangeEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
 }
