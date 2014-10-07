@@ -31,11 +31,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Widget;
 
-/**
- * 
- */
-public abstract class TouchWidget extends Widget implements EventDispatcher,
-		IsComponentElement {
+public abstract class TouchWidget extends Widget implements EventDispatcher, IsComponentElement {
 
 	protected JavaScriptObject config;
 	protected String id;
@@ -64,8 +60,7 @@ public abstract class TouchWidget extends Widget implements EventDispatcher,
 		return addWidgetListener(event, fn);
 	}
 
-	protected CallbackRegistration addWidgetListener(String event,
-			JavaScriptObject fn) {
+	protected CallbackRegistration addWidgetListener(String event, JavaScriptObject fn) {
 		return delegate.addWidgetListener(event, fn);
 	}
 
@@ -129,14 +124,11 @@ public abstract class TouchWidget extends Widget implements EventDispatcher,
 		return delegate.getElement(jsObj);
 	}
 
-	protected void error(String attribute, String value, boolean allowPostCreate)
-			throws IllegalStateException {
+	protected void error(String attribute, String value, boolean allowPostCreate) throws IllegalStateException {
 		if (allowPostCreate) {
-			error("Cannot change configuration property '" + attribute
-					+ "' after the component has been rendered.");
+			error("Cannot change configuration property '" + attribute + "' after the component has been rendered.");
 		} else {
-			error("Cannot change configuration property '" + attribute
-					+ "' after the component has been created.");
+			error("Cannot change configuration property '" + attribute + "' after the component has been created.");
 		}
 	}
 
@@ -150,11 +142,8 @@ public abstract class TouchWidget extends Widget implements EventDispatcher,
 	protected void check() throws IllegalStateException {
 		if (isRendered()) {
 			if (GWT.isScript()) {
-				MessageBox
-						.alert("Error",
-								"Cannot change configuration property after the component has been rendered");
-				throw new IllegalStateException(
-						"Cannot change configuration property after the component has been rendered");
+				MessageBox.alert("Error", "Cannot change configuration property after the component has been rendered");
+				throw new IllegalStateException("Cannot change configuration property after the component has been rendered");
 			}
 		}
 	}
@@ -169,8 +158,7 @@ public abstract class TouchWidget extends Widget implements EventDispatcher,
 
 	protected JavaScriptObject getAttributeAsJavaScriptObject(String attribute) {
 		if (isCreated()) {
-			return JsoHelper.getAttributeAsJavaScriptObject(getJsObj(),
-					attribute);
+			return JsoHelper.getAttributeAsJavaScriptObject(getJsObj(), attribute);
 		} else {
 			return JsoHelper.getAttributeAsJavaScriptObject(config, attribute);
 		}
@@ -208,13 +196,11 @@ public abstract class TouchWidget extends Widget implements EventDispatcher,
 		}
 	}
 
-	protected void setAttribute(String attribute, String value,
-			boolean allowPostCreate) {
+	protected void setAttribute(String attribute, String value, boolean allowPostCreate) {
 		setAttribute(attribute, value, allowPostCreate, false);
 	}
 
-	protected void setAttribute(String attribute, String value,
-			boolean allowPostCreate, boolean allowPostRendered) {
+	protected void setAttribute(String attribute, String value, boolean allowPostCreate, boolean allowPostRendered) {
 		if (!isCreated()) {
 			JsoHelper.setAttribute(config, attribute, value);
 		} else if (!isRendered() && allowPostCreate || allowPostRendered) {
@@ -225,14 +211,12 @@ public abstract class TouchWidget extends Widget implements EventDispatcher,
 	}
 
 	@SuppressWarnings("rawtypes")
-	protected void setAttribute(String attribute, Map value,
-			boolean allowPostCreate) {
+	protected void setAttribute(String attribute, Map value, boolean allowPostCreate) {
 		setAttribute(attribute, value, allowPostCreate, false);
 	}
 
 	@SuppressWarnings("rawtypes")
-	protected void setAttribute(String attribute, Map value,
-			boolean allowPostCreate, boolean allowPostRendered) {
+	protected void setAttribute(String attribute, Map value, boolean allowPostCreate, boolean allowPostRendered) {
 		if (!isCreated()) {
 			JsoHelper.setAttribute(config, attribute, value);
 		} else if (!isRendered() && allowPostCreate || allowPostRendered) {
@@ -242,13 +226,11 @@ public abstract class TouchWidget extends Widget implements EventDispatcher,
 		}
 	}
 
-	protected void setAttribute(String attribute, int[] value,
-			boolean allowPostCreate) {
+	protected void setAttribute(String attribute, int[] value, boolean allowPostCreate) {
 		setAttribute(attribute, value, allowPostCreate, false);
 	}
 
-	protected void setAttribute(String attribute, int[] value,
-			boolean allowPostCreate, boolean allowPostRender) {
+	protected void setAttribute(String attribute, int[] value, boolean allowPostCreate, boolean allowPostRender) {
 		if (!isCreated()) {
 			JsoHelper.setAttribute(config, attribute, value);
 		} else if (!isRendered() && allowPostCreate || allowPostRender) {
@@ -258,8 +240,7 @@ public abstract class TouchWidget extends Widget implements EventDispatcher,
 		}
 	}
 
-	protected void setAttribute(String attribute, long value,
-			boolean allowPostCreate) {
+	protected void setAttribute(String attribute, long value, boolean allowPostCreate) {
 		if (!isCreated()) {
 			JsoHelper.setAttribute(config, attribute, value);
 		} else if (!isRendered() && allowPostCreate) {
@@ -269,8 +250,7 @@ public abstract class TouchWidget extends Widget implements EventDispatcher,
 		}
 	}
 
-	protected void setAttribute(String attribute, double value,
-			boolean allowPostCreate) {
+	protected void setAttribute(String attribute, double value, boolean allowPostCreate) {
 		if (!isCreated()) {
 			JsoHelper.setAttribute(config, attribute, value);
 		} else if (!isRendered() && allowPostCreate) {
@@ -280,13 +260,11 @@ public abstract class TouchWidget extends Widget implements EventDispatcher,
 		}
 	}
 
-	protected void setAttribute(String attribute, int value,
-			boolean allowPostCreate) {
+	protected void setAttribute(String attribute, int value, boolean allowPostCreate) {
 		setAttribute(attribute, value, allowPostCreate, false);
 	}
 
-	protected void setAttribute(String attribute, int value,
-			boolean allowPostCreate, boolean allowPostRender) {
+	protected void setAttribute(String attribute, int value, boolean allowPostCreate, boolean allowPostRender) {
 		if (!isCreated()) {
 			JsoHelper.setAttribute(config, attribute, value);
 		} else if (!isRendered() && allowPostCreate || allowPostRender) {
@@ -296,8 +274,7 @@ public abstract class TouchWidget extends Widget implements EventDispatcher,
 		}
 	}
 
-	protected void setAttribute(String attribute, Date value,
-			boolean allowPostCreate) {
+	protected void setAttribute(String attribute, Date value, boolean allowPostCreate) {
 		if (!isCreated()) {
 			JsoHelper.setAttribute(config, attribute, value);
 		} else if (!isRendered() && allowPostCreate) {
@@ -307,13 +284,11 @@ public abstract class TouchWidget extends Widget implements EventDispatcher,
 		}
 	}
 
-	protected void setAttribute(String attribute, JavaScriptObject value,
-			boolean allowPostCreate) {
+	protected void setAttribute(String attribute, JavaScriptObject value, boolean allowPostCreate) {
 		setAttribute(attribute, value, allowPostCreate, false);
 	}
 
-	protected void setAttribute(String attribute, JavaScriptObject value,
-			boolean allowPostCreate, boolean allowPostRender) {
+	protected void setAttribute(String attribute, JavaScriptObject value, boolean allowPostCreate, boolean allowPostRender) {
 		if (!isCreated()) {
 			JsoHelper.setAttribute(config, attribute, value);
 		} else if (!isRendered() && allowPostCreate || allowPostRender) {
@@ -323,13 +298,11 @@ public abstract class TouchWidget extends Widget implements EventDispatcher,
 		}
 	}
 
-	protected void setAttribute(String attribute, String[] value,
-			boolean allowPostCreate) {
+	protected void setAttribute(String attribute, String[] value, boolean allowPostCreate) {
 		setAttribute(attribute, value, allowPostCreate, false);
 	}
 
-	protected void setAttribute(String attribute, String[] value,
-			boolean allowPostCreate, boolean allowPostRender) {
+	protected void setAttribute(String attribute, String[] value, boolean allowPostCreate, boolean allowPostRender) {
 		if (!isCreated()) {
 			JsoHelper.setAttribute(config, attribute, value);
 		} else if (!isRendered() && allowPostCreate || allowPostRender) {
@@ -339,13 +312,11 @@ public abstract class TouchWidget extends Widget implements EventDispatcher,
 		}
 	}
 
-	protected void setAttribute(String attribute, boolean value,
-			boolean allowPostCreate) {
+	protected void setAttribute(String attribute, boolean value, boolean allowPostCreate) {
 		setAttribute(attribute, value, allowPostCreate, false);
 	}
 
-	protected void setAttribute(String attribute, boolean value,
-			boolean allowPostCreate, boolean allowPostRendered) {
+	protected void setAttribute(String attribute, boolean value, boolean allowPostCreate, boolean allowPostRendered) {
 		if (!isCreated()) {
 			JsoHelper.setAttribute(config, attribute, value);
 		} else if (!isRendered() && allowPostCreate || allowPostRendered) {
@@ -355,13 +326,11 @@ public abstract class TouchWidget extends Widget implements EventDispatcher,
 		}
 	}
 
-	protected void setAttribute(String attribute, Element value,
-			boolean allowPostCreate) {
+	protected void setAttribute(String attribute, Element value, boolean allowPostCreate) {
 		setAttribute(attribute, value, allowPostCreate, false);
 	}
 
-	protected void setAttribute(String attribute, Element value,
-			boolean allowPostCreate, boolean allowPostRendered) {
+	protected void setAttribute(String attribute, Element value, boolean allowPostCreate, boolean allowPostRendered) {
 		if (!isCreated()) {
 			JsoHelper.setAttribute(config, attribute, value);
 		} else if (!isRendered() && allowPostCreate || allowPostRendered) {
@@ -374,23 +343,17 @@ public abstract class TouchWidget extends Widget implements EventDispatcher,
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.ait.toolkit.sencha.touch.client.core.EventDispatcher#addListener(
-	 * java.lang .String,
-	 * com.ait.toolkit.sencha.shared.client.core.handlers.AbstractHandler)
+	 * @see com.ait.toolkit.sencha.touch.client.core.EventDispatcher#addListener( java.lang .String, com.ait.toolkit.sencha.shared.client.core.handlers.AbstractHandler)
 	 */
 	@Override
-	public CallbackRegistration addListener(String event,
-			AbstractHandler handler) {
+	public CallbackRegistration addListener(String event, AbstractHandler handler) {
 		return this.addListener(event, handler.getJsoPeer());
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.ait.toolkit.sencha.touch.client.core.EventDispatcher#addEvent(java
-	 * .lang .String)
+	 * @see com.ait.toolkit.sencha.touch.client.core.EventDispatcher#addEvent(java .lang .String)
 	 */
 	@Override
 	public void addEvent(String event) {
@@ -400,9 +363,7 @@ public abstract class TouchWidget extends Widget implements EventDispatcher,
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.ait.toolkit.sencha.touch.client.core.EventDispatcher#fireEvent(java
-	 * .lang .String)
+	 * @see com.ait.toolkit.sencha.touch.client.core.EventDispatcher#fireEvent(java .lang .String)
 	 */
 	@Override
 	public void fireEvent(String event) {
@@ -412,8 +373,7 @@ public abstract class TouchWidget extends Widget implements EventDispatcher,
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.ait.toolkit.sencha.touch.client.core.EventDispatcher#purgeListeners()
+	 * @see com.ait.toolkit.sencha.touch.client.core.EventDispatcher#purgeListeners()
 	 */
 	@Override
 	public void purgeListeners() {
@@ -423,8 +383,7 @@ public abstract class TouchWidget extends Widget implements EventDispatcher,
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.ait.toolkit.sencha.touch.client.core.EventDispatcher#resumeEvents()
+	 * @see com.ait.toolkit.sencha.touch.client.core.EventDispatcher#resumeEvents()
 	 */
 	@Override
 	public void resumeEvents() {
@@ -434,8 +393,7 @@ public abstract class TouchWidget extends Widget implements EventDispatcher,
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.ait.toolkit.sencha.touch.client.core.EventDispatcher#suspendEvents()
+	 * @see com.ait.toolkit.sencha.touch.client.core.EventDispatcher#suspendEvents()
 	 */
 	@Override
 	public void suspendEvents() {
