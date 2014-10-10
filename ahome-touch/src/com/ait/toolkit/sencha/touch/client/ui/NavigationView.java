@@ -244,7 +244,7 @@ public class NavigationView extends Container {
 	public native HandlerRegistration addPopHandler(PopHandler handler)/*-{
 		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		var fn = function(n, c) {
-			var comp = @com.ait.toolkit.sencha.touch.client.ui.NavigationView::new(Lcom/google/gwt/core/client/JavaScriptObject;)(b);
+			var comp = @com.ait.toolkit.sencha.touch.client.ui.NavigationView::new(Lcom/google/gwt/core/client/JavaScriptObject;)(n);
 			var container = @com.ait.toolkit.sencha.touch.client.ui.Container::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
 			var event = @com.ait.toolkit.sencha.touch.client.events.navigation.PopEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/NavigationView;Lcom/ait/toolkit/sencha/touch/client/ui/Container;)(comp,container);
 			handler.@com.ait.toolkit.sencha.touch.client.events.navigation.PopHandler::onPop(Lcom/ait/toolkit/sencha/touch/client/events/navigation/PopEvent;)(event);
@@ -263,7 +263,7 @@ public class NavigationView extends Container {
 	public native HandlerRegistration addPushHandler(PushHandler handler)/*-{
 		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		var fn = function(n, c) {
-			var comp = @com.ait.toolkit.sencha.touch.client.ui.NavigationView::new(Lcom/google/gwt/core/client/JavaScriptObject;)(b);
+			var comp = @com.ait.toolkit.sencha.touch.client.ui.NavigationView::new(Lcom/google/gwt/core/client/JavaScriptObject;)(n);
 			var container = @com.ait.toolkit.sencha.touch.client.ui.Container::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
 			var event = @com.ait.toolkit.sencha.touch.client.events.navigation.PushEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/NavigationView;Lcom/ait/toolkit/sencha/touch/client/ui/Container;)(comp,container);
 			handler.@com.ait.toolkit.sencha.touch.client.events.navigation.PushHandler::onPush(Lcom/ait/toolkit/sencha/touch/client/events/navigation/PushEvent;)(event);
@@ -282,7 +282,7 @@ public class NavigationView extends Container {
 	public native HandlerRegistration addBackHandler(BackHandler handler)/*-{
 		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		var fn = function(n) {
-			var comp = @com.ait.toolkit.sencha.touch.client.ui.NavigationView::new(Lcom/google/gwt/core/client/JavaScriptObject;)(b);
+			var comp = @com.ait.toolkit.sencha.touch.client.ui.NavigationView::new(Lcom/google/gwt/core/client/JavaScriptObject;)(n);
 			var event = @com.ait.toolkit.sencha.touch.client.events.navigation.BackEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/NavigationView;)(comp);
 			handler.@com.ait.toolkit.sencha.touch.client.events.navigation.BackHandler::onBack(Lcom/ait/toolkit/sencha/touch/client/events/navigation/BackEvent;)(event);
 		};

@@ -20,6 +20,7 @@ import com.ait.toolkit.sencha.touch.client.core.Component;
 import com.ait.toolkit.sencha.touch.client.layout.AbstractLayout;
 import com.ait.toolkit.sencha.touch.client.layout.Layout;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.uibinder.client.UiConstructor;
 import com.google.gwt.user.client.Element;
 
 /**
@@ -69,6 +70,11 @@ public class Panel extends Container {
 	}
 
 	public Panel(Layout layout) {
+		setLayout(layout);
+	}
+
+	@UiConstructor
+	public Panel(String layout) {
 		setLayout(layout);
 	}
 

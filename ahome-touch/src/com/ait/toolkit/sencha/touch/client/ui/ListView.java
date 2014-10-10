@@ -40,6 +40,7 @@ import com.ait.toolkit.sencha.touch.client.layout.Layout;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.SimpleEventBus;
+import com.google.gwt.uibinder.client.UiConstructor;
 import com.google.gwt.user.client.Element;
 
 /**
@@ -88,10 +89,11 @@ public class ListView extends DataView implements ListDataViewContainerAddedHand
 		setStore(store);
 	}
 
-	public ListView(String itemTemplate, Store store) {
+	@UiConstructor
+	public ListView(String itemTpl, Store store) {
 		this();
 		setStore(store);
-		setItemTpl(itemTemplate);
+		setItemTpl(itemTpl);
 	}
 
 	public ListView(String itemTemplate) {
