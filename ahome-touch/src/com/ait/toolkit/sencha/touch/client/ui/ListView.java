@@ -31,9 +31,10 @@ import com.ait.toolkit.sencha.touch.client.core.Component;
 import com.ait.toolkit.sencha.touch.client.core.Ext;
 import com.ait.toolkit.sencha.touch.client.core.handlers.dataview.DataViewItemTapHandler;
 import com.ait.toolkit.sencha.touch.client.core.handlers.dataview.DataViewItemTouchStartHandler;
-import com.ait.toolkit.sencha.touch.client.core.handlers.list.ItemDisclosureHandler;
 import com.ait.toolkit.sencha.touch.client.dataview.ListItemComponentRenderer;
 import com.ait.toolkit.sencha.touch.client.dataview.SimpleListItem;
+import com.ait.toolkit.sencha.touch.client.events.HandlerRegistration;
+import com.ait.toolkit.sencha.touch.client.events.dataview.DiscloseHandler;
 import com.ait.toolkit.sencha.touch.client.events.dataview.ListDataViewContainerAddEvent;
 import com.ait.toolkit.sencha.touch.client.events.dataview.ListDataViewContainerAddedHandler;
 import com.ait.toolkit.sencha.touch.client.layout.Layout;
@@ -175,13 +176,16 @@ public class ListView extends DataView implements ListDataViewContainerAddedHand
 		list.setPreventSelectionOnDisclose(value);
 	}-*/;
 
-	public native void setOnItemDisclosure(ItemDisclosureHandler handler)/*-{
+	public native void setOnItemDisclosure(DiscloseHandler handler)/*-{
 		var list = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
-		list
-				.setOnItemDisclosure(function(record, node, index) {
-					var model = @com.ait.toolkit.data.client.BaseModel::new(Lcom/google/gwt/core/client/JavaScriptObject;)(record);
-					handler.@com.ait.toolkit.sencha.touch.client.core.handlers.list.ItemDisclosureHandler::onItemDisclosure(Lcom/ait/toolkit/data/client/BaseModel;Lcom/google/gwt/core/client/JavaScriptObject;I)(model,node,index);
-				});
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, rec, target, index, e) {
+			var cmp = @com.ait.toolkit.sencha.touch.client.ui.ListView::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
+			var model = @com.ait.toolkit.data.client.BaseModel::new(Lcom/google/gwt/core/client/JavaScriptObject;)(rec);
+			var event = @com.ait.toolkit.sencha.touch.client.events.dataview.DiscloseEvent::new(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/ait/toolkit/sencha/touch/client/ui/ListView;Lcom/ait/toolkit/data/client/BaseModel;Lcom/google/gwt/dom/client/Element;I)(e,comp,model,target, index);
+			handler.@com.ait.toolkit.sencha.touch.client.events.dataview.DiscloseHandler::onDisclosure(Lcom/ait/toolkit/sencha/touch/client/events/dataview/DiscloseEvent;)(event);
+		};
+		component.setOnItemDisclosure(fn);
 	}-*/;
 
 	public void setItemDisclosure(boolean value) {
@@ -370,5 +374,19 @@ public class ListView extends DataView implements ListDataViewContainerAddedHand
 
 		}
 	}
+
+	public native HandlerRegistration addDiscloseHandler(DiscloseHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, rec, target, index, e) {
+			var cmp = @com.ait.toolkit.sencha.touch.client.ui.ListView::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
+			var model = @com.ait.toolkit.data.client.BaseModel::new(Lcom/google/gwt/core/client/JavaScriptObject;)(rec);
+			var event = @com.ait.toolkit.sencha.touch.client.events.dataview.DiscloseEvent::new(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/ait/toolkit/sencha/touch/client/ui/ListView;Lcom/ait/toolkit/data/client/BaseModel;Lcom/google/gwt/dom/client/Element;I)(e,comp,model,target, index);
+			handler.@com.ait.toolkit.sencha.touch.client.events.dataview.DiscloseHandler::onDisclosure(Lcom/ait/toolkit/sencha/touch/client/events/dataview/DiscloseEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.dataview.DiscloseEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
 }
