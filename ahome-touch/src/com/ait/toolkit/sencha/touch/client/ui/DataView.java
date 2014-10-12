@@ -17,19 +17,21 @@ package com.ait.toolkit.sencha.touch.client.ui;
 
 import com.ait.toolkit.sencha.shared.client.core.Template;
 import com.ait.toolkit.sencha.shared.client.core.XType;
-import com.ait.toolkit.sencha.shared.client.core.handlers.CallbackRegistration;
 import com.ait.toolkit.sencha.shared.client.data.Store;
-import com.ait.toolkit.sencha.touch.client.core.config.Event;
 import com.ait.toolkit.sencha.touch.client.core.config.TouchAttribute;
-import com.ait.toolkit.sencha.touch.client.core.handlers.dataview.DataViewDoSelectHandler;
-import com.ait.toolkit.sencha.touch.client.core.handlers.dataview.DataViewItemDoubleTapHandler;
-import com.ait.toolkit.sencha.touch.client.core.handlers.dataview.DataViewItemSwipeHandler;
-import com.ait.toolkit.sencha.touch.client.core.handlers.dataview.DataViewItemTapHandler;
-import com.ait.toolkit.sencha.touch.client.core.handlers.dataview.DataViewItemTouchEndHandler;
-import com.ait.toolkit.sencha.touch.client.core.handlers.dataview.DataViewItemTouchStartHandler;
-import com.ait.toolkit.sencha.touch.client.core.handlers.dataview.DataViewRefreshHandler;
-import com.ait.toolkit.sencha.touch.client.core.handlers.dataview.DataViewSelectHandler;
 import com.ait.toolkit.sencha.touch.client.dataview.SimpleListItem;
+import com.ait.toolkit.sencha.touch.client.events.HandlerRegistration;
+import com.ait.toolkit.sencha.touch.client.events.dataview.DeselectHandler;
+import com.ait.toolkit.sencha.touch.client.events.dataview.ItemSingleTapHandler;
+import com.ait.toolkit.sencha.touch.client.events.dataview.ItemSwipeHandler;
+import com.ait.toolkit.sencha.touch.client.events.dataview.ItemTapHandler;
+import com.ait.toolkit.sencha.touch.client.events.dataview.ItemTapHoldHandler;
+import com.ait.toolkit.sencha.touch.client.events.dataview.ItemTouchEndHandler;
+import com.ait.toolkit.sencha.touch.client.events.dataview.ItemTouchMoveHandler;
+import com.ait.toolkit.sencha.touch.client.events.dataview.ItemTouchStartHandler;
+import com.ait.toolkit.sencha.touch.client.events.dataview.RefreshHandler;
+import com.ait.toolkit.sencha.touch.client.events.dataview.SelectHandler;
+import com.ait.toolkit.sencha.touch.client.events.nestedlist.ItemDoubleTapHandler;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
@@ -373,77 +375,159 @@ public class DataView extends Container implements HasStore {
 		dataview.setStore(value);
 	}-*/;
 
-	/**
-	 * Fires whenever an item is deselected. This action is preventable.
-	 * 
-	 * @param handler
-	 */
-	public CallbackRegistration addDoSelectHandler(DataViewDoSelectHandler handler) {
-		return this.addWidgetListener(Event.DO_SELECT.getValue(), handler.getJsoPeer());
-	}
+	// Events
+	public native HandlerRegistration addDeselectHandler(DeselectHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(l, r, supressed) {
+			var comp = @com.ait.toolkit.sencha.touch.client.ui.ListView::new(Lcom/google/gwt/core/client/JavaScriptObject;)(l);
+			var record = @com.ait.toolkit.data.client.BaseModel::new(Lcom/google/gwt/core/client/JavaScriptObject;)(r);
+			var event = @com.ait.toolkit.sencha.touch.client.events.dataview.DeselectEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/DataView;Lcom/ait/toolkit/data/client/BaseModel;Z)(comp,record,supressed);
+			handler.@com.ait.toolkit.sencha.touch.client.events.dataview.DeselectHandler::onDeselect(Lcom/ait/toolkit/sencha/touch/client/events/dataview/DeselectEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.dataview.DeselectEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
-	/**
-	 * Fires whenever an item is doubletapped
-	 * 
-	 * @param handler
-	 */
-	public CallbackRegistration addItemDoubleTapHandler(DataViewItemDoubleTapHandler handler) {
-		return this.addWidgetListener(Event.ITEM_DOUBLE_TAP.getValue(), handler.getJsoPeer());
-	}
+	public native HandlerRegistration addItemDoubleTapHandler(ItemDoubleTapHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, rec, target, index, e) {
+			var cmp = @com.ait.toolkit.sencha.touch.client.ui.ListView::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
+			var model = @com.ait.toolkit.data.client.BaseModel::new(Lcom/google/gwt/core/client/JavaScriptObject;)(rec);
+			var event = @com.ait.toolkit.sencha.touch.client.events.dataview.ItemDoubleTapEvent::new(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/ait/toolkit/sencha/touch/client/ui/ListView;Lcom/ait/toolkit/data/client/BaseModel;Lcom/google/gwt/dom/client/Element;I)(e,comp,model,target, index);
+			handler.@com.ait.toolkit.sencha.touch.client.events.dataview.ItemDoubleTapHandler::onItemDoubleTap(Lcom/ait/toolkit/sencha/touch/client/events/dataview/ItemDoubleTapEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.dataview.ItemDoubleTapEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
-	/**
-	 * Fires whenever an item is swiped
-	 * 
-	 * @param handler
-	 */
-	public CallbackRegistration addItemSwipeHandler(DataViewItemSwipeHandler handler) {
-		return this.addWidgetListener(Event.ITEM_SWIPE.getValue(), handler.getJsoPeer());
-	}
+	public native HandlerRegistration addItemSingleTapHandler(ItemSingleTapHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, rec, target, index, e) {
+			var cmp = @com.ait.toolkit.sencha.touch.client.ui.ListView::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
+			var model = @com.ait.toolkit.data.client.BaseModel::new(Lcom/google/gwt/core/client/JavaScriptObject;)(rec);
+			var event = @com.ait.toolkit.sencha.touch.client.events.dataview.ItemSingleTapEvent::new(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/ait/toolkit/sencha/touch/client/ui/ListView;Lcom/ait/toolkit/data/client/BaseModel;Lcom/google/gwt/dom/client/Element;I)(e,comp,model,target, index);
+			handler.@com.ait.toolkit.sencha.touch.client.events.dataview.ItemSingleTapHandler::onItemSingleTap(Lcom/ait/toolkit/sencha/touch/client/events/dataview/ItemSingleTapEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.dataview.ItemSingleTapEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
-	/**
-	 * Fires whenever an item is tapped
-	 * 
-	 * @param handler
-	 */
-	public CallbackRegistration addItemTapHandler(DataViewItemTapHandler handler) {
-		return this.addWidgetListener(Event.ITEM_TAP.getValue(), handler.getJsoPeer());
-	}
+	public native HandlerRegistration addItemSwipeHandler(ItemSwipeHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, rec, target, index, e) {
+			var cmp = @com.ait.toolkit.sencha.touch.client.ui.ListView::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
+			var model = @com.ait.toolkit.data.client.BaseModel::new(Lcom/google/gwt/core/client/JavaScriptObject;)(rec);
+			var event = @com.ait.toolkit.sencha.touch.client.events.dataview.ItemSwipeEvent::new(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/ait/toolkit/sencha/touch/client/ui/ListView;Lcom/ait/toolkit/data/client/BaseModel;Lcom/google/gwt/dom/client/Element;I)(e,comp,model,target, index);
+			handler.@com.ait.toolkit.sencha.touch.client.events.dataview.ItemSwipeHandler::onItemSwipe(Lcom/ait/toolkit/sencha/touch/client/events/dataview/ItemSwipeEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.dataview.ItemSwipeEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
-	/**
-	 * Fires whenever an item is touched
-	 * 
-	 * @param handler
-	 */
-	public CallbackRegistration addItemTouchEndHandler(DataViewItemTouchEndHandler handler) {
-		return this.addWidgetListener(Event.ITEM_TOUCH_END.getValue(), handler.getJsoPeer());
-	}
+	public native HandlerRegistration addItemTapHandler(ItemTapHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, rec, target, index, e) {
+			var cmp = @com.ait.toolkit.sencha.touch.client.ui.ListView::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
+			var model = @com.ait.toolkit.data.client.BaseModel::new(Lcom/google/gwt/core/client/JavaScriptObject;)(rec);
+			var event = @com.ait.toolkit.sencha.touch.client.events.dataview.ItemTapEvent::new(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/ait/toolkit/sencha/touch/client/ui/ListView;Lcom/ait/toolkit/data/client/BaseModel;Lcom/google/gwt/dom/client/Element;I)(e,comp,model,target, index);
+			handler.@com.ait.toolkit.sencha.touch.client.events.dataview.ItemTapHandler::onItemTap(Lcom/ait/toolkit/sencha/touch/client/events/dataview/ItemTapEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.dataview.ItemTapEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
-	/**
-	 * Fires whenever an item is touched
-	 * 
-	 * @param handler
-	 */
-	public CallbackRegistration addItemTouchStartHandler(DataViewItemTouchStartHandler handler) {
-		return this.addWidgetListener(Event.ITEM_TOUCH_START.getValue(), handler.getJsoPeer());
-	}
+	public native HandlerRegistration addItemTapHoldHandler(ItemTapHoldHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, rec, target, index, e) {
+			var cmp = @com.ait.toolkit.sencha.touch.client.ui.ListView::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
+			var model = @com.ait.toolkit.data.client.BaseModel::new(Lcom/google/gwt/core/client/JavaScriptObject;)(rec);
+			var event = @com.ait.toolkit.sencha.touch.client.events.dataview.ItemTapHoldEvent::new(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/ait/toolkit/sencha/touch/client/ui/ListView;Lcom/ait/toolkit/data/client/BaseModel;Lcom/google/gwt/dom/client/Element;I)(e,comp,model,target, index);
+			handler.@com.ait.toolkit.sencha.touch.client.events.dataview.ItemTapHoldHandler::onItemTapHold(Lcom/ait/toolkit/sencha/touch/client/events/dataview/ItemTapHoldEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.dataview.ItemTapHoldEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
-	/**
-	 * Fires whenever the DataView is refreshed. The Event is preventable.
-	 * 
-	 * @param handler
-	 */
-	public CallbackRegistration addRefreshHandler(DataViewRefreshHandler handler) {
-		return this.addWidgetListener(Event.REFRESH.getValue(), handler.getJsoPeer());
-	}
+	public native HandlerRegistration addItemTouchEndHandler(ItemTouchEndHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, rec, target, index, e) {
+			var cmp = @com.ait.toolkit.sencha.touch.client.ui.ListView::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
+			var model = @com.ait.toolkit.data.client.BaseModel::new(Lcom/google/gwt/core/client/JavaScriptObject;)(rec);
+			var event = @com.ait.toolkit.sencha.touch.client.events.dataview.ItemTouchEndEvent::new(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/ait/toolkit/sencha/touch/client/ui/ListView;Lcom/ait/toolkit/data/client/BaseModel;Lcom/google/gwt/dom/client/Element;I)(e,comp,model,target, index);
+			handler.@com.ait.toolkit.sencha.touch.client.events.dataview.ItemTouchEndHandler::onItemTouchEnd(Lcom/ait/toolkit/sencha/touch/client/events/dataview/ItemTouchEndEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.dataview.ItemTouchEndEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
-	/**
-	 * Fires whenever an item is selected
-	 * 
-	 * @param handler
-	 */
-	public CallbackRegistration addSelectHandler(DataViewSelectHandler handler) {
-		return this.addWidgetListener(Event.SELECT.getValue(), handler.getJsoPeer());
-	}
+	public native HandlerRegistration addItemTouchMoveHandler(ItemTouchMoveHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, rec, target, index, e) {
+			var cmp = @com.ait.toolkit.sencha.touch.client.ui.ListView::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
+			var model = @com.ait.toolkit.data.client.BaseModel::new(Lcom/google/gwt/core/client/JavaScriptObject;)(rec);
+			var event = @com.ait.toolkit.sencha.touch.client.events.dataview.ItemTouchMoveEvent::new(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/ait/toolkit/sencha/touch/client/ui/ListView;Lcom/ait/toolkit/data/client/BaseModel;Lcom/google/gwt/dom/client/Element;I)(e,comp,model,target, index);
+			handler.@com.ait.toolkit.sencha.touch.client.events.dataview.ItemTouchMoveHandler::onItemTouchMove(Lcom/ait/toolkit/sencha/touch/client/events/dataview/ItemTouchMoveEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.dataview.ItemTouchMoveEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
+
+	public native HandlerRegistration addItemTouchStartHandler(ItemTouchStartHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, rec, target, index, e) {
+			var cmp = @com.ait.toolkit.sencha.touch.client.ui.ListView::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
+			var model = @com.ait.toolkit.data.client.BaseModel::new(Lcom/google/gwt/core/client/JavaScriptObject;)(rec);
+			var event = @com.ait.toolkit.sencha.touch.client.events.dataview.ItemTouchStartEvent::new(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/ait/toolkit/sencha/touch/client/ui/ListView;Lcom/ait/toolkit/data/client/BaseModel;Lcom/google/gwt/dom/client/Element;I)(e,comp,model,target, index);
+			handler.@com.ait.toolkit.sencha.touch.client.events.dataview.ItemTouchStartHandler::onItemTouchStart(Lcom/ait/toolkit/sencha/touch/client/events/dataview/ItemTouchStartEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.dataview.ItemTouchStartEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
+
+	public native HandlerRegistration addRefreshHandler(RefreshHandler handler)/*-{
+	var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+	var fn = function(c) {
+		var cmp = @com.ait.toolkit.sencha.touch.client.ui.DataView::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
+		var event = @com.ait.toolkit.sencha.touch.client.events.dataview.RefreshEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/DataView;);
+		handler.@com.ait.toolkit.sencha.touch.client.events.dataview.RefreshHandler::onRefresh(Lcom/ait/toolkit/sencha/touch/client/events/dataview/RefreshEvent;)(event);
+	};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.dataview.RefreshEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+    }-*/;
+
+	public native HandlerRegistration addSelectHandler(SelectHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, rec) {
+			var cmp = @com.ait.toolkit.sencha.touch.client.ui.DataView::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
+			var model = @com.ait.toolkit.data.client.BaseModel::new(Lcom/google/gwt/core/client/JavaScriptObject;)(rec);
+			var event = @com.ait.toolkit.sencha.touch.client.events.dataview.SelectEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/DataView;Lcom/ait/toolkit/data/client/BaseModel;)(event);
+			handler.@com.ait.toolkit.sencha.touch.client.events.dataview.SelectHandler::onSelect(Lcom/ait/toolkit/sencha/touch/client/events/dataview/SelectEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.client.events.dataview.SelectEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
 	private native void _setItemTpl(String value)/*-{
 		var dataview = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();

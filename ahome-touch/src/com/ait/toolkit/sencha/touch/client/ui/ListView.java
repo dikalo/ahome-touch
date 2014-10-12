@@ -29,12 +29,14 @@ import com.ait.toolkit.sencha.shared.client.dom.DomHelper;
 import com.ait.toolkit.sencha.shared.client.dom.ExtElement;
 import com.ait.toolkit.sencha.touch.client.core.Component;
 import com.ait.toolkit.sencha.touch.client.core.Ext;
-import com.ait.toolkit.sencha.touch.client.core.handlers.dataview.DataViewItemTapHandler;
-import com.ait.toolkit.sencha.touch.client.core.handlers.dataview.DataViewItemTouchStartHandler;
 import com.ait.toolkit.sencha.touch.client.dataview.ListItemComponentRenderer;
 import com.ait.toolkit.sencha.touch.client.dataview.SimpleListItem;
 import com.ait.toolkit.sencha.touch.client.events.HandlerRegistration;
 import com.ait.toolkit.sencha.touch.client.events.dataview.DiscloseHandler;
+import com.ait.toolkit.sencha.touch.client.events.dataview.ItemTapEvent;
+import com.ait.toolkit.sencha.touch.client.events.dataview.ItemTapHandler;
+import com.ait.toolkit.sencha.touch.client.events.dataview.ItemTouchStartEvent;
+import com.ait.toolkit.sencha.touch.client.events.dataview.ItemTouchStartHandler;
 import com.ait.toolkit.sencha.touch.client.events.dataview.ListDataViewContainerAddEvent;
 import com.ait.toolkit.sencha.touch.client.events.dataview.ListDataViewContainerAddedHandler;
 import com.ait.toolkit.sencha.touch.client.layout.Layout;
@@ -42,7 +44,6 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.uibinder.client.UiConstructor;
-import com.google.gwt.user.client.Element;
 
 /**
  * ListDataView is a custom styled DataView which allows Grouping, Indexing, Icons, and a Disclosure.
@@ -351,24 +352,22 @@ public class ListView extends DataView implements ListDataViewContainerAddedHand
 					}
 				}
 			});
-			this.addItemTapHandler(new DataViewItemTapHandler() {
+			this.addItemTapHandler(new ItemTapHandler() {
 				@Override
-				public void onItemTap(DataView dataView, int index, Element element, BaseModel record, EventObject eventObject, Object eOpts) {
-					ExtElement item = Ext.get(eventObject.getTarget());
+				public void onItemTap(ItemTapEvent event) {
+					ExtElement item = Ext.get(event.getTarget());
 					if (!item.hasClass("x-innerhtml")) {
-						eventObject.stopEvent();
+						event.stopEvent();
 					}
-
 				}
 			});
-			this.addItemTouchStartHandler(new DataViewItemTouchStartHandler() {
+			this.addItemTouchStartHandler(new ItemTouchStartHandler() {
 				@Override
-				public void onItemTouchStart(DataView dataView, int index, SimpleListItem element, BaseModel record, EventObject eventObject) {
-					ExtElement item = Ext.get(eventObject.getTarget());
+				public void onItemTouchStart(ItemTouchStartEvent event) {
+					ExtElement item = Ext.get(event.getTarget());
 					if (!item.hasClass("x-innerhtml")) {
-						eventObject.stopEvent();
+						event.stopEvent();
 					}
-
 				}
 			});
 
