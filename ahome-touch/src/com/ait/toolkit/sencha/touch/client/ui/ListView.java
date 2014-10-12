@@ -180,7 +180,7 @@ public class ListView extends DataView implements ListDataViewContainerAddedHand
 	public native void setOnItemDisclosure(DiscloseHandler handler)/*-{
 		var list = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
-		var fn = function(c, rec, target, index, e) {
+		var fn = function(c, index, target, rec, e) {
 			var cmp = @com.ait.toolkit.sencha.touch.client.ui.ListView::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
 			var model = @com.ait.toolkit.data.client.BaseModel::new(Lcom/google/gwt/core/client/JavaScriptObject;)(rec);
 			var event = @com.ait.toolkit.sencha.touch.client.events.dataview.DiscloseEvent::new(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/ait/toolkit/sencha/touch/client/ui/ListView;Lcom/ait/toolkit/data/client/BaseModel;Lcom/google/gwt/dom/client/Element;I)(e,comp,model,target, index);
@@ -376,7 +376,7 @@ public class ListView extends DataView implements ListDataViewContainerAddedHand
 
 	public native HandlerRegistration addDiscloseHandler(DiscloseHandler handler)/*-{
 		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
-		var fn = function(c, rec, target, index, e) {
+		var fn = function(c, index, target, rec, e) {
 			var cmp = @com.ait.toolkit.sencha.touch.client.ui.ListView::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
 			var model = @com.ait.toolkit.data.client.BaseModel::new(Lcom/google/gwt/core/client/JavaScriptObject;)(rec);
 			var event = @com.ait.toolkit.sencha.touch.client.events.dataview.DiscloseEvent::new(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/ait/toolkit/sencha/touch/client/ui/ListView;Lcom/ait/toolkit/data/client/BaseModel;Lcom/google/gwt/dom/client/Element;I)(e,comp,model,target, index);
