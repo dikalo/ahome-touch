@@ -69,34 +69,6 @@ import com.google.gwt.core.client.JsArrayString;
  */
 public abstract class AbstractChart extends DrawComponent {
 
-	private static final String BEFORE_REFRESH = "beforerefresh";
-	private static final String ITEM_CLICK = "itemclick";
-	private static final String ITEM_DOUBLE_CLICK = "itemdoubleclick";
-	private static final String ITEM_DOUBLE_TAP = "itemdoubletap";
-	private static final String ITEM_DRAG = "itemdrag";
-	private static final String ITEM_DRAG_END = "itemdragend";
-	private static final String ITEM_DRAG_START = "itemdragstart";
-	private static final String ITEM_MOUSE_DOWN = "itemmousedown";
-	private static final String ITEM_MOUSE_MOVE = "itemmousemove";
-	private static final String ITEM_MOUSE_OUT = "itemmouseout";
-	private static final String ITEM_MOUSE_OVER = "itemmouseover";
-	private static final String ITEM_MOUSE_UP = "itemmouseup";
-	private static final String ITEM_PINCH = "itempinch";
-	private static final String ITEM_PINCH_END = "itempinchend";
-	private static final String ITEM_PINCH_START = "itempinchstart";
-	private static final String ITEM_SINGLE_TAP = "itemsingletap";
-	private static final String ITEM_SWIPE = "itemswipe";
-	private static final String ITEM_TAP = "itemtap";
-	private static final String ITEM_TAP_CANCEL = "itemtapcancel";
-	private static final String ITEM_TAP_END = "itemtapend";
-	private static final String ITEM_TAP_HOLD = "itemtaphold";
-	private static final String ITEM_TAP_START = "itemtapstart";
-	private static final String ITEM_TOUCH_END = "itemtouchend";
-	private static final String ITEM_TOUCH_MOVE = "itemtouchmove";
-	private static final String ITEM_TOUCH_START = "itemtouchstart";
-	private static final String REDRAW = "redraw";
-	private static final String REFRESH = "refresh";
-
 	protected static JavaScriptObject configPrototype;
 	protected Store store;
 	protected List<AbstractSeries> series = new ArrayList<AbstractSeries>();
@@ -685,7 +657,7 @@ public abstract class AbstractChart extends DrawComponent {
 		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		component
 				.addEventListener(
-						@com.ait.toolkit.sencha.touch.charts.client.AbstractChart::BEFORE_REFRESH,
+						@com.ait.toolkit.sencha.touch.charts.client.events.BeforeRefreshEvent::EVENT_NAME,
 						$entry(function(chart) {
 							chartObject = @com.ait.toolkit.sencha.touch.charts.client.AbstractChart::new(Lcom/google/gwt/core/client/JavaScriptObject;)(chart);
 							return handler.@com.ait.toolkit.sencha.touch.charts.client.handlers.ChartBeforeRefreshHandler::onBeforeRefresh(Lcom/ait/toolkit/sencha/touch/charts/client/AbstractChart;)(chartObject);

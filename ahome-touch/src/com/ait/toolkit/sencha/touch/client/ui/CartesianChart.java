@@ -15,22 +15,18 @@
  */
 package com.ait.toolkit.sencha.touch.client.ui;
 
+import com.ait.toolkit.sencha.shared.client.core.XType;
 import com.ait.toolkit.sencha.shared.client.data.Store;
 import com.ait.toolkit.sencha.touch.charts.client.AbstractChart;
-import com.ait.toolkit.sencha.shared.client.core.XType;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.uibinder.client.UiConstructor;
 
 /**
- * Represents a chart that uses cartesian coordinates. A cartesian chart have
- * two directions, X direction and Y direction. The series and axes are
- * coordinated along these directions. By default the x direction is horizontal
- * and y direction is vertical, You can swap the by setting flipXY config to
- * true.
+ * Represents a chart that uses cartesian coordinates. A cartesian chart have two directions, X direction and Y direction. The series and axes are coordinated along these
+ * directions. By default the x direction is horizontal and y direction is vertical, You can swap the by setting flipXY config to true.
  * <p>
- * Cartesian series often treats x direction an y direction differently. In most
- * cases, data on x direction are assumed to be monotonically increasing. Based
- * on this property, cartesian series can be trimmed and summarized properly to
- * gain a better performance.
+ * Cartesian series often treats x direction an y direction differently. In most cases, data on x direction are assumed to be monotonically increasing. Based on this property,
+ * cartesian series can be trimmed and summarized properly to gain a better performance.
  */
 public class CartesianChart extends AbstractChart {
 
@@ -56,9 +52,9 @@ public class CartesianChart extends AbstractChart {
 
 	}
 
+	@UiConstructor
 	public CartesianChart(Store store) {
 		setStore(store);
-		// setTheme(Theme.BASE);
 	}
 
 	/**

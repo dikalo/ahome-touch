@@ -15,10 +15,11 @@
  */
 package com.ait.toolkit.sencha.touch.client.ui;
 
+import com.ait.toolkit.sencha.shared.client.core.XType;
 import com.ait.toolkit.sencha.shared.client.data.Store;
 import com.ait.toolkit.sencha.touch.charts.client.AbstractChart;
-import com.ait.toolkit.sencha.shared.client.core.XType;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.uibinder.client.UiConstructor;
 
 /**
  * Creates a chart that fills the entire area of the chart. e.g. Treemap
@@ -47,6 +48,7 @@ public class SpaceFillingChart extends AbstractChart {
 
 	}
 
+	@UiConstructor
 	public SpaceFillingChart(Store store) {
 		setStore(store);
 		// setTheme(Theme.BASE);
