@@ -333,4 +333,19 @@ public class Field extends Component {
 		}
 	}-*/;
 
+	public native void setLabelWrap(boolean value) /*-{
+		var field = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		if (field != null) {
+			field.setLabelWrap(value);
+		}
+	}-*/;
+
+	public native boolean hasLabelWrap() /*-{
+		var field = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		if (field != null) {
+			return field.getLabelWrap();
+		}
+		return false;
+	}-*/;
+
 }
