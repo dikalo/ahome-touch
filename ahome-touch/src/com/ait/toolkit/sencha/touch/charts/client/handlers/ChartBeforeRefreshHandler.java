@@ -17,6 +17,6 @@ package com.ait.toolkit.sencha.touch.charts.client.handlers;
 
 import com.ait.toolkit.sencha.touch.charts.client.AbstractChart;
 
-public interface BeforeRefreshHandler {
+public interface ChartBeforeRefreshHandler {
     public boolean onBeforeRefresh(AbstractChart chart);
 }

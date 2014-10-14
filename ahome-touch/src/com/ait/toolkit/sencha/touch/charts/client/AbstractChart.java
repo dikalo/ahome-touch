@@ -19,12 +19,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ait.toolkit.core.client.JsoHelper;
-import com.ait.toolkit.sencha.shared.client.core.handlers.CallbackRegistration;
 import com.ait.toolkit.sencha.shared.client.data.Store;
 import com.ait.toolkit.sencha.touch.charts.client.axis.AbstractAxis;
-import com.ait.toolkit.sencha.touch.charts.client.handlers.BeforeRefreshHandler;
-import com.ait.toolkit.sencha.touch.charts.client.handlers.ChartChangeHandler;
-import com.ait.toolkit.sencha.touch.charts.client.handlers.ChartEventHandler;
+import com.ait.toolkit.sencha.touch.charts.client.events.BeforeRefreshHandler;
+import com.ait.toolkit.sencha.touch.charts.client.events.ItemClickHandler;
+import com.ait.toolkit.sencha.touch.charts.client.events.ItemDoubleClickHandler;
+import com.ait.toolkit.sencha.touch.charts.client.events.ItemDoubleTapHandler;
+import com.ait.toolkit.sencha.touch.charts.client.events.ItemDragEndHandler;
+import com.ait.toolkit.sencha.touch.charts.client.events.ItemDragHandler;
+import com.ait.toolkit.sencha.touch.charts.client.events.ItemDragStartHandler;
+import com.ait.toolkit.sencha.touch.charts.client.events.ItemMouseDownHandler;
+import com.ait.toolkit.sencha.touch.charts.client.events.ItemMouseMoveHandler;
+import com.ait.toolkit.sencha.touch.charts.client.events.ItemMouseOutHandler;
+import com.ait.toolkit.sencha.touch.charts.client.events.ItemMouseOverHandler;
+import com.ait.toolkit.sencha.touch.charts.client.events.ItemMouseUpHandler;
+import com.ait.toolkit.sencha.touch.charts.client.events.ItemPinchEndHandler;
+import com.ait.toolkit.sencha.touch.charts.client.events.ItemPinchHandler;
+import com.ait.toolkit.sencha.touch.charts.client.events.ItemPinchStartHandler;
+import com.ait.toolkit.sencha.touch.charts.client.events.ItemSingleTapHandler;
+import com.ait.toolkit.sencha.touch.charts.client.events.ItemSwipeHandler;
+import com.ait.toolkit.sencha.touch.charts.client.events.ItemTapCancelHandler;
+import com.ait.toolkit.sencha.touch.charts.client.events.ItemTapEndHandler;
+import com.ait.toolkit.sencha.touch.charts.client.events.ItemTapHandler;
+import com.ait.toolkit.sencha.touch.charts.client.events.ItemTapStartHandler;
+import com.ait.toolkit.sencha.touch.charts.client.events.RedrawHandler;
+import com.ait.toolkit.sencha.touch.charts.client.events.RefreshHandler;
+import com.ait.toolkit.sencha.touch.charts.client.handlers.ChartBeforeRefreshHandler;
 import com.ait.toolkit.sencha.touch.charts.client.interactions.AbstractInteraction;
 import com.ait.toolkit.sencha.touch.charts.client.interactions.InteractionType;
 import com.ait.toolkit.sencha.touch.charts.client.interactions.SavingType;
@@ -32,6 +52,11 @@ import com.ait.toolkit.sencha.touch.charts.client.laf.Gradient;
 import com.ait.toolkit.sencha.touch.charts.client.laf.Shadow;
 import com.ait.toolkit.sencha.touch.charts.client.series.AbstractSeries;
 import com.ait.toolkit.sencha.touch.charts.client.theme.Theme;
+import com.ait.toolkit.sencha.touch.client.events.HandlerRegistration;
+import com.ait.toolkit.sencha.touch.client.events.dataview.ItemTapHoldHandler;
+import com.ait.toolkit.sencha.touch.client.events.dataview.ItemTouchEndHandler;
+import com.ait.toolkit.sencha.touch.client.events.dataview.ItemTouchMoveHandler;
+import com.ait.toolkit.sencha.touch.client.events.dataview.ItemTouchStartHandler;
 import com.ait.toolkit.sencha.touch.client.laf.Color;
 import com.ait.toolkit.sencha.touch.client.laf.Position;
 import com.ait.toolkit.sencha.touch.client.ui.DrawComponent;
@@ -40,8 +65,7 @@ import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.JsArrayString;
 
 /**
- * The AbstractChart component provides the capability to visualize data. Each
- * chart binds directly to a Store enabling automatic updates of the chart.
+ * The AbstractChart component provides the capability to visualize data. Each chart binds directly to a Store enabling automatic updates of the chart.
  */
 public abstract class AbstractChart extends DrawComponent {
 
@@ -96,11 +120,8 @@ public abstract class AbstractChart extends DrawComponent {
 	}
 
 	/**
-	 * The name of the theme to be used. A theme defines the colors and other
-	 * visual displays of tick marks on axis, text, title text, line colors,
-	 * marker colors and styles, etc. Possible theme values are 'Base', 'Green',
-	 * 'Sky', 'Red', 'Purple', 'Blue', 'Yellow' and also six category themes
-	 * 'Category1' to 'Category6'. Default value is 'Base'.
+	 * The name of the theme to be used. A theme defines the colors and other visual displays of tick marks on axis, text, title text, line colors, marker colors and styles, etc.
+	 * Possible theme values are 'Base', 'Green', 'Sky', 'Red', 'Purple', 'Blue', 'Yellow' and also six category themes 'Category1' to 'Category6'. Default value is 'Base'.
 	 * 
 	 * @param theme
 	 */
@@ -122,8 +143,7 @@ public abstract class AbstractChart extends DrawComponent {
 	 */
 	public void drawAxis() {
 		if (this.axis.size() <= 0) {
-			throw new RuntimeException(
-					"You must add add atleast one axis to the chart before calling drawAxis");
+			throw new RuntimeException("You must add add atleast one axis to the chart before calling drawAxis");
 		}
 		this.setAxes(this.axis);
 	}
@@ -143,8 +163,7 @@ public abstract class AbstractChart extends DrawComponent {
 		if (nativePeers != null) {
 			int size = JsoHelper.getArrayLength(nativePeers);
 			for (int i = 0; i < size; i++) {
-				AbstractAxis serie = AbstractAxis.create(JsoHelper
-						.getValueFromJavaScriptObjectArray(nativePeers, i));
+				AbstractAxis serie = AbstractAxis.create(JsoHelper.getValueFromJavaScriptObjectArray(nativePeers, i));
 				toReturn.add(serie);
 			}
 		}
@@ -195,8 +214,7 @@ public abstract class AbstractChart extends DrawComponent {
 	 */
 	public void drawSeries() {
 		if (this.series.size() <= 0) {
-			throw new RuntimeException(
-					"You must add add atleast one series to the chart before calling drawSeries");
+			throw new RuntimeException("You must add add atleast one series to the chart before calling drawSeries");
 		}
 		this.setSeries(this.series);
 	}
@@ -216,8 +234,7 @@ public abstract class AbstractChart extends DrawComponent {
 		if (nativePeers != null) {
 			int size = JsoHelper.getArrayLength(nativePeers);
 			for (int i = 0; i < size; i++) {
-				AbstractSeries serie = AbstractSeries.create(JsoHelper
-						.getValueFromJavaScriptObjectArray(nativePeers, i));
+				AbstractSeries serie = AbstractSeries.create(JsoHelper.getValueFromJavaScriptObjectArray(nativePeers, i));
 				toReturn.add(serie);
 			}
 		}
@@ -301,8 +318,7 @@ public abstract class AbstractChart extends DrawComponent {
 	}
 
 	/**
-	 * Turn on autoSize support which will set the bounding div's size to the
-	 * natural size of the contents.
+	 * Turn on autoSize support which will set the bounding div's size to the natural size of the contents.
 	 * 
 	 * @param value
 	 */
@@ -311,9 +327,7 @@ public abstract class AbstractChart extends DrawComponent {
 	}
 
 	/**
-	 * (optional) true for the default animation (easing: 'ease' and duration:
-	 * 500) or a standard animation config object to be used for default chart
-	 * animations.
+	 * (optional) true for the default animation (easing: 'ease' and duration: 500) or a standard animation config object to be used for default chart animations.
 	 * 
 	 * Defaults to: false
 	 * 
@@ -324,9 +338,7 @@ public abstract class AbstractChart extends DrawComponent {
 	}
 
 	/**
-	 * (optional) true for the default animation (easing: 'ease' and duration:
-	 * 500) or a standard animation config object to be used for default chart
-	 * animations.
+	 * (optional) true for the default animation (easing: 'ease' and duration: 500) or a standard animation config object to be used for default chart animations.
 	 * 
 	 * Defaults to: false
 	 * 
@@ -419,8 +431,7 @@ public abstract class AbstractChart extends DrawComponent {
 	}
 
 	/**
-	 * Define a set of gradients that can be used as fill property in sprites.
-	 * ...
+	 * Define a set of gradients that can be used as fill property in sprites. ...
 	 * 
 	 * @param values
 	 */
@@ -444,8 +455,7 @@ public abstract class AbstractChart extends DrawComponent {
 	 */
 	public void drawGradients() {
 		if (this.gradients.size() <= 0) {
-			throw new RuntimeException(
-					"You must add add atleast one gradient to the chart before calling drawGradients");
+			throw new RuntimeException("You must add add atleast one gradient to the chart before calling drawGradients");
 		}
 		this.setColors(this.gradients);
 	}
@@ -469,14 +479,12 @@ public abstract class AbstractChart extends DrawComponent {
 	}
 
 	/**
-	 * The position at which the toolbar should be docked in relation to the
-	 * chart.
+	 * The position at which the toolbar should be docked in relation to the chart.
 	 * 
 	 * @param position
 	 */
 	public void setToolbar(Position position) {
-		setAttribute("toolbar", createToolbarPosition(position.getValue()),
-				true);
+		setAttribute("toolbar", createToolbarPosition(position.getValue()), true);
 	}
 
 	public native Toolbar getToolbar()/*-{
@@ -487,9 +495,8 @@ public abstract class AbstractChart extends DrawComponent {
 	}-*/;
 
 	/**
-	 * Turn on view box support which will scale and position items in the draw
-	 * component to fit to the component while maintaining aspect ratio. Note
-	 * that this scaling can override other sizing settings on yor items.
+	 * Turn on view box support which will scale and position items in the draw component to fit to the component while maintaining aspect ratio. Note that this scaling can
+	 * override other sizing settings on yor items.
 	 * 
 	 * @param position
 	 */
@@ -523,8 +530,7 @@ public abstract class AbstractChart extends DrawComponent {
 	}
 
 	/**
-	 * Interactions are optional modules that can be plugged in to a chart to
-	 * allow the user to interact with the chart and its data in special ways
+	 * Interactions are optional modules that can be plugged in to a chart to allow the user to interact with the chart and its data in special ways
 	 * 
 	 * @param interactions
 	 */
@@ -537,8 +543,7 @@ public abstract class AbstractChart extends DrawComponent {
 	}
 
 	/**
-	 * Interactions are optional modules that can be plugged in to a chart to
-	 * allow the user to interact with the chart and its data in special ways
+	 * Interactions are optional modules that can be plugged in to a chart to allow the user to interact with the chart and its data in special ways
 	 * 
 	 * @param interactions
 	 */
@@ -576,9 +581,7 @@ public abstract class AbstractChart extends DrawComponent {
 		if (nativePeers != null) {
 			int size = JsoHelper.getArrayLength(nativePeers);
 			for (int i = 0; i < size; i++) {
-				AbstractInteraction serie = AbstractInteraction
-						.create(JsoHelper.getValueFromJavaScriptObjectArray(
-								nativePeers, i));
+				AbstractInteraction serie = AbstractInteraction.create(JsoHelper.getValueFromJavaScriptObjectArray(nativePeers, i));
 				toReturn.add(serie);
 			}
 		}
@@ -674,266 +677,395 @@ public abstract class AbstractChart extends DrawComponent {
 	}
 
 	/**
-	 * Fires before a refresh to the chart data is called. If the beforerefresh
-	 * handler returns false the refresh action will be cancelled.
+	 * Fires before a refresh to the chart data is called. If the beforerefresh handler returns false the refresh action will be cancelled.
 	 * 
 	 * @param handler
 	 */
-	public native void addBeforeRefreshHandler(BeforeRefreshHandler handler)/*-{
+	public native void addChartBeforeRefreshHandler(ChartBeforeRefreshHandler handler)/*-{
 		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		component
 				.addEventListener(
 						@com.ait.toolkit.sencha.touch.charts.client.AbstractChart::BEFORE_REFRESH,
 						$entry(function(chart) {
 							chartObject = @com.ait.toolkit.sencha.touch.charts.client.AbstractChart::new(Lcom/google/gwt/core/client/JavaScriptObject;)(chart);
-							handler.@com.ait.toolkit.sencha.touch.charts.client.handlers.BeforeRefreshHandler::onBeforeRefresh(Lcom/ait/toolkit/sencha/touch/charts/client/AbstractChart;)(chartObject);
+							return handler.@com.ait.toolkit.sencha.touch.charts.client.handlers.ChartBeforeRefreshHandler::onBeforeRefresh(Lcom/ait/toolkit/sencha/touch/charts/client/AbstractChart;)(chartObject);
 						}));
 	}-*/;
 
-	/**
-	 * Fires when a click event occurs on a series item.
-	 * 
-	 * @param handler
-	 */
-	public CallbackRegistration addItemClickHandler(ChartEventHandler handler) {
-		return addHandler(ITEM_CLICK, handler);
-	}
+	public native HandlerRegistration addBeforeRefreshHandler(BeforeRefreshHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c) {
+			var comp = @com.ait.toolkit.sencha.touch.charts.client.AbstractChart::new(Lcom/google/gwt/core/client/JavaScriptObject;)(b);
+			var event = @com.ait.toolkit.sencha.touch.charts.client.events.BeforeRefreshEvent::new(Lcom/ait/toolkit/sencha/touch/charts/client/AbstractChart;)(comp);
+			handler.@com.ait.toolkit.sencha.touch.charts.client.events.BeforeRefreshHandler::onBeforeRefresh(Lcom/ait/toolkit/sencha/touch/charts/client/events/BeforeRefreshEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.charts.client.events.BeforeRefreshEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
-	/**
-	 * Fires when a doubleclick event occurs on a series item.
-	 * 
-	 * @param handler
-	 */
-	public CallbackRegistration addItemDoubleClickHandler(
-			ChartEventHandler handler) {
-		return addHandler(ITEM_DOUBLE_CLICK, handler);
-	}
+	public native HandlerRegistration addItemClickHandler(ItemClickHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, s, e) {
+			var comp = @com.ait.toolkit.sencha.touch.charts.client.AbstractChart::new(Lcom/google/gwt/core/client/JavaScriptObject;)(b);
+			var series = @com.ait.toolkit.sencha.touch.charts.client.series.AbstractSeries::new(Lcom/google/gwt/core/client/JavaScriptObject;)(s);
+			var event = @com.ait.toolkit.sencha.touch.charts.client.events.ItemClickEvent::new(Lcom/ait/toolkit/sencha/touch/charts/client/series/AbstractSeries;Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(series,item,e);
+			handler.@com.ait.toolkit.sencha.touch.charts.client.events.ItemClickHandler::onItemClick(Lcom/ait/toolkit/sencha/touch/charts/client/events/ItemClickEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.charts.client.events.ItemClickEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
-	/**
-	 * Fires when a doubletap event occurs on a series item.
-	 * 
-	 * @param handler
-	 */
-	public CallbackRegistration addItemDoubleTapHandler(
-			ChartEventHandler handler) {
-		return addHandler(ITEM_DOUBLE_TAP, handler);
-	}
+	public native HandlerRegistration addItemDoubleClickHandler(ItemDoubleClickHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, s, e) {
+			var comp = @com.ait.toolkit.sencha.touch.charts.client.AbstractChart::new(Lcom/google/gwt/core/client/JavaScriptObject;)(b);
+			var series = @com.ait.toolkit.sencha.touch.charts.client.series.AbstractSeries::new(Lcom/google/gwt/core/client/JavaScriptObject;)(s);
+			var event = @com.ait.toolkit.sencha.touch.charts.client.events.ItemDoubleClickEvent::new(Lcom/ait/toolkit/sencha/touch/charts/client/series/AbstractSeries;Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(series,item,e);
+			handler.@com.ait.toolkit.sencha.touch.charts.client.events.ItemDoubleClickHandler::onItemDoubleClick(Lcom/ait/toolkit/sencha/touch/charts/client/events/ItemDoubleClickEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.charts.client.events.ItemDoubleClickEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
-	/**
-	 * Fires when a drag event occurs on a series item.
-	 * 
-	 * @param handler
-	 */
-	public CallbackRegistration addItemDraHandler(ChartEventHandler handler) {
-		return addHandler(ITEM_DRAG, handler);
-	}
+	public native HandlerRegistration addItemDoubleTapHandler(ItemDoubleTapHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, s, e) {
+			var comp = @com.ait.toolkit.sencha.touch.charts.client.AbstractChart::new(Lcom/google/gwt/core/client/JavaScriptObject;)(b);
+			var series = @com.ait.toolkit.sencha.touch.charts.client.series.AbstractSeries::new(Lcom/google/gwt/core/client/JavaScriptObject;)(s);
+			var event = @com.ait.toolkit.sencha.touch.charts.client.events.ItemDoubleTapEvent::new(Lcom/ait/toolkit/sencha/touch/charts/client/series/AbstractSeries;Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(series,item,e);
+			handler.@com.ait.toolkit.sencha.touch.charts.client.events.ItemDoubleTapHandler::onItemDoubleTap(Lcom/ait/toolkit/sencha/touch/charts/client/events/ItemDoubleTapEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.charts.client.events.ItemDoubleTapEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
-	/**
-	 * Fires when a dragend event occurs on a series item.
-	 * 
-	 * @param handler
-	 */
-	public CallbackRegistration addItemDragEndHandler(ChartEventHandler handler) {
-		return addHandler(ITEM_DRAG_END, handler);
-	}
+	public native HandlerRegistration addItemDragHandler(ItemDragHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, s, e) {
+			var comp = @com.ait.toolkit.sencha.touch.charts.client.AbstractChart::new(Lcom/google/gwt/core/client/JavaScriptObject;)(b);
+			var series = @com.ait.toolkit.sencha.touch.charts.client.series.AbstractSeries::new(Lcom/google/gwt/core/client/JavaScriptObject;)(s);
+			var event = @com.ait.toolkit.sencha.touch.charts.client.events.ItemDragEvent::new(Lcom/ait/toolkit/sencha/touch/charts/client/series/AbstractSeries;Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(series,item,e);
+			handler.@com.ait.toolkit.sencha.touch.charts.client.events.ItemDragHandler::onItemDrag(Lcom/ait/toolkit/sencha/touch/charts/client/events/ItemDragEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.charts.client.events.ItemDragEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
-	/**
-	 * Fires when a dragstart event occurs on a series item.
-	 * 
-	 * @param handler
-	 */
-	public CallbackRegistration addItemDragStartHandler(
-			ChartEventHandler handler) {
-		return addHandler(ITEM_DRAG_START, handler);
-	}
+	public native HandlerRegistration addItemDragEndHandler(ItemDragEndHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, s, e) {
+			var comp = @com.ait.toolkit.sencha.touch.charts.client.AbstractChart::new(Lcom/google/gwt/core/client/JavaScriptObject;)(b);
+			var series = @com.ait.toolkit.sencha.touch.charts.client.series.AbstractSeries::new(Lcom/google/gwt/core/client/JavaScriptObject;)(s);
+			var event = @com.ait.toolkit.sencha.touch.charts.client.events.ItemDragEndEvent::new(Lcom/ait/toolkit/sencha/touch/charts/client/series/AbstractSeries;Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(series,item,e);
+			handler.@com.ait.toolkit.sencha.touch.charts.client.events.ItemDragEndHandler::onItemDragEnd(Lcom/ait/toolkit/sencha/touch/charts/client/events/ItemDragEndEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.charts.client.events.ItemDragEndEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
-	/**
-	 * Fires when a mousedown event occurs on a series item.
-	 * 
-	 * @param handler
-	 */
-	public CallbackRegistration addItemMouseDownHandler(
-			ChartEventHandler handler) {
-		return addHandler(ITEM_MOUSE_DOWN, handler);
-	}
+	public native HandlerRegistration addItemDragStartHandler(ItemDragStartHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, s, e) {
+			var comp = @com.ait.toolkit.sencha.touch.charts.client.AbstractChart::new(Lcom/google/gwt/core/client/JavaScriptObject;)(b);
+			var series = @com.ait.toolkit.sencha.touch.charts.client.series.AbstractSeries::new(Lcom/google/gwt/core/client/JavaScriptObject;)(s);
+			var event = @com.ait.toolkit.sencha.touch.charts.client.events.ItemDragStartEvent::new(Lcom/ait/toolkit/sencha/touch/charts/client/series/AbstractSeries;Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(series,item,e);
+			handler.@com.ait.toolkit.sencha.touch.charts.client.events.ItemDragStartHandler::onItemDragStart(Lcom/ait/toolkit/sencha/touch/charts/client/events/ItemDragStartEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.charts.client.events.ItemDragStartEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
-	/**
-	 * Fires when a mousemove event occurs on a series item.
-	 * 
-	 * @param handler
-	 */
-	public CallbackRegistration addItemMouseMoveHandler(
-			ChartEventHandler handler) {
-		return addHandler(ITEM_MOUSE_MOVE, handler);
-	}
+	public native HandlerRegistration addItemMouseDownHandler(ItemMouseDownHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, s, e) {
+			var comp = @com.ait.toolkit.sencha.touch.charts.client.AbstractChart::new(Lcom/google/gwt/core/client/JavaScriptObject;)(b);
+			var series = @com.ait.toolkit.sencha.touch.charts.client.series.AbstractSeries::new(Lcom/google/gwt/core/client/JavaScriptObject;)(s);
+			var event = @com.ait.toolkit.sencha.touch.charts.client.events.ItemMouseDownEvent::new(Lcom/ait/toolkit/sencha/touch/charts/client/series/AbstractSeries;Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(series,item,e);
+			handler.@com.ait.toolkit.sencha.touch.charts.client.events.ItemMouseDownHandler::onItemMouseDown(Lcom/ait/toolkit/sencha/touch/charts/client/events/ItemMouseDownEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.charts.client.events.ItemMouseDownEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
-	/**
-	 * Fires when a mouseout event occurs on a series item.
-	 * 
-	 * @param handler
-	 */
-	public CallbackRegistration addItemMouseOutHandler(ChartEventHandler handler) {
-		return addHandler(ITEM_MOUSE_OUT, handler);
-	}
+	public native HandlerRegistration addItemMouseMoveHandler(ItemMouseMoveHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, s, e) {
+			var comp = @com.ait.toolkit.sencha.touch.charts.client.AbstractChart::new(Lcom/google/gwt/core/client/JavaScriptObject;)(b);
+			var series = @com.ait.toolkit.sencha.touch.charts.client.series.AbstractSeries::new(Lcom/google/gwt/core/client/JavaScriptObject;)(s);
+			var event = @com.ait.toolkit.sencha.touch.charts.client.events.ItemMouseMoveEvent::new(Lcom/ait/toolkit/sencha/touch/charts/client/series/AbstractSeries;Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(series,item,e);
+			handler.@com.ait.toolkit.sencha.touch.charts.client.events.ItemMouseMoveHandler::onItemMouseMove(Lcom/ait/toolkit/sencha/touch/charts/client/events/ItemMouseMoveEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.charts.client.events.ItemMouseMoveEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
-	/**
-	 * Fires when a mouseover event occurs on a series item.
-	 * 
-	 * @param handler
-	 */
-	public CallbackRegistration addItemMouseOverHandler(
-			ChartEventHandler handler) {
-		return addHandler(ITEM_MOUSE_OVER, handler);
-	}
+	public native HandlerRegistration addItemMouseUpHandler(ItemMouseUpHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, s, e) {
+			var comp = @com.ait.toolkit.sencha.touch.charts.client.AbstractChart::new(Lcom/google/gwt/core/client/JavaScriptObject;)(b);
+			var series = @com.ait.toolkit.sencha.touch.charts.client.series.AbstractSeries::new(Lcom/google/gwt/core/client/JavaScriptObject;)(s);
+			var event = @com.ait.toolkit.sencha.touch.charts.client.events.ItemMouseUpEvent::new(Lcom/ait/toolkit/sencha/touch/charts/client/series/AbstractSeries;Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(series,item,e);
+			handler.@com.ait.toolkit.sencha.touch.charts.client.events.ItemMouseUpHandler::onItemMouseUp(Lcom/ait/toolkit/sencha/touch/charts/client/events/ItemMouseUpEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.charts.client.events.ItemMouseUpEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
-	/**
-	 * Fires when a mouseup event occurs on a series item.
-	 * 
-	 * @param handler
-	 */
-	public CallbackRegistration addItemMouseUpHandler(ChartEventHandler handler) {
-		return addHandler(ITEM_MOUSE_UP, handler);
-	}
+	public native HandlerRegistration addItemMouseOverHandler(ItemMouseOverHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, s, e) {
+			var comp = @com.ait.toolkit.sencha.touch.charts.client.AbstractChart::new(Lcom/google/gwt/core/client/JavaScriptObject;)(b);
+			var series = @com.ait.toolkit.sencha.touch.charts.client.series.AbstractSeries::new(Lcom/google/gwt/core/client/JavaScriptObject;)(s);
+			var event = @com.ait.toolkit.sencha.touch.charts.client.events.ItemMouseOverEvent::new(Lcom/ait/toolkit/sencha/touch/charts/client/series/AbstractSeries;Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(series,item,e);
+			handler.@com.ait.toolkit.sencha.touch.charts.client.events.ItemMouseOverHandler::onItemMouseOver(Lcom/ait/toolkit/sencha/touch/charts/client/events/ItemMouseOverEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.charts.client.events.ItemMouseOverEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
-	/**
-	 * Fires when a pinch event occurs on a series item.
-	 * 
-	 * @param handler
-	 */
-	public CallbackRegistration addItemPinchHandler(ChartEventHandler handler) {
-		return addHandler(ITEM_PINCH, handler);
-	}
+	public native HandlerRegistration addItemMouseOutHandler(ItemMouseOutHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, s, e) {
+			var comp = @com.ait.toolkit.sencha.touch.charts.client.AbstractChart::new(Lcom/google/gwt/core/client/JavaScriptObject;)(b);
+			var series = @com.ait.toolkit.sencha.touch.charts.client.series.AbstractSeries::new(Lcom/google/gwt/core/client/JavaScriptObject;)(s);
+			var event = @com.ait.toolkit.sencha.touch.charts.client.events.ItemMouseOutEvent::new(Lcom/ait/toolkit/sencha/touch/charts/client/series/AbstractSeries;Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(series,item,e);
+			handler.@com.ait.toolkit.sencha.touch.charts.client.events.ItemMouseOutHandler::onItemMouseOut(Lcom/ait/toolkit/sencha/touch/charts/client/events/ItemMouseOutEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.charts.client.events.ItemMouseOutEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
-	/**
-	 * Fires when a pinchend event occurs on a series item.
-	 * 
-	 * @param handler
-	 */
-	public CallbackRegistration addItemPinchEndHandler(ChartEventHandler handler) {
-		return addHandler(ITEM_PINCH_END, handler);
-	}
+	public native HandlerRegistration addItemPinchHandler(ItemPinchHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, s, e) {
+			var comp = @com.ait.toolkit.sencha.touch.charts.client.AbstractChart::new(Lcom/google/gwt/core/client/JavaScriptObject;)(b);
+			var series = @com.ait.toolkit.sencha.touch.charts.client.series.AbstractSeries::new(Lcom/google/gwt/core/client/JavaScriptObject;)(s);
+			var event = @com.ait.toolkit.sencha.touch.charts.client.events.ItemPinchEvent::new(Lcom/ait/toolkit/sencha/touch/charts/client/series/AbstractSeries;Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(series,item,e);
+			handler.@com.ait.toolkit.sencha.touch.charts.client.events.ItemPinchHandler::onItemPinch(Lcom/ait/toolkit/sencha/touch/charts/client/events/ItemPinchEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.charts.client.events.ItemPinchEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
-	/**
-	 * Fires when a pinchstart event occurs on a series item.
-	 * 
-	 * @param handler
-	 */
-	public CallbackRegistration addItemPinchStartHandler(
-			ChartEventHandler handler) {
-		return addHandler(ITEM_PINCH_START, handler);
-	}
+	public native HandlerRegistration addItemPinchEndHandler(ItemPinchEndHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, s, e) {
+			var comp = @com.ait.toolkit.sencha.touch.charts.client.AbstractChart::new(Lcom/google/gwt/core/client/JavaScriptObject;)(b);
+			var series = @com.ait.toolkit.sencha.touch.charts.client.series.AbstractSeries::new(Lcom/google/gwt/core/client/JavaScriptObject;)(s);
+			var event = @com.ait.toolkit.sencha.touch.charts.client.events.ItemPinchEndEvent::new(Lcom/ait/toolkit/sencha/touch/charts/client/series/AbstractSeries;Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(series,item,e);
+			handler.@com.ait.toolkit.sencha.touch.charts.client.events.ItemPinchEndHandler::onItemPinchEnd(Lcom/ait/toolkit/sencha/touch/charts/client/events/ItemPinchEndEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.charts.client.events.ItemPinchEndEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
-	/**
-	 * Fires when a singletap event occurs on a series item.
-	 * 
-	 * @param handler
-	 */
-	public CallbackRegistration addItemSingleTapHandler(
-			ChartEventHandler handler) {
-		return addHandler(ITEM_SINGLE_TAP, handler);
-	}
+	public native HandlerRegistration addItemPinchStartHandler(ItemPinchStartHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, s, e) {
+			var comp = @com.ait.toolkit.sencha.touch.charts.client.AbstractChart::new(Lcom/google/gwt/core/client/JavaScriptObject;)(b);
+			var series = @com.ait.toolkit.sencha.touch.charts.client.series.AbstractSeries::new(Lcom/google/gwt/core/client/JavaScriptObject;)(s);
+			var event = @com.ait.toolkit.sencha.touch.charts.client.events.ItemPinchStartEvent::new(Lcom/ait/toolkit/sencha/touch/charts/client/series/AbstractSeries;Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(series,item,e);
+			handler.@com.ait.toolkit.sencha.touch.charts.client.events.ItemPinchStartHandler::onItemPinchStart(Lcom/ait/toolkit/sencha/touch/charts/client/events/ItemPinchStartEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.charts.client.events.ItemPinchStartEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
-	/**
-	 * Fires when a swipe event occurs on a series item.
-	 * 
-	 * @param handler
-	 */
-	public CallbackRegistration addItemSwipeHandler(ChartEventHandler handler) {
-		return addHandler(ITEM_SWIPE, handler);
-	}
+	public native HandlerRegistration addItemSingleTapHandler(ItemSingleTapHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, s, e) {
+			var comp = @com.ait.toolkit.sencha.touch.charts.client.AbstractChart::new(Lcom/google/gwt/core/client/JavaScriptObject;)(b);
+			var series = @com.ait.toolkit.sencha.touch.charts.client.series.AbstractSeries::new(Lcom/google/gwt/core/client/JavaScriptObject;)(s);
+			var event = @com.ait.toolkit.sencha.touch.charts.client.events.ItemSingleTapEvent::new(Lcom/ait/toolkit/sencha/touch/charts/client/series/AbstractSeries;Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(series,item,e);
+			handler.@com.ait.toolkit.sencha.touch.charts.client.events.ItemSingleTapHandler::onItemSingleTap(Lcom/ait/toolkit/sencha/touch/charts/client/events/ItemSingleTapEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.charts.client.events.ItemSingleTapEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
-	/**
-	 * Fires when a tap event occurs on a series item.
-	 * 
-	 * @param handler
-	 */
-	public CallbackRegistration addItemTapHandler(ChartEventHandler handler) {
-		return addHandler(ITEM_TAP, handler);
-	}
+	public native HandlerRegistration addItemSwipeHandler(ItemSwipeHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, s, e) {
+			var comp = @com.ait.toolkit.sencha.touch.charts.client.AbstractChart::new(Lcom/google/gwt/core/client/JavaScriptObject;)(b);
+			var series = @com.ait.toolkit.sencha.touch.charts.client.series.AbstractSeries::new(Lcom/google/gwt/core/client/JavaScriptObject;)(s);
+			var event = @com.ait.toolkit.sencha.touch.charts.client.events.ItemSwipeEvent::new(Lcom/ait/toolkit/sencha/touch/charts/client/series/AbstractSeries;Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(series,item,e);
+			handler.@com.ait.toolkit.sencha.touch.charts.client.events.ItemSwipeHandler::onItemSwipe(Lcom/ait/toolkit/sencha/touch/charts/client/events/ItemSwipeEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.charts.client.events.ItemSwipeEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
-	/**
-	 * Fires when a tapcancel event occurs on a series item.
-	 * 
-	 * @param handler
-	 */
-	public CallbackRegistration addItemTapCancelHandler(
-			ChartEventHandler handler) {
-		return addHandler(ITEM_TAP_CANCEL, handler);
-	}
+	public native HandlerRegistration addItemTapHandler(ItemTapHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, s, e) {
+			var comp = @com.ait.toolkit.sencha.touch.charts.client.AbstractChart::new(Lcom/google/gwt/core/client/JavaScriptObject;)(b);
+			var series = @com.ait.toolkit.sencha.touch.charts.client.series.AbstractSeries::new(Lcom/google/gwt/core/client/JavaScriptObject;)(s);
+			var event = @com.ait.toolkit.sencha.touch.charts.client.events.ItemTapEvent::new(Lcom/ait/toolkit/sencha/touch/charts/client/series/AbstractSeries;Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(series,item,e);
+			handler.@com.ait.toolkit.sencha.touch.charts.client.events.ItemTapHandler::onItemTap(Lcom/ait/toolkit/sencha/touch/charts/client/events/ItemTapEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.charts.client.events.ItemTapEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
-	/**
-	 * Fires when a tapend event occurs on a series item.
-	 * 
-	 * @param handler
-	 */
-	public CallbackRegistration addItemTapEndHandler(ChartEventHandler handler) {
-		return addHandler(ITEM_TAP_END, handler);
-	}
+	public native HandlerRegistration addItemTapCancelHandler(ItemTapCancelHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, s, e) {
+			var comp = @com.ait.toolkit.sencha.touch.charts.client.AbstractChart::new(Lcom/google/gwt/core/client/JavaScriptObject;)(b);
+			var series = @com.ait.toolkit.sencha.touch.charts.client.series.AbstractSeries::new(Lcom/google/gwt/core/client/JavaScriptObject;)(s);
+			var event = @com.ait.toolkit.sencha.touch.charts.client.events.ItemTapCancelEvent::new(Lcom/ait/toolkit/sencha/touch/charts/client/series/AbstractSeries;Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(series,item,e);
+			handler.@com.ait.toolkit.sencha.touch.charts.client.events.ItemTapCancelHandler::onItemTapCancel(Lcom/ait/toolkit/sencha/touch/charts/client/events/ItemTapCancelEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.charts.client.events.ItemTapCancelEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
-	/**
-	 * Fires when a taphold event occurs on a series item.
-	 * 
-	 * @param handler
-	 */
-	public CallbackRegistration addItemTapHoldHandler(ChartEventHandler handler) {
-		return addHandler(ITEM_TAP_HOLD, handler);
-	}
+	public native HandlerRegistration addItemTapEndHandler(ItemTapEndHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, s, e) {
+			var comp = @com.ait.toolkit.sencha.touch.charts.client.AbstractChart::new(Lcom/google/gwt/core/client/JavaScriptObject;)(b);
+			var series = @com.ait.toolkit.sencha.touch.charts.client.series.AbstractSeries::new(Lcom/google/gwt/core/client/JavaScriptObject;)(s);
+			var event = @com.ait.toolkit.sencha.touch.charts.client.events.ItemTapEndEvent::new(Lcom/ait/toolkit/sencha/touch/charts/client/series/AbstractSeries;Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(series,item,e);
+			handler.@com.ait.toolkit.sencha.touch.charts.client.events.ItemTapEndHandler::onItemTapEnd(Lcom/ait/toolkit/sencha/touch/charts/client/events/ItemTapEndEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.charts.client.events.ItemTapEndEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
-	/**
-	 * Fires when a tapstart event occurs on a series item.
-	 * 
-	 * @param handler
-	 */
-	public CallbackRegistration addItemTapStartHandler(ChartEventHandler handler) {
-		return addHandler(ITEM_TAP_START, handler);
-	}
+	public native HandlerRegistration addItemTapHoldHandler(ItemTapHoldHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, s, e) {
+			var comp = @com.ait.toolkit.sencha.touch.charts.client.AbstractChart::new(Lcom/google/gwt/core/client/JavaScriptObject;)(b);
+			var series = @com.ait.toolkit.sencha.touch.charts.client.series.AbstractSeries::new(Lcom/google/gwt/core/client/JavaScriptObject;)(s);
+			var event = @com.ait.toolkit.sencha.touch.charts.client.events.ItemTapHoldEvent::new(Lcom/ait/toolkit/sencha/touch/charts/client/series/AbstractSeries;Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(series,item,e);
+			handler.@com.ait.toolkit.sencha.touch.charts.client.events.ItemTapHoldHandler::onItemTapHold(Lcom/ait/toolkit/sencha/touch/charts/client/events/ItemTapHoldEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.charts.client.events.ItemTapHoldEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
-	/**
-	 * Fires when a touchend event occurs on a series item.
-	 * 
-	 * @param handler
-	 */
-	public CallbackRegistration addItemTouchEndHandler(ChartEventHandler handler) {
-		return addHandler(ITEM_TOUCH_END, handler);
-	}
+	public native HandlerRegistration addItemTapStartHandler(ItemTapStartHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, s, e) {
+			var comp = @com.ait.toolkit.sencha.touch.charts.client.AbstractChart::new(Lcom/google/gwt/core/client/JavaScriptObject;)(b);
+			var series = @com.ait.toolkit.sencha.touch.charts.client.series.AbstractSeries::new(Lcom/google/gwt/core/client/JavaScriptObject;)(s);
+			var event = @com.ait.toolkit.sencha.touch.charts.client.events.ItemTapStartEvent::new(Lcom/ait/toolkit/sencha/touch/charts/client/series/AbstractSeries;Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(series,item,e);
+			handler.@com.ait.toolkit.sencha.touch.charts.client.events.ItemTapStartHandler::onItemTapStart(Lcom/ait/toolkit/sencha/touch/charts/client/events/ItemTapStartEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.charts.client.events.ItemTapStartEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
-	/**
-	 * Fires when a touchmove event occurs on a series item.
-	 * 
-	 * @param handler
-	 */
-	public CallbackRegistration addItemTouchMoveHandler(
-			ChartEventHandler handler) {
-		return addHandler(ITEM_TOUCH_MOVE, handler);
-	}
+	public native HandlerRegistration addItemTouchEndHandler(ItemTouchEndHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, s, e) {
+			var comp = @com.ait.toolkit.sencha.touch.charts.client.AbstractChart::new(Lcom/google/gwt/core/client/JavaScriptObject;)(b);
+			var series = @com.ait.toolkit.sencha.touch.charts.client.series.AbstractSeries::new(Lcom/google/gwt/core/client/JavaScriptObject;)(s);
+			var event = @com.ait.toolkit.sencha.touch.charts.client.events.ItemTouchEndEvent::new(Lcom/ait/toolkit/sencha/touch/charts/client/series/AbstractSeries;Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(series,item,e);
+			handler.@com.ait.toolkit.sencha.touch.charts.client.events.ItemTouchEndHandler::onItemTouchEnd(Lcom/ait/toolkit/sencha/touch/charts/client/events/ItemTouchEndEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.charts.client.events.ItemTouchEndEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
-	/**
-	 * Fires when a touchstart event occurs on a series item.
-	 * 
-	 * @param handler
-	 */
-	public CallbackRegistration addItemTouchStartHandler(
-			ChartEventHandler handler) {
-		return addHandler(ITEM_TOUCH_START, handler);
-	}
+	public native HandlerRegistration addItemTouchMoveHandler(ItemTouchMoveHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, s, e) {
+			var comp = @com.ait.toolkit.sencha.touch.charts.client.AbstractChart::new(Lcom/google/gwt/core/client/JavaScriptObject;)(b);
+			var series = @com.ait.toolkit.sencha.touch.charts.client.series.AbstractSeries::new(Lcom/google/gwt/core/client/JavaScriptObject;)(s);
+			var event = @com.ait.toolkit.sencha.touch.charts.client.events.ItemTouchMoveEvent::new(Lcom/ait/toolkit/sencha/touch/charts/client/series/AbstractSeries;Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(series,item,e);
+			handler.@com.ait.toolkit.sencha.touch.charts.client.events.ItemTouchMoveHandler::onItemTouchMove(Lcom/ait/toolkit/sencha/touch/charts/client/events/ItemTouchMoveEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.charts.client.events.ItemTouchMoveEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
-	/**
-	 * Fires after the chart is redrawn.
-	 * 
-	 * @param handler
-	 */
-	public CallbackRegistration addRedrawHandler(ChartChangeHandler handler) {
-		return addChangeHandler(REDRAW, handler);
-	}
+	public native HandlerRegistration addItemTouchStartHandler(ItemTouchStartHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c, s, e) {
+			var comp = @com.ait.toolkit.sencha.touch.charts.client.AbstractChart::new(Lcom/google/gwt/core/client/JavaScriptObject;)(b);
+			var series = @com.ait.toolkit.sencha.touch.charts.client.series.AbstractSeries::new(Lcom/google/gwt/core/client/JavaScriptObject;)(s);
+			var event = @com.ait.toolkit.sencha.touch.charts.client.events.ItemTouchStartEvent::new(Lcom/ait/toolkit/sencha/touch/charts/client/series/AbstractSeries;Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(series,item,e);
+			handler.@com.ait.toolkit.sencha.touch.charts.client.events.ItemTouchStartHandler::onItemTouchStart(Lcom/ait/toolkit/sencha/touch/charts/client/events/ItemTouchStartEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.charts.client.events.ItemTouchStartEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
-	/**
-	 * Fires after the chart data has been refreshed.
-	 * 
-	 * @param handler
-	 */
-	public CallbackRegistration addRefreshHandler(ChartChangeHandler handler) {
-		return addChangeHandler(REFRESH, handler);
-	}
+	public native HandlerRegistration addRefreshHandler(RefreshHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c) {
+			var comp = @com.ait.toolkit.sencha.touch.charts.client.AbstractChart::new(Lcom/google/gwt/core/client/JavaScriptObject;)(b);
+			var event = @com.ait.toolkit.sencha.touch.charts.client.events.RefreshEvent::new(Lcom/ait/toolkit/sencha/touch/charts/client/AbstractChart;)(comp);
+			handler.@com.ait.toolkit.sencha.touch.charts.client.events.RefreshHandler::onRefresh(Lcom/ait/toolkit/sencha/touch/charts/client/events/RefreshEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.charts.client.events.RefreshEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
+
+	public native HandlerRegistration addRedrawHandler(RedrawHandler handler)/*-{
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c) {
+			var comp = @com.ait.toolkit.sencha.touch.charts.client.AbstractChart::new(Lcom/google/gwt/core/client/JavaScriptObject;)(b);
+			var event = @com.ait.toolkit.sencha.touch.charts.client.events.RedrawEvent::new(Lcom/ait/toolkit/sencha/touch/charts/client/AbstractChart;)(comp);
+			handler.@com.ait.toolkit.sencha.touch.charts.client.events.RedrawHandler::onRedraw(Lcom/ait/toolkit/sencha/touch/charts/client/events/RedrawEvent;)(event);
+		};
+		var eventName = @com.ait.toolkit.sencha.touch.charts.client.events.RedrawEvent::EVENT_NAME;
+		component.addListener(eventName, fn);
+		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
+		return toReturn;
+	}-*/;
 
 	private native void _save(JavaScriptObject type)/*-{
 		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
@@ -966,38 +1098,6 @@ public abstract class AbstractChart extends DrawComponent {
 		return {
 			gradient : obj
 		};
-	}-*/;
-
-	private native CallbackRegistration addHandler(String event,
-			ChartEventHandler handler)/*-{
-		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
-		var widget = this.@com.ait.toolkit.sencha.touch.client.core.AbstractBaseWidget::widget;
-		var peer = widget.getOrCreateJsObj();
-		var fn = $entry(function(series, item, e) {
-			var seriesObject = @com.ait.toolkit.sencha.touch.charts.client.series.AbstractSeries::new(Lcom/google/gwt/core/client/JavaScriptObject;)(series);
-			var chartItem = @com.ait.toolkit.sencha.touch.charts.client.interactions.ChartItem::new(Lcom/google/gwt/core/client/JavaScriptObject;)(item);
-			var eventObject = @com.ait.toolkit.sencha.shared.client.core.EventObject::new(Lcom/google/gwt/core/client/JavaScriptObject;)(e);
-			chartObject = @com.ait.toolkit.sencha.touch.charts.client.AbstractChart::new(Lcom/google/gwt/core/client/JavaScriptObject;)(chart);
-
-			handler.@com.ait.toolkit.sencha.touch.charts.client.handlers.ChartEventHandler::onEvent(Lcom/ait/toolkit/sencha/touch/charts/client/series/BaseSeries;Lcom/ait/toolkit/sencha/touch/charts/client/interactions/ChartItem;Lcom/ait/toolkit/sencha/shared/client/core/EventObject;)(seriesObject, chartItem, eventObject);
-		});
-		component.addListener(event, fn);
-		var toReturn = @com.ait.toolkit.sencha.shared.client.core.handlers.CallbackRegistration::new(Lcom/google/gwt/core/client/JavaScriptObject;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(peer,event,fn);
-		return toReturn;
-	}-*/;
-
-	private native CallbackRegistration addChangeHandler(String event,
-			ChartChangeHandler handler)/*-{
-		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
-		var widget = this.@com.ait.toolkit.sencha.touch.client.core.AbstractBaseWidget::widget;
-		var peer = widget.getOrCreateJsObj();
-		var fn = $entry(function(chart) {
-			chartObject = @com.ait.toolkit.sencha.touch.charts.client.AbstractChart::new(Lcom/google/gwt/core/client/JavaScriptObject;)(chart);
-			handler.@com.ait.toolkit.sencha.touch.charts.client.handlers.ChartChangeHandler::onEvent(Lcom/ait/toolkit/sencha/touch/charts/client/AbstractChart;)(chartObject);
-		});
-		component.addListener(event, fn);
-		var toReturn = @com.ait.toolkit.sencha.shared.client.core.handlers.CallbackRegistration::new(Lcom/google/gwt/core/client/JavaScriptObject;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(peer,event,fn);
-		return toReturn;
 	}-*/;
 
 }
