@@ -17,6 +17,7 @@ package com.ait.toolkit.sencha.touch.client.core;
 
 import com.ait.toolkit.sencha.shared.client.core.ExtCore;
 import com.ait.toolkit.sencha.shared.client.dom.ExtElement;
+import com.ait.toolkit.sencha.touch.client.ui.Container;
 import com.google.gwt.dom.client.Element;
 
 public class Ext extends ExtCore {
@@ -26,9 +27,8 @@ public class Ext extends ExtCore {
 	}
 
 	/**
-	 * Attempts to destroy the component passed to it by removing all event
-	 * listeners, removing them from the DOM (if applicable) and calling their
-	 * destroy functions (if available).
+	 * Attempts to destroy the component passed to it by removing all event listeners, removing them from the DOM (if applicable) and calling their destroy functions (if
+	 * available).
 	 * 
 	 * @param component
 	 *            the component to destroy
@@ -39,8 +39,7 @@ public class Ext extends ExtCore {
 	}-*/;
 
 	/**
-	 * Returns a component by id. Shorthand for
-	 * {@link ComponentMgr#getComponent(String)}.
+	 * Returns a component by id. Shorthand for {@link ComponentMgr#getComponent(String)}.
 	 * 
 	 * @param id
 	 *            the component ID
@@ -51,8 +50,7 @@ public class Ext extends ExtCore {
 	}
 
 	/**
-	 * Returns a component that the passed element represents. Shorthand for
-	 * {@link ComponentMgr#getComponent(Element)}.
+	 * Returns a component that the passed element represents. Shorthand for {@link ComponentMgr#getComponent(Element)}.
 	 * 
 	 * @param element
 	 *            the component's element
@@ -63,8 +61,7 @@ public class Ext extends ExtCore {
 	}
 
 	/**
-	 * Returns a component that the passed element represents. Shorthand for
-	 * {@link ComponentMgr#getComponent(ExtElement)}.
+	 * Returns a component that the passed element represents. Shorthand for {@link ComponentMgr#getComponent(ExtElement)}.
 	 * 
 	 * @param element
 	 *            the component's element
@@ -72,6 +69,20 @@ public class Ext extends ExtCore {
 	 */
 	public static Component getCmp(ExtElement element) {
 		return ComponentMgr.getComponent(element);
+	}
+
+	public Container createPreview(Component target, int width, int height) {
+		Container toReturn = new Container();
+		toReturn.setSize(width, height);
+		ExtCore.createBoxPreview(toReturn.getEl().getJsObj(), target.getEl().getJsObj());
+		return toReturn;
+	}
+
+	public String getScreenContent(Component target, int width, int height) {
+		Container toReturn = new Container();
+		toReturn.setSize(width, height);
+		return ExtCore.getScreenContent(toReturn.getEl().getJsObj(), target.getEl().getJsObj());
+
 	}
 
 }
