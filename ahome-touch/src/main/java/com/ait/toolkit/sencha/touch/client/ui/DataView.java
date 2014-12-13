@@ -503,24 +503,24 @@ public class DataView extends Container implements HasStore {
 	}-*/;
 
 	public native HandlerRegistration addRefreshHandler(RefreshHandler handler)/*-{
-	var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
-	var fn = function(c) {
-		var comp = @com.ait.toolkit.sencha.touch.client.ui.DataView::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
-		var event = @com.ait.toolkit.sencha.touch.client.events.dataview.RefreshEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/DataView;);
-		handler.@com.ait.toolkit.sencha.touch.client.events.dataview.RefreshHandler::onRefresh(Lcom/ait/toolkit/sencha/touch/client/events/dataview/RefreshEvent;)(comp,event);
-	};
+		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var fn = function(c) {
+			var comp = @com.ait.toolkit.sencha.touch.client.ui.DataView::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
+			var event = @com.ait.toolkit.sencha.touch.client.events.dataview.RefreshEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/DataView;)(comp);
+			handler.@com.ait.toolkit.sencha.touch.client.events.dataview.RefreshHandler::onRefresh(Lcom/ait/toolkit/sencha/touch/client/events/dataview/RefreshEvent;)(comp,event);
+		};
 		var eventName = @com.ait.toolkit.sencha.touch.client.events.dataview.RefreshEvent::EVENT_NAME;
 		component.addListener(eventName, fn);
 		var toReturn = @com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::new(Lcom/ait/toolkit/sencha/touch/client/core/Component;Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(this,eventName,fn);
 		return toReturn;
-    }-*/;
+	}-*/;
 
 	public native HandlerRegistration addSelectHandler(SelectHandler handler)/*-{
 		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		var fn = function(c, rec) {
 			var comp = @com.ait.toolkit.sencha.touch.client.ui.DataView::new(Lcom/google/gwt/core/client/JavaScriptObject;)(c);
 			var model = @com.ait.toolkit.data.client.BaseModel::new(Lcom/google/gwt/core/client/JavaScriptObject;)(rec);
-			var event = @com.ait.toolkit.sencha.touch.client.events.dataview.SelectEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/DataView;Lcom/ait/toolkit/data/client/BaseModel;)(comp, event);
+			var event = @com.ait.toolkit.sencha.touch.client.events.dataview.SelectEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/DataView;Lcom/ait/toolkit/data/client/BaseModel;)(comp, model);
 			handler.@com.ait.toolkit.sencha.touch.client.events.dataview.SelectHandler::onSelect(Lcom/ait/toolkit/sencha/touch/client/events/dataview/SelectEvent;)(event);
 		};
 		var eventName = @com.ait.toolkit.sencha.touch.client.events.dataview.SelectEvent::EVENT_NAME;
