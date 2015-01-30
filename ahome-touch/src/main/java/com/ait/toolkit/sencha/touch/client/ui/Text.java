@@ -286,7 +286,7 @@ public class Text<T> extends Field implements HasValue<T>, IsEditor<LeafValueEdi
 
 	public native HandlerRegistration AddChangeHandler(ChangeHandler handler)/*-{
 		var component = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
-		var fn = function(t, n, o) {
+		var fn = function(t, o, n) {
 			var comp = @com.ait.toolkit.sencha.touch.client.ui.Text::new(Lcom/google/gwt/core/client/JavaScriptObject;)(t);
 			var event = @com.ait.toolkit.sencha.touch.client.events.text.ChangeEvent::new(Lcom/ait/toolkit/sencha/touch/client/ui/Text;Ljava/lang/Object;Ljava/lang/Object;)(comp,o,n);
 			handler.@com.ait.toolkit.sencha.touch.client.events.text.ChangeHandler::onChange(Lcom/ait/toolkit/sencha/touch/client/events/text/ChangeEvent;)(event);
