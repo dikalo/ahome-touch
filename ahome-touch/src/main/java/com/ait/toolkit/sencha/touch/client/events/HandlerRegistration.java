@@ -58,7 +58,7 @@ public class HandlerRegistration implements com.google.gwt.event.shared.HandlerR
 	 */
 	public native void unregister()/*-{
 		var target = this.@com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::getTarget()();
-		var targetJs = widget.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
+		var targetJs = target.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		var event = this.@com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::getEventName()();
 		var fn = this.@com.ait.toolkit.sencha.touch.client.events.HandlerRegistration::getCallback()();
 		targetJs.removeListener(event, fn);
