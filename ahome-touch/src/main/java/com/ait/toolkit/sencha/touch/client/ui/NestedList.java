@@ -232,7 +232,7 @@ public class NestedList extends Container {
 	 * 
 	 * @param value
 	 */
-	public native void setUpdateTitleText(String value) /*-{
+	public native void setUpdateTitleText(boolean value) /*-{
 		var nestedlist = this.@com.ait.toolkit.sencha.touch.client.core.Component::getOrCreateJsObj()();
 		nestedlist.setUpdateTitleText(value);
 	}-*/;
