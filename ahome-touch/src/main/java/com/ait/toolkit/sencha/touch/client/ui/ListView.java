@@ -46,9 +46,11 @@ import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.uibinder.client.UiConstructor;
 
 /**
- * ListDataView is a custom styled DataView which allows Grouping, Indexing, Icons, and a Disclosure.
+ * ListDataView is a custom styled DataView which allows Grouping, Indexing,
+ * Icons, and a Disclosure.
  */
-public class ListView extends DataView implements ListDataViewContainerAddedHandler {
+public class ListView extends DataView implements
+		ListDataViewContainerAddedHandler {
 
 	private String containerCls = "touch-list-comp-container";
 	private final static EventBus eventBus = new SimpleEventBus();
@@ -143,6 +145,7 @@ public class ListView extends DataView implements ListDataViewContainerAddedHand
 
 	public void setGrouped(boolean value) {
 		this.setAttribute("grouped", value, true);
+		_setGrouped(true);
 	}
 
 	public native boolean hasIndexBar()/*-{
@@ -278,7 +281,8 @@ public class ListView extends DataView implements ListDataViewContainerAddedHand
 		List<Component> list;
 		int size = this.getStore().getCount();
 		if (componentList == null) {
-			componentList = new ArrayList<List<Component>>(this.getStore().getCount());
+			componentList = new ArrayList<List<Component>>(this.getStore()
+					.getCount());
 			for (int i = 0; i < size; i++) {
 				componentList.add(new ArrayList<Component>());
 			}
@@ -293,7 +297,8 @@ public class ListView extends DataView implements ListDataViewContainerAddedHand
 		if (this.itemComponentRender != null) {
 			for (int i = 0; i < containerList.size(); i++) {
 				Container c = containerList.get(i);
-				List<Component> components = itemComponentRender.getComponents();
+				List<Component> components = itemComponentRender
+						.getComponents();
 				if (components != null) {
 					for (Component component : components) {
 						component.setListItemIndex(i);
@@ -307,7 +312,8 @@ public class ListView extends DataView implements ListDataViewContainerAddedHand
 
 	}
 
-	public void setItemComponentRenderer(ListItemComponentRenderer itemCompomentRenderer) {
+	public void setItemComponentRenderer(
+			ListItemComponentRenderer itemCompomentRenderer) {
 		this.itemComponentRender = itemCompomentRenderer;
 	}
 
@@ -324,22 +330,27 @@ public class ListView extends DataView implements ListDataViewContainerAddedHand
 
 						for (int i = 0; i < size; i++) {
 							item = ListView.this.getItemAt(i);
-							DomHelper.append(item.getEl(), "<div class='touch-list-comp-container'></div>");
+							DomHelper.append(item.getEl(),
+									"<div class='touch-list-comp-container'></div>");
 							final Container container = new Container();
-							container.setRenderTo(item.getEl().down("." + containerCls));
+							container.setRenderTo(item.getEl().down(
+									"." + containerCls));
 							container.setLayout(Layout.HBOX);
-							container.addEventHandler("painted", new Function() {
-								@Override
-								public void execute() {
-									container.getEl().on("tap", new ElementEventHandler() {
+							container.addEventHandler("painted",
+									new Function() {
 										@Override
-										public void onEvent(EventObject event) {
-											event.stopEvent();
+										public void execute() {
+											container.getEl().on("tap",
+													new ElementEventHandler() {
+														@Override
+														public void onEvent(
+																EventObject event) {
+															event.stopEvent();
+														}
+													});
 										}
-									});
-								}
 
-							});
+									});
 
 							container.setRight(15);
 							container.setTop(5);
